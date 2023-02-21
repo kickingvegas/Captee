@@ -34,9 +34,7 @@ class ShareViewController: NSViewController {
 
     override func loadView() {
         super.loadView()
-        
-        
-     
+
         // Insert code here to customize the view
         let item = self.extensionContext!.inputItems[0] as! NSExtensionItem
         
