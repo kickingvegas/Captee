@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D971A71529A819C00029F6F6 /* CAPTextEditor.swift */; };
 		D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B8EC299BFCB800C00D0B /* CapteeApp.swift */; };
 		D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B8EE299BFCB800C00D0B /* ContentView.swift */; };
 		D978B8F1299BFCB900C00D0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D978B8F0299BFCB900C00D0B /* Assets.xcassets */; };
@@ -110,6 +111,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D971A71529A819C00029F6F6 /* CAPTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPTextEditor.swift; sourceTree = "<group>"; };
 		D978B8E9299BFCB800C00D0B /* Captee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Captee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D978B8EC299BFCB800C00D0B /* CapteeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeApp.swift; sourceTree = "<group>"; };
 		D978B8EE299BFCB800C00D0B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 		D978B8EB299BFCB800C00D0B /* Captee */ = {
 			isa = PBXGroup;
 			children = (
+				D971A71529A819C00029F6F6 /* CAPTextEditor.swift */,
 				D978B8EC299BFCB800C00D0B /* CapteeApp.swift */,
 				D978B8EE299BFCB800C00D0B /* ContentView.swift */,
 				D978B8F0299BFCB900C00D0B /* Assets.xcassets */,
@@ -515,6 +518,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */,
 				D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */,
 				D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */,
 			);

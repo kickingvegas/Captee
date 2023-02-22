@@ -26,15 +26,32 @@ public protocol CapteeManagerProtocol {
     func orgProtcolURL(host: OrgProtocolHost, url: URL?, title: String?, body: String?, template: String?) -> URL?
 }
 
-
-public struct CapteeManager: CapteeManagerProtocol {
+public protocol CapteePersistenceProtocol {
+    var defaultTemplate: String { get set }
+}
+    
+public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
+    var url: URL?
+    var title: String?
+    var body: AttributedString?
+    var template: String?
+        
+    public var defaultTemplate: String {
+        get {
+            if let result = UserDefaults.standard.value(forKey: "template") as? String {
+                return result
+            } else {
+                return "c"
+            }
+        }
+        
+        set(newTemplate) {
+            UserDefaults.standard.setValue(newTemplate, forKey: "template")
+        }
+    }
     
     public init() {
-        
-    }
-
-    public func hello() {
-        print("hello")
+        UserDefaults.standard.register(defaults: ["template": "c" ])
         
     }
     

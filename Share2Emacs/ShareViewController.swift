@@ -24,7 +24,7 @@ class ShareViewController: NSViewController {
     var contentText: NSAttributedString?
     var capturedTitle: String?
     
-    let capteeManager = CapteeManager()
+    var capteeManager = CapteeManager()
     
     @IBOutlet weak var titleField: NSTextField!
     @IBOutlet weak var urlField: NSTextField!
@@ -37,18 +37,16 @@ class ShareViewController: NSViewController {
 
     override func loadView() {
         super.loadView()
-        
-        capteeManager.hello()
 
         // Insert code here to customize the view
         let item = self.extensionContext!.inputItems[0] as! NSExtensionItem
         
-        if let userInfo = item.userInfo as? [String: Any],
-           let data = userInfo[NSExtensionItemAttributedContentTextKey] as? Data {
-            let payload = String(decoding: data, as: UTF8.self)
-            print("AYE!: \(payload)")
-            
-        }
+//        if let userInfo = item.userInfo as? [String: Any],
+//           let data = userInfo[NSExtensionItemAttributedContentTextKey] as? Data {
+//            let payload = String(decoding: data, as: UTF8.self)
+//            print("AYE!: \(payload)")
+//
+//        }
 
             
         if let contentText = item.attributedContentText {
@@ -60,6 +58,8 @@ class ShareViewController: NSViewController {
             }
         }
         
+        self.templateField.stringValue = capteeManager.defaultTemplate
+                
         if let attachments = item.attachments {
             NSLog("Attachments = %@", attachments as NSArray)
             for itemProvider in attachments {
@@ -67,6 +67,7 @@ class ShareViewController: NSViewController {
                     itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.url.identifier) { [weak self] data, error in
                         if let data = data {
                             let buf = String(decoding: data, as: UTF8.self)
+                            // TODO: amend
                             NSLog("URL: %@", buf)
                             
                             self?.capturedURL = URL(string: buf)
@@ -88,23 +89,25 @@ class ShareViewController: NSViewController {
                                 return
                             }
 
+                            // TODO: amend
                             print("title: \(title)")
                             self?.capturedTitle = title
+                            // TODO: amend
                             print("href: \(href)")
                             self?.titleField.stringValue = title
                         })
                 }
             }
         } else {
+            // TODO: amend
             NSLog("No Attachments")
         }
     }
 
     @IBAction func send(_ sender: AnyObject?) {
         let outputItem = NSExtensionItem()
-
         
-        let urlString = self.urlField.stringValue.trimmingCharacters(in:.whitespacesAndNewlines)
+        let urlString = self.urlField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         let titleString = self.titleField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         
         var templateString = self.templateField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -112,15 +115,15 @@ class ShareViewController: NSViewController {
             templateString = "c"
         }
         
-        var bodyString: String? = self.textView.textStorage?.string
+        capteeManager.defaultTemplate = templateString
         
-        
+        let bodyString: String? = self.textView.textStorage?.string
+                
         var orgProtcolHost: OrgProtocolHost = .storeLink
         
         if bodyString != nil, bodyString != "" {
             orgProtcolHost = .capture
         }
-
         
         if let url = capteeManager.orgProtcolURL(host: orgProtcolHost,
                                                  url: URL(string: urlString),
@@ -129,7 +132,10 @@ class ShareViewController: NSViewController {
                                                  template: templateString) {
             print(url.absoluteString)
             NSWorkspace.shared.open(url)
+        } else {
+            // TODO: handle error
         }
+
 
         let outputItems = [outputItem]
         self.extensionContext!.completeRequest(returningItems: outputItems, completionHandler: nil)

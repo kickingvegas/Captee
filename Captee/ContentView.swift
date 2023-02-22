@@ -17,16 +17,62 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var urlText: String = ""
+    @State var titleText: String = ""
+    @State var templateText: String = ""
+    @State var bodyText: NSAttributedString = NSAttributedString(string: "hey they clittiak")
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        VStack (alignment: .someFooAlignment) {
+            HStack(alignment: .center) {
+                Text("URL")
+                    .multilineTextAlignment(.trailing)
+                    .alignmentGuide(.someFooAlignment, computeValue: { d in d[.trailing]})
+                TextField("URL", text: $urlText)
+            }
+            
+            HStack(alignment: .center) {
+                Text("Title")
+                    .multilineTextAlignment(.trailing)
+                    .alignmentGuide(.someFooAlignment, computeValue: { d in d[.trailing]})
+                TextField("Title", text: $titleText)
+            }
+            
+            HStack(alignment: .top) {
+                Text("Body")
+                    .multilineTextAlignment(.trailing)
+                    .alignmentGuide(.someFooAlignment, computeValue: { d in d[.trailing]})
+                // TODO: need to wrap NSTextView here. https://sarunw.com/posts/uikit-in-swiftui/
+                
+                CAPTextEditor(text: $bodyText)
+                //TextEditor(text: $bodyText)
+            }
+            
+            HStack {
+                Text("Template")
+                    .multilineTextAlignment(.trailing)
+                    .alignmentGuide(.someFooAlignment, computeValue: { d in d[.trailing]})
+                    .padding(.leading, 30)
+                TextField("template id", text: $templateText)
+            }
+            
+            Spacer()
         }
-        .padding()
+        .padding(EdgeInsets(top: 10, leading: 60, bottom: 10, trailing: 90))
     }
 }
+
+
+extension HorizontalAlignment {
+    private struct SomeFooAlignment: AlignmentID {
+        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+            context[HorizontalAlignment.trailing]
+        }
+    }
+    
+    static let someFooAlignment = HorizontalAlignment(SomeFooAlignment.self)
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
