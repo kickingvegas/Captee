@@ -16,12 +16,15 @@
 
 import Cocoa
 import UniformTypeIdentifiers
+import CapteeKit
 
 class ShareViewController: NSViewController {
     
     var capturedURL: URL?
     var contentText: NSAttributedString?
     var capturedTitle: String?
+    
+    let capteeManager = CapteeManager()
     
     @IBOutlet weak var titleField: NSTextField!
     @IBOutlet weak var urlField: NSTextField!
@@ -34,6 +37,8 @@ class ShareViewController: NSViewController {
 
     override func loadView() {
         super.loadView()
+        
+        capteeManager.hello()
 
         // Insert code here to customize the view
         let item = self.extensionContext!.inputItems[0] as! NSExtensionItem
@@ -44,22 +49,7 @@ class ShareViewController: NSViewController {
             print("AYE!: \(payload)")
             
         }
-        
-//        if let userInfo = item.userInfo {
-//            print("\(userInfo)")
-//
-//            for k in userInfo.keys {
-//                if userInfo[k] is NSArray {
-//                    continue
-//                }
-//
-//                let x = userInfo[k] as! Data
-//                //print("\(x)")
-//                let payload = String(decoding: x, as: UTF8.self)
-//                print("FUCK: \(payload)")
-//            }
-//
-//        }
+
             
         if let contentText = item.attributedContentText {
             print("\(contentText.string)")
@@ -113,66 +103,34 @@ class ShareViewController: NSViewController {
     @IBAction func send(_ sender: AnyObject?) {
         let outputItem = NSExtensionItem()
 
-        var orgProtocolComponents = URLComponents()
-        orgProtocolComponents.scheme = "org-protocol"
-        var queryItems = [URLQueryItem]()
         
-        let urlString = self.urlField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
-        if urlString != "" {
-            queryItems.append(URLQueryItem(name: "url", value: urlString))
-        }
-        
+        let urlString = self.urlField.stringValue.trimmingCharacters(in:.whitespacesAndNewlines)
         let titleString = self.titleField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
-        if titleString != "" {
-            queryItems.append(URLQueryItem(name: "title", value: titleString))
-        }
         
         var templateString = self.templateField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         if templateString == "" {
             templateString = "c"
         }
         
-        queryItems.append(URLQueryItem(name: "template", value: templateString))
-
-        if self.capturedURL != nil {
-            orgProtocolComponents.host = "store-link"
-        } else {
-            orgProtocolComponents.host = "capture"
-            
-            if let bodyString = self.textView.textStorage?.string {
-                queryItems.append(URLQueryItem(name: "body", value: bodyString))
-            }
+        var bodyString: String? = self.textView.textStorage?.string
+        
+        
+        var orgProtcolHost: OrgProtocolHost = .storeLink
+        
+        if bodyString != nil, bodyString != "" {
+            orgProtcolHost = .capture
         }
+
         
-        
-        orgProtocolComponents.queryItems = queryItems
-        
-//
-//
-//        if let contentText = self.contentText {
-//
-//            orgProtocolComponents.host = "capture"
-//
-//            var title = ""
-//            if contentText.string.count > 10 {
-//                title = String(self.titleField.stringValue)
-//            } else {
-//                title = contentText.string
-//            }
-//
-//            orgProtocolComponents.queryItems = [
-//                URLQueryItem(name: "template", value: "c"),
-//                URLQueryItem(name: "title", value: title),
-//                URLQueryItem(name: "body", value: contentText.string)
-//            ]
-//        }
-        
-        if let url = orgProtocolComponents.url  {
+        if let url = capteeManager.orgProtcolURL(host: orgProtcolHost,
+                                                 url: URL(string: urlString),
+                                                 title: titleString,
+                                                 body: bodyString,
+                                                 template: templateString) {
             print(url.absoluteString)
             NSWorkspace.shared.open(url)
         }
 
-        
         let outputItems = [outputItem]
         self.extensionContext!.completeRequest(returningItems: outputItems, completionHandler: nil)
 }

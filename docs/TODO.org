@@ -1,9 +1,24 @@
-* Tasks [2/19]
-*** WAITING Setup Apple Developer account
+* Tasks [2/20]
+*** WAITING Setup Apple Developer account [1/5]
 
 [2023-02-16 Thu 14:34]
-Sent email back to Melissa. Trying to just change the name.
+Sent epmail back to Melissa. Trying to just change the name.
 
+**** DONE Confirm charles.choi@yummymelon.com is still active and has two-factor
+CLOSED: [2023-02-17 Fri 15:36]
+
+Also confirmed that kickingvegas@gmail.com Apple ID is already two-factor auth.
+
+**** WAITING Transfer ownership from ~kickingvegas@gmail.com~ to ~charles.choi@yummymelon.com~ for the existing account Team ID: N5X6YV9N92
+[2023-02-20 Mon 20:58]
+
+What a fucking pain in the ass. Tried to transfer over from kickingvegas@gmail.com to charles.choi@yummymelon.com but I need charles.choi@yummymelon.com to be a verified account. The existing Apple Developer app just errors out with an "unknown error" which is very unhelpful.
+
+**** TODO Create a new individual AD account using the ~kickingvegas@gmail.com~ Apple ID.
+
+**** TODO Transfer all apps from Team ID: N5X6YV9N92 to the new individual AD account owned by ~kickingvegas@gmail.com~
+
+**** TODO Arrange for a refund of $99 US for the Team ID: N5X6YV9N92.
 
 *** IN_PROGRESS Architect Captee
 
@@ -59,8 +74,8 @@ Sent email back to Melissa. Trying to just change the name.
 
 *** TODO Refactor Org Protocol Processing Logic
 - Support access from either host or sharing extension
-  - Implement as XPC?
-
+  - Implement as XPC? No. At least not yet.
+    
 *** TODO Support attributed string to Org mode export
 
 *** TODO Test what happens when called with no Emacs  daemon.
