@@ -15,62 +15,58 @@
 //
 
 import SwiftUI
+import CapteeKit
 
 struct ContentView: View {
     @State var urlText: String = ""
     @State var titleText: String = ""
     @State var templateText: String = ""
-    @State var bodyText: NSAttributedString = NSAttributedString(string: "hey they clittiak")
+    
+    // TODO: convert to AttributedString
+    // https://developer.apple.com/forums/thread/682431
+    
+    @State var bodyText: NSAttributedString = NSAttributedString(string: "")
+    @State var orghost: OrgProtocolHost = .storeLink
     
     var body: some View {
-        VStack (alignment: .someFooAlignment) {
-            HStack(alignment: .center) {
-                Text("URL")
-                    .multilineTextAlignment(.trailing)
-                    .alignmentGuide(.someFooAlignment, computeValue: { d in d[.trailing]})
-                TextField("URL", text: $urlText)
-            }
+        
+        VStack (alignment: .leading) {
+            Picker("Protocol", selection: $orghost) {
+                ForEach(OrgProtocolHost.allCases, id: \.self) { value in
+                    Text(value.rawValue)
+                        .tag(value)
+                }
+            }.pickerStyle(.radioGroup)
+            Divider()
+            TextField("URL", text: $urlText)
+                .textFieldStyle(.plain)
+                .help("Org Capture Link URL")
             
-            HStack(alignment: .center) {
-                Text("Title")
-                    .multilineTextAlignment(.trailing)
-                    .alignmentGuide(.someFooAlignment, computeValue: { d in d[.trailing]})
-                TextField("Title", text: $titleText)
-            }
+            Divider()
+            TextField("Title", text: $titleText)
+                .textFieldStyle(.plain)
+                .help("Org Capture Link Title")
+            Divider()
             
-            HStack(alignment: .top) {
-                Text("Body")
-                    .multilineTextAlignment(.trailing)
-                    .alignmentGuide(.someFooAlignment, computeValue: { d in d[.trailing]})
-                // TODO: need to wrap NSTextView here. https://sarunw.com/posts/uikit-in-swiftui/
-                
-                CAPTextEditor(text: $bodyText)
-                //TextEditor(text: $bodyText)
-            }
+            Text("Body Text")
+                .help("Enter body text")
+                .foregroundColor(.gray)
             
-            HStack {
-                Text("Template")
-                    .multilineTextAlignment(.trailing)
-                    .alignmentGuide(.someFooAlignment, computeValue: { d in d[.trailing]})
-                    .padding(.leading, 30)
-                TextField("template id", text: $templateText)
-            }
+            CAPTextEditor(text: $bodyText)
+                .textFieldStyle(.roundedBorder)
             
-            Spacer()
+
+            HStack(alignment: .bottom) {
+                Spacer()
+                Button("Capture") {
+                }
+                .frame(alignment: .trailing)
+                .buttonStyle(.borderedProminent)
+                .help("Send to Org")
+            }
         }
         .padding(EdgeInsets(top: 10, leading: 60, bottom: 10, trailing: 90))
     }
-}
-
-
-extension HorizontalAlignment {
-    private struct SomeFooAlignment: AlignmentID {
-        static func defaultValue(in context: ViewDimensions) -> CGFloat {
-            context[HorizontalAlignment.trailing]
-        }
-    }
-    
-    static let someFooAlignment = HorizontalAlignment(SomeFooAlignment.self)
 }
 
 

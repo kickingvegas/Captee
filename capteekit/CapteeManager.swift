@@ -17,7 +17,7 @@
 import Foundation
 import UniformTypeIdentifiers
 
-public enum OrgProtocolHost: String {
+public enum OrgProtocolHost: String, Equatable, CaseIterable {
     case storeLink = "store-link"
     case capture
 }
