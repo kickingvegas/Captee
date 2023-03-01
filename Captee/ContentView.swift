@@ -25,7 +25,7 @@ struct ContentView: View {
     // TODO: convert to AttributedString
     // https://developer.apple.com/forums/thread/682431
     
-    @State var bodyText: NSAttributedString = NSAttributedString(string: "")
+    @State var bodyText: AttributedString = AttributedString("hey there")
     @State var orghost: OrgProtocolHost = .storeLink
     
     var body: some View {

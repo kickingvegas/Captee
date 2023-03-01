@@ -26,7 +26,7 @@ struct CAPTextEditor: NSViewRepresentable {
     
     var theTextView = NSTextView.scrollableTextView()
     
-    @Binding var text: NSAttributedString
+    @Binding var text: AttributedString
     
     func makeNSView(context: Context) -> NSScrollView {
         let textView = (theTextView.documentView as! NSTextView)
@@ -43,7 +43,7 @@ struct CAPTextEditor: NSViewRepresentable {
         textView.delegate = context.coordinator
         
         if let textStorage = textView.textStorage {
-            textStorage.append(text)
+            textStorage.append(NSAttributedString(text))
         }
 
         return theTextView
@@ -70,7 +70,14 @@ extension CAPTextEditor {
             
             //Update text
             if let textStorage = textView.textStorage {
-                self.parent.text = textStorage
+                // TODO: convert to attributedstring
+                
+                do {
+                    let a = try AttributedString(textStorage, including: \.appKit)
+                    self.parent.text = a
+                } catch {
+                    print("CAPTextEditor: failed to convert back to attributed string")
+                }
             }
         }
         
