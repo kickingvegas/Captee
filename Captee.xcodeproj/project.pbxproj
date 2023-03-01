@@ -216,8 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				D978B8EC299BFCB800C00D0B /* CapteeApp.swift */,
-				D978B8EE299BFCB800C00D0B /* ContentView.swift */,
-				D971A71529A819C00029F6F6 /* CAPTextEditor.swift */,
+				D9E9311B29B014D900348A7B /* Managers */,
+				D9E9311A29B014C600348A7B /* UI */,
 				D978B8F0299BFCB900C00D0B /* Assets.xcassets */,
 				D978B8F5299BFCB900C00D0B /* Captee.entitlements */,
 				D978B8F2299BFCB900C00D0B /* Preview Content */,
@@ -261,6 +261,22 @@
 				D978B92D299C096800C00D0B /* ExtensionClass.js */,
 			);
 			path = Share2Emacs;
+			sourceTree = "<group>";
+		};
+		D9E9311A29B014C600348A7B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D971A71529A819C00029F6F6 /* CAPTextEditor.swift */,
+				D978B8EE299BFCB800C00D0B /* ContentView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		D9E9311B29B014D900348A7B /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		D9F36E1829A5464E00C17E5A /* CapteeKit */ = {
