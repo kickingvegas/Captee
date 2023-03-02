@@ -18,60 +18,124 @@ import SwiftUI
 import CapteeKit
 
 struct ContentView: View {
-    @State var urlText: String = ""
-    @State var titleText: String = ""
-    @State var templateText: String = ""
-    
-    // TODO: convert to AttributedString
-    // https://developer.apple.com/forums/thread/682431
-    
-    @State var bodyText: AttributedString = AttributedString("hey there")
-    @State var orghost: OrgProtocolHost = .storeLink
+    @StateObject var capteeObservableManager = CapteeObservableManager()
     
     var body: some View {
-        
         VStack (alignment: .leading) {
-            Picker("Protocol", selection: $orghost) {
-                ForEach(OrgProtocolHost.allCases, id: \.self) { value in
-                    Text(value.rawValue)
-                        .tag(value)
-                }
-            }.pickerStyle(.radioGroup)
-            Divider()
-            TextField("URL", text: $urlText)
-                .textFieldStyle(.plain)
-                .help("Org Capture Link URL")
-            
-            Divider()
-            TextField("Title", text: $titleText)
-                .textFieldStyle(.plain)
-                .help("Org Capture Link Title")
-            Divider()
-            
-            Text("Body Text")
-                .help("Enter body text")
-                .foregroundColor(.gray)
-            
-            CAPTextEditor(text: $bodyText)
-                .textFieldStyle(.roundedBorder)
-            
+            OrgProtocolPickerView(capteeObservableManager: capteeObservableManager)
+            OrgURLView(capteeObservableManager: capteeObservableManager)
+            OrgTitleView(capteeObservableManager: capteeObservableManager)
+            OrgTemplateView(capteeObservableManager: capteeObservableManager)
+            OrgBodyView(capteeObservableManager: capteeObservableManager)
 
             HStack(alignment: .bottom) {
                 Spacer()
                 Button("Capture") {
+                    if let url = capteeObservableManager.orgProtocolURL() {
+                        print("\(url.absoluteString)")
+                        NSWorkspace.shared.open(url)
+                        
+                    }
                 }
                 .frame(alignment: .trailing)
                 .buttonStyle(.borderedProminent)
                 .help("Send to Org")
             }
         }
-        .padding(EdgeInsets(top: 10, leading: 60, bottom: 10, trailing: 90))
+        .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct OrgTemplateView: View {
+    @ObservedObject var capteeObservableManager: CapteeObservableManager
+
+    var body: some View {
+        HStack(alignment: .lastTextBaseline) {
+            Text("Template Key")
+                .foregroundColor(.gray)
+            TextField("Key", text: $capteeObservableManager.template)
+                .textFieldStyle(.plain)
+            .help("Org Capture Link Template Key")
+            .disabled(capteeObservableManager.orgProtocol == .storeLink)
+        }
+        
+        Divider()
+    }
+}
+
+struct OrgTitleView: View {
+    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    
+    var body: some View {
+        TextField("Title", text: $capteeObservableManager.title)
+            .textFieldStyle(.plain)
+            .help("Org Capture Link Title")
+        
+        Divider()
+    }
+}
+
+struct OrgURLView: View {
+    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    
+    @State var foregroundColor: Color = .black
+
+    var body: some View {
+        TextField("URL", text: $capteeObservableManager.urlString)
+            .textFieldStyle(.plain)
+            .help("Org Capture Link URL")
+            .onChange(of: capteeObservableManager.urlString) { newValue in
+                print("\(newValue)")
+                
+                if let _ = URL(string: newValue) {
+                    foregroundColor = .black
+                } else if newValue == "" {
+                    foregroundColor = .black
+                } else {
+                    foregroundColor = .red
+                }
+
+            }
+            .foregroundColor(foregroundColor)
+
+
+        
+        Divider()
+    }
+}
+
+struct OrgBodyView: View {
+    @ObservedObject var capteeObservableManager: CapteeObservableManager
+
+    var body: some View {
+        Text("Body Text")
+            .help("Enter body text")
+            .foregroundColor(.gray)
+        
+        CAPTextEditor(text: $capteeObservableManager.body)
+            .textFieldStyle(.roundedBorder)
+            .disabled(capteeObservableManager.orgProtocol == .storeLink)
+    }
+}
+
+struct OrgProtocolPickerView: View {
+    @ObservedObject var capteeObservableManager: CapteeObservableManager
+
+    var body: some View {
+        Picker("Protocol", selection: $capteeObservableManager.orgProtocol) {
+            ForEach(OrgProtocolType.allCases, id: \.self) { value in
+                Text(value.rawValue)
+                    .tag(value)
+            }
+        }
+        .pickerStyle(.radioGroup)
+        
+        Divider()
     }
 }

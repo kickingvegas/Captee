@@ -20,6 +20,7 @@
 		D978B923299BFD1000C00D0B /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D978B921299BFD1000C00D0B /* ShareViewController.xib */; };
 		D978B928299BFD1000C00D0B /* Share2Emacs.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D978B91B299BFD1000C00D0B /* Share2Emacs.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D978B92E299C096800C00D0B /* ExtensionClass.js in Resources */ = {isa = PBXBuildFile; fileRef = D978B92D299C096800C00D0B /* ExtensionClass.js */; };
+		D9E9311D29B0156600348A7B /* CapteeObservableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */; };
 		D9F36E1B29A5464E00C17E5A /* CapteeKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */; };
 		D9F36E2129A5464E00C17E5A /* CapteeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F36E1729A5464E00C17E5A /* CapteeKit.framework */; };
 		D9F36E2829A5464F00C17E5A /* CapteeKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F36E2729A5464F00C17E5A /* CapteeKitTests.swift */; };
@@ -130,6 +131,7 @@
 		D978B924299BFD1000C00D0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D978B925299BFD1000C00D0B /* Share2Emacs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share2Emacs.entitlements; sourceTree = "<group>"; };
 		D978B92D299C096800C00D0B /* ExtensionClass.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExtensionClass.js; sourceTree = "<group>"; };
+		D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeObservableManager.swift; sourceTree = "<group>"; };
 		D9F36E1729A5464E00C17E5A /* CapteeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CapteeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F36E1929A5464E00C17E5A /* CapteeKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapteeKit.h; sourceTree = "<group>"; };
 		D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CapteeKit.docc; sourceTree = "<group>"; };
@@ -266,8 +268,8 @@
 		D9E9311A29B014C600348A7B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D971A71529A819C00029F6F6 /* CAPTextEditor.swift */,
 				D978B8EE299BFCB800C00D0B /* ContentView.swift */,
+				D971A71529A819C00029F6F6 /* CAPTextEditor.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -275,6 +277,7 @@
 		D9E9311B29B014D900348A7B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 			files = (
 				D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */,
 				D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */,
+				D9E9311D29B0156600348A7B /* CapteeObservableManager.swift in Sources */,
 				D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

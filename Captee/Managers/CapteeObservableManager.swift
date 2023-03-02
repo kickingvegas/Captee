@@ -15,4 +15,30 @@
 //
 
 
-import Foundation
+import SwiftUI
+import CapteeKit
+
+class CapteeObservableManager: ObservableObject {
+    @Published var urlString: String = ""
+    @Published var title: String = ""
+    @Published var body: AttributedString = AttributedString("")
+    @Published var template: String = ""
+    @Published var orgProtocol: OrgProtocolType = .storeLink
+    
+    var capteeManager = CapteeManager()
+    
+    init() {
+        self.template = capteeManager.defaultTemplate
+    }
+    
+    func orgProtocolURL() -> URL? {
+        capteeManager.orgProtcolURL(orgProtocol: orgProtocol,
+                                    url: URL(string: urlString),
+                                    title: title,
+                                    body: String(body.characters[...]),
+                                    template: template)
+    }
+    
+    
+}
+

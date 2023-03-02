@@ -119,13 +119,13 @@ class ShareViewController: NSViewController {
         
         let bodyString: String? = self.textView.textStorage?.string
                 
-        var orgProtcolHost: OrgProtocolHost = .storeLink
+        var orgProtcolHost: OrgProtocolType = .storeLink
         
         if bodyString != nil, bodyString != "" {
             orgProtcolHost = .capture
         }
         
-        if let url = capteeManager.orgProtcolURL(host: orgProtcolHost,
+        if let url = capteeManager.orgProtcolURL(orgProtocol: orgProtcolHost,
                                                  url: URL(string: urlString),
                                                  title: titleString,
                                                  body: bodyString,

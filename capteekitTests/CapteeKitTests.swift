@@ -66,7 +66,7 @@ final class CapteeKitTests: XCTestCase {
 
             if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) {
                 XCTAssertTrue(urlComponents.scheme == "org-protocol")
-                XCTAssertTrue(urlComponents.host == OrgProtocolHost.storeLink.rawValue)
+                XCTAssertTrue(urlComponents.host == OrgProtocolType.storeLink.rawValue)
                 
                 if let queryItems = urlComponents.queryItems {
                     print("\(queryItems)")
