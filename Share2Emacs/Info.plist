@@ -6,26 +6,26 @@
 	<string>icon</string>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionItemAttributedTitleKey</key>
-		<string>capturedTitle</string>
-		<key>NSExtensionItemAttributedContentTextKey</key>
-		<string>capturedContentText</string>
 		<key>NSExtensionAttributes</key>
 		<dict>
-			<key>NSExtensionJavaScriptPreprocessingFile</key>
-			<string>ExtensionClass</string>
 			<key>NSExtensionActivationRule</key>
 			<dict>
 				<key>NSExtensionActivationDictionaryVersion</key>
 				<integer>2</integer>
 				<key>NSExtensionActivationSupportsText</key>
 				<true/>
-				<key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
-				<integer>1</integer>
 				<key>NSExtensionActivationSupportsWebPageWithMaxCount</key>
 				<integer>1</integer>
+				<key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
+				<integer>1</integer>
 			</dict>
+			<key>NSExtensionJavaScriptPreprocessingFile</key>
+			<string>ExtensionClass</string>
 		</dict>
+		<key>NSExtensionItemAttributedContentTextKey</key>
+		<string>capturedContentText</string>
+		<key>NSExtensionItemAttributedTitleKey</key>
+		<string>capturedTitle</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>
 		<key>NSExtensionPrincipalClass</key>
