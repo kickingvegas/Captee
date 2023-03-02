@@ -24,7 +24,7 @@ public enum OrgProtocolType: String, Equatable, CaseIterable {
 
 public protocol CapteeManagerProtocol {
     // TODO: body should be of type AttributedString
-    func orgProtcolURL(orgProtocol: OrgProtocolType, url: URL?, title: String?, body: String?, template: String?) -> URL?
+    func orgProtcolURL(orgProtocol: OrgProtocolType, url: URL?, title: String?, body: AttributedString?, template: String?) -> URL?
 }
 
 public protocol CapteePersistenceProtocol {
@@ -56,7 +56,7 @@ public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
         UserDefaults.standard.register(defaults: ["template": "c" ])
     }
     
-    public func orgProtcolURL(orgProtocol: OrgProtocolType, url: URL?, title: String?, body: String?, template: String?) -> URL? {
+    public func orgProtcolURL(orgProtocol: OrgProtocolType, url: URL?, title: String?, body: AttributedString?, template: String?) -> URL? {
         // preconditions:
         // strings must be trimmed of whitespaces and newlines
 
@@ -80,10 +80,14 @@ public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
             queryItems.append(URLQueryItem(name: "template", value: template))
         }
         
-        if let body = body,
-           body != "" {
-            queryItems.append(URLQueryItem(name: "body", value: body))
+        
+        if let body = body {
+            let bodyString = String(body.characters[...])
+            if bodyString != "" {
+                queryItems.append(URLQueryItem(name: "body", value: bodyString))
+            }
         }
+
                 
         orgProtocolComponents.queryItems = queryItems
         

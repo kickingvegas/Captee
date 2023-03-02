@@ -35,10 +35,8 @@ class CapteeObservableManager: ObservableObject {
         capteeManager.orgProtcolURL(orgProtocol: orgProtocol,
                                     url: URL(string: urlString),
                                     title: title,
-                                    body: String(body.characters[...]),
+                                    body: body,
                                     template: template)
     }
-    
-    
 }
 

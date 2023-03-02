@@ -117,18 +117,25 @@ class ShareViewController: NSViewController {
         
         capteeManager.defaultTemplate = templateString
         
-        let bodyString: String? = self.textView.textStorage?.string
-                
         var orgProtcolHost: OrgProtocolType = .storeLink
         
-        if bodyString != nil, bodyString != "" {
-            orgProtcolHost = .capture
+        var body: AttributedString?
+        
+        do {
+            if let textStorage = self.textView.textStorage {
+                body = try AttributedString(textStorage, including: \.appKit)
+                if body != "" {
+                    orgProtcolHost = .capture
+                }
+            }
+        } catch {
+            // do nothing
         }
         
         if let url = capteeManager.orgProtcolURL(orgProtocol: orgProtcolHost,
                                                  url: URL(string: urlString),
                                                  title: titleString,
-                                                 body: bodyString,
+                                                 body: body,
                                                  template: templateString) {
             print(url.absoluteString)
             NSWorkspace.shared.open(url)
