@@ -39,13 +39,13 @@ struct CAPTextEditor: NSViewRepresentable {
         textView.usesRuler = true
         textView.usesInspectorBar = true
         textView.usesFontPanel = true
-
+        
         textView.delegate = context.coordinator
         
         if let textStorage = textView.textStorage {
             textStorage.append(NSAttributedString(text))
         }
-
+        
         return theTextView
     }
     

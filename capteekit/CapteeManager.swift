@@ -17,13 +17,14 @@
 import Foundation
 import UniformTypeIdentifiers
 
-public enum OrgProtocolHost: String, Equatable, CaseIterable {
+public enum OrgProtocolType: String, Equatable, CaseIterable {
     case storeLink = "store-link"
     case capture
 }
 
 public protocol CapteeManagerProtocol {
-    func orgProtcolURL(host: OrgProtocolHost, url: URL?, title: String?, body: String?, template: String?) -> URL?
+    // TODO: body should be of type AttributedString
+    func orgProtcolURL(orgProtocol: OrgProtocolType, url: URL?, title: String?, body: AttributedString?, template: String?) -> URL?
 }
 
 public protocol CapteePersistenceProtocol {
@@ -31,6 +32,7 @@ public protocol CapteePersistenceProtocol {
 }
     
 public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
+    // TODO: do I need these?
     var url: URL?
     var title: String?
     var body: AttributedString?
@@ -52,10 +54,9 @@ public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
     
     public init() {
         UserDefaults.standard.register(defaults: ["template": "c" ])
-        
     }
     
-    public func orgProtcolURL(host: OrgProtocolHost, url: URL?, title: String?, body: String?, template: String?) -> URL? {
+    public func orgProtcolURL(orgProtocol: OrgProtocolType, url: URL?, title: String?, body: AttributedString?, template: String?) -> URL? {
         // preconditions:
         // strings must be trimmed of whitespaces and newlines
 
@@ -63,7 +64,7 @@ public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
         orgProtocolComponents.scheme = "org-protocol"
         var queryItems = [URLQueryItem]()
         
-        orgProtocolComponents.host = host.rawValue
+        orgProtocolComponents.host = orgProtocol.rawValue
         
         if let url = url {
             queryItems.append(URLQueryItem(name: "url", value: url.absoluteString))
@@ -79,10 +80,14 @@ public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
             queryItems.append(URLQueryItem(name: "template", value: template))
         }
         
-        if let body = body,
-           body != "" {
-            queryItems.append(URLQueryItem(name: "body", value: body))
+        
+        if let body = body {
+            let bodyString = String(body.characters[...])
+            if bodyString != "" {
+                queryItems.append(URLQueryItem(name: "body", value: bodyString))
+            }
         }
+
                 
         orgProtocolComponents.queryItems = queryItems
         
