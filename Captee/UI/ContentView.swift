@@ -33,8 +33,10 @@ struct ContentView: View {
                 Button("Capture") {
                     if let url = capteeObservableManager.orgProtocolURL() {
                         print("\(url.absoluteString)")
-                        NSWorkspace.shared.open(url)
-                        
+                        capteeObservableManager.connectionManager.xpcService().openURL(url: url as NSURL) { buf in
+                            // TODO: handle bool response
+                            print("\(buf)")
+                        }
                     }
                 }
                 .frame(alignment: .trailing)

@@ -25,6 +25,7 @@ class ShareViewController: NSViewController {
     var capturedTitle: String?
     
     var capteeManager = CapteeManager()
+    var connectionManager = ConnectionManager()
     
     @IBOutlet weak var titleField: NSTextField!
     @IBOutlet weak var urlField: NSTextField!
@@ -138,11 +139,14 @@ class ShareViewController: NSViewController {
                                                  body: body,
                                                  template: templateString) {
             print(url.absoluteString)
-            NSWorkspace.shared.open(url)
+            //capteeManager.openURL(url: url, native: false)
+            connectionManager.xpcService().openURL(url: url as NSURL) { buf in
+                print("\(buf)")
+            }
+            
         } else {
             // TODO: handle error
         }
-
 
         let outputItems = [outputItem]
         self.extensionContext!.completeRequest(returningItems: outputItems, completionHandler: nil)
