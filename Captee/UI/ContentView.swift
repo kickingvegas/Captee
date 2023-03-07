@@ -31,13 +31,7 @@ struct ContentView: View {
             HStack(alignment: .bottom) {
                 Spacer()
                 Button("Capture") {
-                    if let url = capteeObservableManager.orgProtocolURL() {
-                        print("\(url.absoluteString)")
-                        capteeObservableManager.connectionManager.xpcService().openURL(url: url as NSURL) { buf in
-                            // TODO: handle bool response
-                            print("\(buf)")
-                        }
-                    }
+                    captureAction()
                 }
                 .frame(alignment: .trailing)
                 .buttonStyle(.borderedProminent)
@@ -46,6 +40,22 @@ struct ContentView: View {
         }
         .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
     }
+    
+    func captureAction() {
+        
+        if let url = capteeObservableManager.orgProtocolURL() {
+            print("\(url.absoluteString)")
+            capteeObservableManager.openURL(url: url as NSURL) { result in
+                print("\(result)")
+            }
+
+//            capteeObservableManager.sendToClipboard(payload: capteeObservableManager.clipboardPayload()) { result in
+//                print("\(result)")
+//            }
+        }
+
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

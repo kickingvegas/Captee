@@ -133,7 +133,7 @@ class ShareViewController: NSViewController {
             // do nothing
         }
         
-        if let url = capteeManager.orgProtcolURL(orgProtocol: orgProtcolHost,
+        if let url = capteeManager.orgProtcolURL(pType: orgProtcolHost,
                                                  url: URL(string: urlString),
                                                  title: titleString,
                                                  body: body,

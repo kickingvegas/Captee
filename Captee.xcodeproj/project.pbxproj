@@ -26,6 +26,9 @@
 		D985493429B6CB2800D41F24 /* CapteeXPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6EC9629B696B4004E0040 /* CapteeXPCServiceProtocol.swift */; };
 		D985493629B6CB8300D41F24 /* CapteeXPCService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9F6EC9429B696B4004E0040 /* CapteeXPCService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D985493829B6CB9900D41F24 /* CapteeXPCService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9F6EC9429B696B4004E0040 /* CapteeXPCService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D9D6BC1729B7F79400B9416C /* CapteeKitProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */; };
+		D9D6BC1929B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */; };
+		D9D6BC1B29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */; };
 		D9E9311D29B0156600348A7B /* CapteeObservableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */; };
 		D9F36E1B29A5464E00C17E5A /* CapteeKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */; };
 		D9F36E2129A5464E00C17E5A /* CapteeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F36E1729A5464E00C17E5A /* CapteeKit.framework */; };
@@ -175,6 +178,9 @@
 		D978B924299BFD1000C00D0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D978B925299BFD1000C00D0B /* Share2Emacs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share2Emacs.entitlements; sourceTree = "<group>"; };
 		D978B92D299C096800C00D0B /* ExtensionClass.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExtensionClass.js; sourceTree = "<group>"; };
+		D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapteeKitProtocol.swift; path = capteekit/CapteeKitProtocol.swift; sourceTree = SOURCE_ROOT; };
+		D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeManagerProtocol.swift"; path = "capteekit/CapteeManager+CapteeManagerProtocol.swift"; sourceTree = SOURCE_ROOT; };
+		D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeePersistenceProtocol.swift"; path = "capteekit/CapteeManager+CapteeePersistenceProtocol.swift"; sourceTree = SOURCE_ROOT; };
 		D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = Captee/Managers/ConnectionManager.swift; sourceTree = SOURCE_ROOT; };
 		D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeObservableManager.swift; sourceTree = "<group>"; };
 		D9F36E1729A5464E00C17E5A /* CapteeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CapteeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -348,7 +354,10 @@
 			children = (
 				D9F36E1929A5464E00C17E5A /* CapteeKit.h */,
 				D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */,
+				D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */,
 				D9F36E3729A5472F00C17E5A /* CapteeManager.swift */,
+				D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */,
+				D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */,
 			);
 			path = CapteeKit;
 			sourceTree = "<group>";
@@ -689,7 +698,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9F36E1B29A5464E00C17E5A /* CapteeKit.docc in Sources */,
+				D9D6BC1729B7F79400B9416C /* CapteeKitProtocol.swift in Sources */,
 				D9F36E3829A5472F00C17E5A /* CapteeManager.swift in Sources */,
+				D9D6BC1B29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift in Sources */,
+				D9D6BC1929B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
