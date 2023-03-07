@@ -20,6 +20,12 @@
 		D978B923299BFD1000C00D0B /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D978B921299BFD1000C00D0B /* ShareViewController.xib */; };
 		D978B928299BFD1000C00D0B /* Share2Emacs.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D978B91B299BFD1000C00D0B /* Share2Emacs.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D978B92E299C096800C00D0B /* ExtensionClass.js in Resources */ = {isa = PBXBuildFile; fileRef = D978B92D299C096800C00D0B /* ExtensionClass.js */; };
+		D985493129B6C9F800D41F24 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */; };
+		D985493229B6CA0E00D41F24 /* CapteeXPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6EC9629B696B4004E0040 /* CapteeXPCServiceProtocol.swift */; };
+		D985493329B6CAED00D41F24 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */; };
+		D985493429B6CB2800D41F24 /* CapteeXPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6EC9629B696B4004E0040 /* CapteeXPCServiceProtocol.swift */; };
+		D985493629B6CB8300D41F24 /* CapteeXPCService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9F6EC9429B696B4004E0040 /* CapteeXPCService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D985493829B6CB9900D41F24 /* CapteeXPCService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9F6EC9429B696B4004E0040 /* CapteeXPCService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D9E9311D29B0156600348A7B /* CapteeObservableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */; };
 		D9F36E1B29A5464E00C17E5A /* CapteeKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */; };
 		D9F36E2129A5464E00C17E5A /* CapteeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F36E1729A5464E00C17E5A /* CapteeKit.framework */; };
@@ -27,8 +33,11 @@
 		D9F36E2929A5464F00C17E5A /* CapteeKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D9F36E1929A5464E00C17E5A /* CapteeKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9F36E2C29A5464F00C17E5A /* CapteeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F36E1729A5464E00C17E5A /* CapteeKit.framework */; };
 		D9F36E2D29A5464F00C17E5A /* CapteeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9F36E1729A5464E00C17E5A /* CapteeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9F36E3629A546ED00C17E5A /* CapteeKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9F36E1729A5464E00C17E5A /* CapteeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9F36E3629A546ED00C17E5A /* CapteeKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D9F36E1729A5464E00C17E5A /* CapteeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9F36E3829A5472F00C17E5A /* CapteeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F36E3729A5472F00C17E5A /* CapteeManager.swift */; };
+		D9F6EC9729B696B4004E0040 /* CapteeXPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6EC9629B696B4004E0040 /* CapteeXPCServiceProtocol.swift */; };
+		D9F6EC9929B696B4004E0040 /* CapteeXPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6EC9829B696B4004E0040 /* CapteeXPCService.swift */; };
+		D9F6EC9B29B696B4004E0040 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6EC9A29B696B4004E0040 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +83,20 @@
 			remoteGlobalIDString = D9F36E1629A5464E00C17E5A;
 			remoteInfo = CapteeKit;
 		};
+		D9F6EC9D29B696B4004E0040 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D978B8E1299BFCB800C00D0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9F6EC9329B696B4004E0040;
+			remoteInfo = CapteeXPCService;
+		};
+		D9F6ECA629B69A49004E0040 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D978B8E1299BFCB800C00D0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9F6EC9329B696B4004E0040;
+			remoteInfo = CapteeXPCService;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,6 +111,26 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D985493529B6CB7900D41F24 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				D985493629B6CB8300D41F24 /* CapteeXPCService.xpc in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D985493729B6CB9100D41F24 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				D985493829B6CB9900D41F24 /* CapteeXPCService.xpc in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9F36E2E29A5464F00C17E5A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -99,14 +142,15 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9F36E3529A546DA00C17E5A /* CopyFiles */ = {
+		D9F36E3529A546DA00C17E5A /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D9F36E3629A546ED00C17E5A /* CapteeKit.framework in CopyFiles */,
+				D9F36E3629A546ED00C17E5A /* CapteeKit.framework in Copy Frameworks */,
 			);
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -131,6 +175,7 @@
 		D978B924299BFD1000C00D0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D978B925299BFD1000C00D0B /* Share2Emacs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share2Emacs.entitlements; sourceTree = "<group>"; };
 		D978B92D299C096800C00D0B /* ExtensionClass.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExtensionClass.js; sourceTree = "<group>"; };
+		D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = Captee/Managers/ConnectionManager.swift; sourceTree = SOURCE_ROOT; };
 		D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeObservableManager.swift; sourceTree = "<group>"; };
 		D9F36E1729A5464E00C17E5A /* CapteeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CapteeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F36E1929A5464E00C17E5A /* CapteeKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapteeKit.h; sourceTree = "<group>"; };
@@ -138,6 +183,11 @@
 		D9F36E2029A5464E00C17E5A /* CapteeKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapteeKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F36E2729A5464F00C17E5A /* CapteeKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeKitTests.swift; sourceTree = "<group>"; };
 		D9F36E3729A5472F00C17E5A /* CapteeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CapteeManager.swift; path = capteekit/CapteeManager.swift; sourceTree = SOURCE_ROOT; };
+		D9F6EC9429B696B4004E0040 /* CapteeXPCService.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = CapteeXPCService.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9F6EC9629B696B4004E0040 /* CapteeXPCServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeXPCServiceProtocol.swift; sourceTree = "<group>"; };
+		D9F6EC9829B696B4004E0040 /* CapteeXPCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeXPCService.swift; sourceTree = "<group>"; };
+		D9F6EC9A29B696B4004E0040 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D9F6EC9C29B696B4004E0040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +235,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D9F6EC9129B696B4004E0040 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -197,7 +254,9 @@
 				D978B91C299BFD1000C00D0B /* Share2Emacs */,
 				D9F36E1829A5464E00C17E5A /* CapteeKit */,
 				D9F36E2629A5464F00C17E5A /* CapteeKitTests */,
+				D9F6EC9529B696B4004E0040 /* CapteeXPCService */,
 				D978B8EA299BFCB800C00D0B /* Products */,
+				D9F6ECA429B69A49004E0040 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -210,6 +269,7 @@
 				D978B91B299BFD1000C00D0B /* Share2Emacs.appex */,
 				D9F36E1729A5464E00C17E5A /* CapteeKit.framework */,
 				D9F36E2029A5464E00C17E5A /* CapteeKitTests.xctest */,
+				D9F6EC9429B696B4004E0040 /* CapteeXPCService.xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -278,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */,
+				D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -298,6 +359,24 @@
 				D9F36E2729A5464F00C17E5A /* CapteeKitTests.swift */,
 			);
 			path = CapteeKitTests;
+			sourceTree = "<group>";
+		};
+		D9F6EC9529B696B4004E0040 /* CapteeXPCService */ = {
+			isa = PBXGroup;
+			children = (
+				D9F6EC9629B696B4004E0040 /* CapteeXPCServiceProtocol.swift */,
+				D9F6EC9829B696B4004E0040 /* CapteeXPCService.swift */,
+				D9F6EC9A29B696B4004E0040 /* main.swift */,
+				D9F6EC9C29B696B4004E0040 /* Info.plist */,
+			);
+			path = CapteeXPCService;
+			sourceTree = "<group>";
+		};
+		D9F6ECA429B69A49004E0040 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,12 +402,14 @@
 				D978B8E7299BFCB800C00D0B /* Resources */,
 				D978B92C299BFD1000C00D0B /* Embed Foundation Extensions */,
 				D9F36E2E29A5464F00C17E5A /* Embed Frameworks */,
+				D985493529B6CB7900D41F24 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				D978B927299BFD1000C00D0B /* PBXTargetDependency */,
 				D9F36E2B29A5464F00C17E5A /* PBXTargetDependency */,
+				D9F6ECA729B69A49004E0040 /* PBXTargetDependency */,
 			);
 			name = Captee;
 			productName = Captee;
@@ -378,7 +459,8 @@
 				D978B917299BFD1000C00D0B /* Sources */,
 				D978B918299BFD1000C00D0B /* Frameworks */,
 				D978B919299BFD1000C00D0B /* Resources */,
-				D9F36E3529A546DA00C17E5A /* CopyFiles */,
+				D9F36E3529A546DA00C17E5A /* Copy Frameworks */,
+				D985493729B6CB9100D41F24 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -401,6 +483,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D9F6EC9E29B696B4004E0040 /* PBXTargetDependency */,
 			);
 			name = CapteeKit;
 			productName = CapteeKit;
@@ -425,6 +508,23 @@
 			productName = CapteeKitTests;
 			productReference = D9F36E2029A5464E00C17E5A /* CapteeKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D9F6EC9329B696B4004E0040 /* CapteeXPCService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9F6ECA329B696B4004E0040 /* Build configuration list for PBXNativeTarget "CapteeXPCService" */;
+			buildPhases = (
+				D9F6EC9029B696B4004E0040 /* Sources */,
+				D9F6EC9129B696B4004E0040 /* Frameworks */,
+				D9F6EC9229B696B4004E0040 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CapteeXPCService;
+			productName = CapteeXPCService;
+			productReference = D9F6EC9429B696B4004E0040 /* CapteeXPCService.xpc */;
+			productType = "com.apple.product-type.xpc-service";
 		};
 /* End PBXNativeTarget section */
 
@@ -457,6 +557,9 @@
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = D978B8E8299BFCB800C00D0B;
 					};
+					D9F6EC9329B696B4004E0040 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 				};
 			};
 			buildConfigurationList = D978B8E4299BFCB800C00D0B /* Build configuration list for PBXProject "Captee" */;
@@ -478,6 +581,7 @@
 				D978B91A299BFD1000C00D0B /* Share2Emacs */,
 				D9F36E1629A5464E00C17E5A /* CapteeKit */,
 				D9F36E1F29A5464E00C17E5A /* CapteeKitTests */,
+				D9F6EC9329B696B4004E0040 /* CapteeXPCService */,
 			);
 		};
 /* End PBXProject section */
@@ -530,6 +634,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D9F6EC9229B696B4004E0040 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -537,8 +648,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D985493129B6C9F800D41F24 /* ConnectionManager.swift in Sources */,
 				D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */,
 				D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */,
+				D985493229B6CA0E00D41F24 /* CapteeXPCServiceProtocol.swift in Sources */,
 				D9E9311D29B0156600348A7B /* CapteeObservableManager.swift in Sources */,
 				D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */,
 			);
@@ -565,7 +678,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D985493429B6CB2800D41F24 /* CapteeXPCServiceProtocol.swift in Sources */,
 				D978B920299BFD1000C00D0B /* ShareViewController.swift in Sources */,
+				D985493329B6CAED00D41F24 /* ConnectionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +698,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9F36E2829A5464F00C17E5A /* CapteeKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F6EC9029B696B4004E0040 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9F6EC9729B696B4004E0040 /* CapteeXPCServiceProtocol.swift in Sources */,
+				D9F6EC9929B696B4004E0040 /* CapteeXPCService.swift in Sources */,
+				D9F6EC9B29B696B4004E0040 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +743,16 @@
 			isa = PBXTargetDependency;
 			target = D9F36E1629A5464E00C17E5A /* CapteeKit */;
 			targetProxy = D9F36E2A29A5464F00C17E5A /* PBXContainerItemProxy */;
+		};
+		D9F6EC9E29B696B4004E0040 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9F6EC9329B696B4004E0040 /* CapteeXPCService */;
+			targetProxy = D9F6EC9D29B696B4004E0040 /* PBXContainerItemProxy */;
+		};
+		D9F6ECA729B69A49004E0040 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9F6EC9329B696B4004E0040 /* CapteeXPCService */;
+			targetProxy = D9F6ECA629B69A49004E0040 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -666,7 +801,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -685,7 +820,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 0.8.0;
+				MARKETING_VERSION = 0.8.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -728,7 +863,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -741,7 +876,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 0.8.0;
+				MARKETING_VERSION = 0.8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -1038,6 +1173,48 @@
 			};
 			name = Release;
 		};
+		D9F6ECA129B696B4004E0040 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UD5428GZB3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CapteeXPCService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CapteeXPCService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yummymelon.CapteeXPCService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D9F6ECA229B696B4004E0040 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UD5428GZB3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CapteeXPCService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CapteeXPCService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yummymelon.CapteeXPCService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1100,6 +1277,15 @@
 			buildConfigurations = (
 				D9F36E3129A5464F00C17E5A /* Debug */,
 				D9F36E3229A5464F00C17E5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9F6ECA329B696B4004E0040 /* Build configuration list for PBXNativeTarget "CapteeXPCService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9F6ECA129B696B4004E0040 /* Debug */,
+				D9F6ECA229B696B4004E0040 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

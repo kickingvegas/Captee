@@ -26,6 +26,7 @@ class CapteeObservableManager: ObservableObject {
     @Published var orgProtocol: OrgProtocolType = .storeLink
     
     var capteeManager = CapteeManager()
+    var connectionManager = ConnectionManager()
     
     init() {
         self.template = capteeManager.defaultTemplate
@@ -39,4 +40,3 @@ class CapteeObservableManager: ObservableObject {
                                     template: template)
     }
 }
-

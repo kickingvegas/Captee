@@ -14,7 +14,7 @@
 // limitations under the License.
 //
 
-import Foundation
+import Cocoa
 import UniformTypeIdentifiers
 
 public enum OrgProtocolType: String, Equatable, CaseIterable {
@@ -23,7 +23,6 @@ public enum OrgProtocolType: String, Equatable, CaseIterable {
 }
 
 public protocol CapteeManagerProtocol {
-    // TODO: body should be of type AttributedString
     func orgProtcolURL(orgProtocol: OrgProtocolType, url: URL?, title: String?, body: AttributedString?, template: String?) -> URL?
 }
 
@@ -37,6 +36,8 @@ public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
     var title: String?
     var body: AttributedString?
     var template: String?
+    
+    //let connectionManager = ConnectionManager()
         
     public var defaultTemplate: String {
         get {
@@ -97,4 +98,21 @@ public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
             return nil
         }
     }
+    
+//    public func openURL(url: URL, native: Bool = true) {
+//        if native {
+//            NSWorkspace.shared.open(url)
+//        } else {
+//            connectionManager.xpcService().wtf()
+////            connectionManager.xpcService().openURL(url: url as NSURL) { buf in
+////                print(buf)
+////
+////            }
+//        }
+//
+//    }
+//
+//    public func wtf() {
+//        connectionManager.xpcService().wtf()
+//    }
 }
