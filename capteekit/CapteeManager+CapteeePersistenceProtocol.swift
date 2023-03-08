@@ -16,19 +16,20 @@
 
 
 import Foundation
-import Cocoa
 
-
-class CapteeXPCService: NSObject, CapteeXPCServiceProtocol {
-    @objc func openURL(url: NSURL, with reply: @escaping (Bool) -> Void) {
-        reply(NSWorkspace.shared.open(url as URL))
-    }
-    
-    func sendToClipboard(payload: String, with reply: @escaping (Bool) -> Void) {
-        
-        let pasteboard = NSPasteboard.general
-        pasteboard.clearContents()
-        pasteboard.setString(payload, forType: .string)
-        reply(true)
-    }
+extension CapteeManager {
+    public var defaultTemplate: String {
+            get {
+                if let result = UserDefaults.standard.value(forKey: "template") as? String {
+                    return result
+                } else {
+                    return "c"
+                }
+            }
+            
+            set(newTemplate) {
+                UserDefaults.standard.setValue(newTemplate, forKey: "template")
+            }
+        }
 }
+

@@ -14,7 +14,6 @@
 // limitations under the License.
 //
 
-
 import SwiftUI
 import CapteeKit
 
@@ -33,10 +32,29 @@ class CapteeObservableManager: ObservableObject {
     }
     
     func orgProtocolURL() -> URL? {
-        capteeManager.orgProtcolURL(orgProtocol: orgProtocol,
+        // TODO: must scrub arguments
+        capteeManager.orgProtcolURL(pType: orgProtocol,
                                     url: URL(string: urlString),
                                     title: title,
                                     body: body,
                                     template: template)
+    }
+    
+    func clipboardPayload() -> String {
+        // TODO: must scrub arguments
+        capteeManager.clipboardPayload(url: URL(string: urlString),
+                                       title: title,
+                                       body: body)
+    }
+    
+    
+    func openURL(url: NSURL, with reply: @escaping (Bool) -> Void) {
+        let service = connectionManager.xpcService()
+        service.openURL(url: url, with: reply)
+    }
+
+    func sendToClipboard(payload: String, with reply: @escaping (Bool) -> Void) {
+        let service = connectionManager.xpcService()
+        service.sendToClipboard(payload: payload, with: reply)
     }
 }
