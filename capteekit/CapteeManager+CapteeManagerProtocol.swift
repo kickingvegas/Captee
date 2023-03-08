@@ -88,4 +88,100 @@ extension CapteeManager {
         
         return bufList.joined(separator: "\n")
     }
+    
+    
+    public func orgMessage(payloadType: PayloadType, url: URL?, title: String?, body: AttributedString?, template: String?) -> String? {
+        var result: String?
+        let linkMarkup = orgLinkMarkup(url: url, title: title)
+        
+        switch payloadType {
+        case .link:
+            result = linkMarkup
+            
+        case .capture:
+            var bufList = [String]()
+            
+            if let title = title {
+                bufList.append("* " + title)
+            }
+
+            if let linkMarkup = linkMarkup {
+                bufList.append(linkMarkup)
+            }
+            
+            if let body = body {
+                // TODO: convert attributed string to org markup
+                let bodyString = String(body.characters[...])
+                if bodyString != "" {
+                    bufList.append(bodyString)
+                }
+            }
+            
+            result = bufList.joined(separator: "\n")
+        }
+        
+        return result
+    }
+    
+    public func markdownMessage(payloadType: PayloadType, url: URL?, title: String?, body: AttributedString?, template: String?) -> String? {
+        var result: String?
+        let linkMarkup = markdownLinkMarkup(url: url, title: title)
+        
+        switch payloadType {
+        case .link:
+            result = linkMarkup
+            
+        case .capture:
+            var bufList = [String]()
+            
+            if let title = title {
+                bufList.append("# " + title)
+            }
+
+            if let linkMarkup = linkMarkup {
+                bufList.append(linkMarkup)
+            }
+            
+            if let body = body {
+                // TODO: convert attributed string to org markup
+                let bodyString = String(body.characters[...])
+                if bodyString != "" {
+                    bufList.append(bodyString)
+                }
+            }
+            
+            result = bufList.joined(separator: "\n")
+        }
+        
+        return result
+    }
+
+    
+    func orgLinkMarkup(url: URL?, title: String?) -> String? {
+        var result: String?
+        if let url = url,
+           let title = title {
+            result = "[[\(url.absoluteString)][\(title)]]"
+        } else if let url = url,
+                  title == nil {
+            result = "[[\(url.absoluteString)]]"
+        } else {
+            // no link can be defined!
+        }
+        return result
+    }
+    
+    func markdownLinkMarkup(url: URL?, title: String?) -> String? {
+        var result: String?
+        if let url = url,
+           let title = title {
+            result = "[\(title)](\(url.absoluteString))"
+        } else if let url = url,
+                  title == nil {
+            result = "<\(url.absoluteString)>"
+        } else {
+            // no link can be defined!
+        }
+        return result
+    }
 }

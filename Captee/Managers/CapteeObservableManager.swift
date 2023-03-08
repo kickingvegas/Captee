@@ -23,6 +23,10 @@ class CapteeObservableManager: ObservableObject {
     @Published var body: AttributedString = AttributedString("")
     @Published var template: String = ""
     @Published var orgProtocol: OrgProtocolType = .storeLink
+    @Published var markupFormat: MarkupFormat = .orgMode
+    @Published var payloadType: PayloadType = .link
+    @Published var sendtoType: SendtoType = .orgProtocol
+    @Published var bodyDisabled: Bool = true
     
     var capteeManager = CapteeManager()
     var connectionManager = ConnectionManager()
@@ -57,4 +61,50 @@ class CapteeObservableManager: ObservableObject {
         let service = connectionManager.xpcService()
         service.sendToClipboard(payload: payload, with: reply)
     }
+    
+    func captureAction(with reply: @escaping (Bool) -> Void) {
+        var orgProtocolType: OrgProtocolType
+        switch payloadType {
+        case .link:
+            orgProtocolType = .storeLink
+        case .capture:
+            orgProtocolType = .capture
+        }
+        
+        let payload = CapteeUtils.extractPayloadContent(urlString: urlString,
+                                                        titleString: title,
+                                                        templateString: template,
+                                                        body: body)
+        switch markupFormat {
+        case .orgMode:
+            switch sendtoType {
+            case .orgProtocol:
+                if let url = capteeManager.orgProtcolURL(pType: orgProtocolType,
+                                                         url: payload.url,
+                                                         title: payload.title,
+                                                         body: payload.body,
+                                                         template: payload.template) {
+                    connectionManager.xpcService().openURL(url: url as NSURL, with: reply)
+                }
+            case .clipboard:
+                if let message = capteeManager.orgMessage(payloadType: payloadType,
+                                                          url: payload.url,
+                                                          title: payload.title,
+                                                          body: payload.body,
+                                                          template: payload.template) {
+                    connectionManager.xpcService().sendToClipboard(payload: message, with: reply)
+                }
+            }
+
+        case .markdown:
+            if let message = capteeManager.markdownMessage(payloadType: payloadType,
+                                                           url: payload.url,
+                                                           title: payload.title,
+                                                           body: payload.body,
+                                                           template: payload.template) {
+                connectionManager.xpcService().sendToClipboard(payload: message, with: reply)
+            }
+        }
+    }
+    
 }

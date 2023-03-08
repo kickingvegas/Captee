@@ -43,16 +43,23 @@ struct ContentView: View {
     
     func captureAction() {
         
-        if let url = capteeObservableManager.orgProtocolURL() {
-            print("\(url.absoluteString)")
-            capteeObservableManager.openURL(url: url as NSURL) { result in
-                print("\(result)")
-            }
-
+        capteeObservableManager.captureAction { result in
+            print("\(result)")
+        }
+        
+//        if capteeObservableManager.sendtoType == .orgProtocol {
+//            if let url = capteeObservableManager.orgProtocolURL() {
+//                print("\(url.absoluteString)")
+//                capteeObservableManager.openURL(url: url as NSURL) { result in
+//                    print("\(result)")
+//                }
+//
+//            }
+//        } else {
 //            capteeObservableManager.sendToClipboard(payload: capteeObservableManager.clipboardPayload()) { result in
 //                print("\(result)")
 //            }
-        }
+//        }
 
     }
     
@@ -115,8 +122,6 @@ struct OrgURLView: View {
 
             }
             .foregroundColor(foregroundColor)
-
-
         
         Divider()
     }
@@ -132,22 +137,64 @@ struct OrgBodyView: View {
         
         CAPTextEditor(text: $capteeObservableManager.body)
             .textFieldStyle(.roundedBorder)
-            .disabled(capteeObservableManager.orgProtocol == .storeLink)
+            .disabled(capteeObservableManager.bodyDisabled)
     }
 }
 
 struct OrgProtocolPickerView: View {
     @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @State var sendDisable: Bool = false
 
     var body: some View {
-        Picker("Protocol", selection: $capteeObservableManager.orgProtocol) {
-            ForEach(OrgProtocolType.allCases, id: \.self) { value in
-                Text(value.rawValue)
-                    .tag(value)
+        VStack(alignment: .leading) {
+            HStack {
+                Picker("Format", selection: $capteeObservableManager.markupFormat) {
+                    ForEach(MarkupFormat.allCases, id: \.self) { value in
+                        Text(value.rawValue)
+                            .tag(value)
+                    }
+                }
+                .pickerStyle(.radioGroup)
+                .onChange(of: capteeObservableManager.markupFormat) { newValue in
+                    if newValue == .markdown {
+                        sendDisable = true
+                        capteeObservableManager.sendtoType = .clipboard
+                    } else {
+                        sendDisable = false
+                        capteeObservableManager.sendtoType = .orgProtocol
+                    }
+                    
+                }
+
+                
+                Picker("Payload", selection: $capteeObservableManager.payloadType) {
+                    ForEach(PayloadType.allCases, id: \.self) { value in
+                        Text(value.rawValue)
+                            .tag(value)
+                    }
+                }
+                .pickerStyle(.radioGroup)
+                .onChange(of: capteeObservableManager.payloadType) { newValue in
+                    if newValue == .capture {
+                        capteeObservableManager.bodyDisabled = false
+                        capteeObservableManager.orgProtocol = .capture
+                    } else {
+                        capteeObservableManager.bodyDisabled = true
+                        capteeObservableManager.orgProtocol = .storeLink
+                    }
+                }
+                
+                Picker("Send to", selection: $capteeObservableManager.sendtoType) {
+                    ForEach(SendtoType.allCases, id: \.self) { value in
+                        Text(value.rawValue)
+                            .tag(value)
+                    }
+                }
+                .pickerStyle(.radioGroup)
+                .disabled(sendDisable)
+
             }
+            Divider()
         }
-        .pickerStyle(.radioGroup)
-        
-        Divider()
     }
 }
