@@ -32,12 +32,43 @@ class ShareViewController: NSViewController {
     @IBOutlet weak var bodyField: NSScrollView!
     @IBOutlet var textView: NSTextView!
     @IBOutlet weak var templateField: NSTextField!
+        
+    @IBOutlet weak var formatOrgModeButton: NSButton!
+    @IBOutlet weak var formatMarkdownButton: NSButton!
+    @IBOutlet weak var payloadLinkButton: NSButton!
+    @IBOutlet weak var payloadCaptureButton: NSButton!
+    @IBOutlet weak var sendtoOrgProtocolButton: NSButton!
+    @IBOutlet weak var sendtoClipboardButton: NSButton!
+    
+    var markupFormat: MarkupFormat = .orgMode {
+        didSet {}
+    }
+    var payloadType: PayloadType = .link {
+        didSet {}
+    }
+    var orgProtocolType: OrgProtocolType = .storeLink {
+        didSet {}
+    }
+    var sendtoType: SendtoType = .orgProtocol {
+        didSet {}
+    }
+    
     override var nibName: NSNib.Name? {
         return NSNib.Name("ShareViewController")
     }
-
+    
     override func loadView() {
         super.loadView()
+        
+        self.formatOrgModeButton.state = .on
+        self.payloadLinkButton.state = .on
+        self.sendtoOrgProtocolButton.state = .on
+
+        formatButtonAction(formatOrgModeButton as Any)
+        payloadButtonAction(payloadLinkButton as Any)
+        sendtoButtonAction(sendtoOrgProtocolButton as Any)
+        
+        textView.isEditable = false
 
         // Insert code here to customize the view
         let item = self.extensionContext!.inputItems[0] as! NSExtensionItem
@@ -56,10 +87,13 @@ class ShareViewController: NSViewController {
             print("\(contentText)\n\(contentText.attributeKeys)")
             if let textStorage = self.textView.textStorage {
                 textStorage.append(contentText)
+                payloadCaptureButton.state = .on
+                payloadButtonAction(payloadCaptureButton as Any)
             }
         }
         
         self.templateField.stringValue = capteeManager.defaultTemplate
+        
                 
         if let attachments = item.attachments {
             NSLog("Attachments = %@", attachments as NSArray)
@@ -105,52 +139,95 @@ class ShareViewController: NSViewController {
         }
     }
 
+    @IBAction func formatButtonAction(_ sender: Any) {
+        let formatButton = sender as! NSButton
+        if formatButton == formatOrgModeButton {
+            markupFormat = .orgMode
+            sendtoOrgProtocolButton.state = .on
+            sendtoOrgProtocolButton.isEnabled = true
+            sendtoClipboardButton.isEnabled = true
+        } else if formatButton == formatMarkdownButton {
+            markupFormat = .markdown
+            sendtoClipboardButton.state = .on
+            sendtoOrgProtocolButton.isEnabled = false
+            sendtoClipboardButton.isEnabled = false
+            sendtoType = .clipboard
+        }
+
+    }
+    
+    @IBAction func payloadButtonAction(_ sender: Any) {
+        let payloadButton = sender as! NSButton
+        if payloadButton == payloadLinkButton {
+            payloadType = .link
+            orgProtocolType = .storeLink
+            textView.isEditable = false
+        } else if payloadButton == payloadCaptureButton {
+            payloadType = .capture
+            orgProtocolType = .capture
+            textView.isEditable = true
+        }
+    }
+    
+    @IBAction func sendtoButtonAction(_ sender: Any) {
+        let sendtoButton = sender as! NSButton
+        if sendtoButton == sendtoOrgProtocolButton {
+            sendtoType = .orgProtocol
+        } else if sendtoButton == sendtoClipboardButton {
+            sendtoType = .clipboard
+        }
+    }
+    
     @IBAction func send(_ sender: AnyObject?) {
         let outputItem = NSExtensionItem()
         
-        let urlString = self.urlField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
-        let titleString = self.titleField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        let payload = Share2EmacsUtils.extractPayloadContentFromAppKit(urlField: urlField,
+                                                                       titleField: titleField,
+                                                                       templateField: templateField,
+                                                                       textView: textView)
         
-        var templateString = self.templateField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
-        if templateString == "" {
-            templateString = "c"
-        }
-        
-        capteeManager.defaultTemplate = templateString
-        
-        var orgProtcolHost: OrgProtocolType = .storeLink
-        
-        var body: AttributedString?
-        
-        do {
-            if let textStorage = self.textView.textStorage {
-                body = try AttributedString(textStorage, including: \.appKit)
-                if body != "" {
-                    orgProtcolHost = .capture
+        switch markupFormat {
+        case .orgMode:
+            switch sendtoType {
+            case .orgProtocol:
+                if let url = capteeManager.orgProtcolURL(pType: orgProtocolType,
+                                                         url: payload.url,
+                                                         title: payload.title,
+                                                         body: payload.body,
+                                                         template: payload.template) {
+                    connectionManager.xpcService().openURL(url: url as NSURL) { result in
+                        print("\(result)")
+                    }
+                }
+            case .clipboard:
+                if let message = capteeManager.orgMessage(payloadType: payloadType,
+                                                          url: payload.url,
+                                                          title: payload.title,
+                                                          body: payload.body,
+                                                          template: payload.template) {
+                    connectionManager.xpcService().sendToClipboard(payload: message) { result in
+                        print("\(result)")
+                    }
                 }
             }
-        } catch {
-            // do nothing
-        }
-        
-        if let url = capteeManager.orgProtcolURL(pType: orgProtcolHost,
-                                                 url: URL(string: urlString),
-                                                 title: titleString,
-                                                 body: body,
-                                                 template: templateString) {
-            print(url.absoluteString)
-            //capteeManager.openURL(url: url, native: false)
-            connectionManager.xpcService().openURL(url: url as NSURL) { buf in
-                print("\(buf)")
+
+        case .markdown:
+            if let message = capteeManager.markdownMessage(payloadType: payloadType,
+                                                           url: payload.url,
+                                                           title: payload.title,
+                                                           body: payload.body,
+                                                           template: payload.template) {
+                connectionManager.xpcService().sendToClipboard(payload: message) { result in
+                        print("\(result)")
+                }
             }
-            
-        } else {
-            // TODO: handle error
         }
 
         let outputItems = [outputItem]
         self.extensionContext!.completeRequest(returningItems: outputItems, completionHandler: nil)
-}
+    }
+    
+    
 
     @IBAction func cancel(_ sender: AnyObject?) {
         let cancelError = NSError(domain: NSCocoaErrorDomain, code: NSUserCancelledError, userInfo: nil)
@@ -158,3 +235,4 @@ class ShareViewController: NSViewController {
     }
 
 }
+

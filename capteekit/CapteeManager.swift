@@ -19,14 +19,7 @@ import UniformTypeIdentifiers
 
   
 public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
-//    // TODO: do I need these?
-//    var url: URL?
-//    var title: String?
-//    var body: AttributedString?
-//    var template: String?
-
     public init() {
         UserDefaults.standard.register(defaults: ["template": "c" ])
     }
 }
-

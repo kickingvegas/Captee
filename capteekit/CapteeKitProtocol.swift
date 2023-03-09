@@ -22,6 +22,21 @@ public enum OrgProtocolType: String, Equatable, CaseIterable {
     case capture
 }
 
+public enum MarkupFormat: String, Equatable, CaseIterable {
+    case orgMode = "Org Mode"
+    case markdown = "Markdown"
+}
+
+public enum PayloadType: String, Equatable, CaseIterable {
+    case link = "Link"
+    case capture = "Capture"
+}
+
+public enum SendtoType: String, Equatable, CaseIterable {
+    case orgProtocol = "Org Protocol"
+    case clipboard = "Clipboard"
+}
+
 public protocol CapteeManagerProtocol {
     /// Generate URL from parameters
     /// - Parameters:
@@ -31,19 +46,37 @@ public protocol CapteeManagerProtocol {
     ///   - body: body content
     ///   - template: template key
     /// - Returns: Org Procotol URL instance
-    func orgProtcolURL(pType: OrgProtocolType, url: URL?, title: String?, body: AttributedString?, template: String?) -> URL?
+    func orgProtcolURL(pType: OrgProtocolType,
+                       url: URL?,
+                       title: String?,
+                       body: AttributedString?,
+                       template: String?) -> URL?
     
     /// Generate payload string for clipboard
+    ///
+    /// TODO: deprecate
     /// - Parameters:
     ///   - url: URL
     ///   - title: title associated with URL
     ///   - body: body content
     /// - Returns: payload to be put into clipboard
     func clipboardPayload(url: URL?, title: String?, body: AttributedString?) -> String
-
+        
+    func orgMessage(payloadType: PayloadType,
+                    url: URL?,
+                    title: String?,
+                    body: AttributedString?,
+                    template: String?) -> String?
+        
+    func markdownMessage(payloadType: PayloadType,
+                         url: URL?,
+                         title: String?,
+                         body: AttributedString?,
+                         template: String?) -> String?
 }
 
 public protocol CapteePersistenceProtocol {
     var defaultTemplate: String { get set }
 }
+
   
