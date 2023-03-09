@@ -163,6 +163,7 @@
 /* Begin PBXFileReference section */
 		D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share2EmacsUtils.swift; sourceTree = "<group>"; };
 		D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeUtils.swift; sourceTree = "<group>"; };
+		D92774B029B95CEA00A15CC9 /* CapteeXPCService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CapteeXPCService.entitlements; sourceTree = "<group>"; };
 		D971A71529A819C00029F6F6 /* CAPTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPTextEditor.swift; sourceTree = "<group>"; };
 		D978B8E9299BFCB800C00D0B /* Captee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Captee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D978B8EC299BFCB800C00D0B /* CapteeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeApp.swift; sourceTree = "<group>"; };
@@ -379,6 +380,7 @@
 		D9F6EC9529B696B4004E0040 /* CapteeXPCService */ = {
 			isa = PBXGroup;
 			children = (
+				D92774B029B95CEA00A15CC9 /* CapteeXPCService.entitlements */,
 				D9F6EC9629B696B4004E0040 /* CapteeXPCServiceProtocol.swift */,
 				D9F6EC9829B696B4004E0040 /* CapteeXPCService.swift */,
 				D9F6EC9A29B696B4004E0040 /* main.swift */,
@@ -1196,6 +1198,7 @@
 		D9F6ECA129B696B4004E0040 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CapteeXPCService/CapteeXPCService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1217,6 +1220,7 @@
 		D9F6ECA229B696B4004E0040 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CapteeXPCService/CapteeXPCService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
