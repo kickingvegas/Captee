@@ -215,10 +215,9 @@ class ShareViewController: NSViewController {
             if let message = capteeManager.markdownMessage(payloadType: payloadType,
                                                            url: payload.url,
                                                            title: payload.title,
-                                                           body: payload.body,
-                                                           template: payload.template) {
+                                                           body: payload.body) {
                 connectionManager.xpcService().sendToClipboard(payload: message) { result in
-                        print("\(result)")
+                    print("\(result)")
                 }
             }
         }

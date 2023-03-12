@@ -69,26 +69,6 @@ extension CapteeManager {
         return orgProtocolComponents.url
     }
         
-    public func clipboardPayload(url: URL?, title: String?, body: AttributedString?) -> String {
-        var bufList = [String]()
-        
-        if let url = url,
-           let title = title,
-           title != "" {
-            bufList.append("[[\(url.absoluteString)][\(title)]]")
-        }
-        
-        if let body = body {
-            // TODO: convert to target format
-            let bodyString = String(body.characters[...])
-            if bodyString != "" {
-                bufList.append(bodyString)
-            }
-        }
-        
-        return bufList.joined(separator: "\n")
-    }
-    
     
     public func orgMessage(payloadType: PayloadType, url: URL?, title: String?, body: AttributedString?, template: String?) -> String? {
         var result: String?
@@ -123,7 +103,7 @@ extension CapteeManager {
         return result
     }
     
-    public func markdownMessage(payloadType: PayloadType, url: URL?, title: String?, body: AttributedString?, template: String?) -> String? {
+    public func markdownMessage(payloadType: PayloadType, url: URL?, title: String?, body: AttributedString?) -> String? {
         var result: String?
         let linkMarkup = markdownLinkMarkup(url: url, title: title)
         
