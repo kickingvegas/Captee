@@ -184,7 +184,7 @@ struct OrgProtocolPickerView: View {
                     }
                 }
                 
-                Picker("Send to", selection: $capteeObservableManager.sendtoType) {
+                Picker("Use", selection: $capteeObservableManager.sendtoType) {
                     ForEach(SendtoType.allCases, id: \.self) { value in
                         Text(value.rawValue)
                             .tag(value)
