@@ -44,14 +44,6 @@ class CapteeObservableManager: ObservableObject {
                                     template: template)
     }
     
-    func clipboardPayload() -> String {
-        // TODO: must scrub arguments
-        capteeManager.clipboardPayload(url: URL(string: urlString),
-                                       title: title,
-                                       body: body)
-    }
-    
-    
     func openURL(url: NSURL, with reply: @escaping (Bool) -> Void) {
         let service = connectionManager.xpcService()
         service.openURL(url: url, with: reply)
@@ -100,8 +92,7 @@ class CapteeObservableManager: ObservableObject {
             if let message = capteeManager.markdownMessage(payloadType: payloadType,
                                                            url: payload.url,
                                                            title: payload.title,
-                                                           body: payload.body,
-                                                           template: payload.template) {
+                                                           body: payload.body) {
                 connectionManager.xpcService().sendToClipboard(payload: message, with: reply)
             }
         }

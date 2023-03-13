@@ -16,6 +16,7 @@
 
 
 import XCTest
+import RegexBuilder
 @testable import CapteeKit
 
 func randomString(length: Int) -> String {
@@ -23,14 +24,31 @@ func randomString(length: Int) -> String {
   return String((0..<length).map{ _ in letters.randomElement()! })
 }
 
-func randomSentence(length: Int) -> String {
+func randomSentence(words: Int) -> String {
     var sentence = [String]()
-    for _ in 1...length {
+    for _ in 1...words {
         sentence.append(randomString(length: Int.random(in: 1..<10)))
     }
     
     let result = sentence.joined(separator: " ")
     return result
+}
+
+func randomURL(scheme: String = "https",
+               host: String = randomString(length: 10),
+               path: String = "/" + randomString(length: 30)) -> URL? {
+    var urlComponents = URLComponents()
+    urlComponents.scheme = scheme
+    urlComponents.path = path
+    
+    var queryItems = [URLQueryItem]()
+    
+    for _ in 1...3 {
+        queryItems.append(URLQueryItem(name: randomString(length: 5), value: randomString(length: 5)))
+    }
+    urlComponents.queryItems = queryItems
+    
+    return urlComponents.url
 }
 
 final class CapteeKitTests: XCTestCase {
@@ -43,50 +61,355 @@ final class CapteeKitTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func test_orgProtocolURL_streamLink() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-        
-        
+    fileprivate func orgProtocolURL_testbench(pType: OrgProtocolType, url: URL?, title:String?, body: AttributedString?, template: String?) {
         let capteeManager = CapteeManager()
+        var urlString = ""
+        if let url = url {
+            urlString = url.absoluteString
+        }
         
-        let urlString = "http://google.com?mar=sdf&sdf=333"
-        let title = randomSentence(length: 3)
-        let body:String? = nil
-        let template:String? = "b"
-            
-        if let url = capteeManager.orgProtcolURL(host: .storeLink,
-                                                 url: URL(string: urlString),
+        var bodyString = ""
+        if let body = body {
+            bodyString = String(body.characters[...])
+        }
+        
+        if let url = capteeManager.orgProtcolURL(pType: pType,
+                                                 url: url,
                                                  title: title,
                                                  body: body,
                                                  template: template) {
-
             if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) {
                 XCTAssertTrue(urlComponents.scheme == "org-protocol")
-                XCTAssertTrue(urlComponents.host == OrgProtocolType.storeLink.rawValue)
+                XCTAssertTrue(urlComponents.host == pType.rawValue)
                 
                 if let queryItems = urlComponents.queryItems {
-                    print("\(queryItems)")
-                    
+                    //print("\(queryItems)")
                     for item in queryItems {
                         if item.name == "title" {
                             XCTAssertTrue(item.value == title)
                         } else if item.name == "url" {
                             XCTAssertTrue(item.value == urlString)
                         } else if item.name == "body" {
-                            XCTAssertTrue(item.value == body)
+                            XCTAssertTrue(item.value == bodyString)
                         } else if item.name == "template" {
                             XCTAssertTrue(item.value == template)
                         }
                     }
                 }
-                
-                print("\(url.absoluteString)")
-
+                //print("\(url.absoluteString)")
             }
         }
     }
+
+    
+    fileprivate func verifyOrgLinkMarkup(_ link: String, _ url: URL, _ title: String) {
+        //print("\(orgLink)")
+        
+        let pat = Regex {
+            #"[["#
+            Capture {
+                OneOrMore {
+                    CharacterClass.any
+                }
+            }
+            #"]["#
+            Capture {
+                NegativeLookahead {
+                    #"]"#
+                }
+                OneOrMore {
+                    CharacterClass.any
+                }
+            }
+            #"]]"#
+        }
+        
+        if let match = link.firstMatch(of: pat) {
+            //print(match.0)
+            //print(match.1)
+            //print(match.2)
+            
+            let testUrlString = String(match.1)
+            let testTitleString = String(match.2)
+            
+            XCTAssertEqual(url.absoluteString, testUrlString)
+            XCTAssertEqual(title, testTitleString)
+        } else {
+            XCTAssert(false, "failed to match org link pattern \(link)")
+        }
+    }
+    
+
+    
+    fileprivate func verifyMarkdownLinkMarkup(_ link: String, _ url: URL, _ title: String) {
+        let pat = Regex {
+            #"["#
+            Capture {
+                OneOrMore {
+                    CharacterClass.any
+                }
+            }
+            #"]("#
+            Capture {
+                NegativeLookahead {
+                    #")"#
+                }
+                OneOrMore {
+                    CharacterClass.any
+                }
+            }
+            #")"#
+        }
+        
+        if let match = link.firstMatch(of: pat) {
+            //print(match.0)
+            //print(match.1)
+            //print(match.2)
+            
+            let testUrlString = String(match.2)
+            let testTitleString = String(match.1)
+            
+            XCTAssertEqual(url.absoluteString, testUrlString)
+            XCTAssertEqual(title, testTitleString)
+        } else {
+            XCTAssert(false, "failed to match markdown link pattern \(link)")
+        }
+    }
+    
+
+    
+}
+
+
+extension CapteeKitTests {
+    
+    func test_orgProtocolURL_capture() throws {
+        if let url = randomURL() {
+            let body = AttributedString(randomSentence(words: 5))
+            
+            orgProtocolURL_testbench(pType: .capture,
+                                     url: url,
+                                     title: randomSentence(words: 5),
+                                     body: body,
+                                     template: randomString(length: 1))
+        } else {
+            XCTAssert(false, "failed to generate random URL")
+        }
+    }
+    
+    func test_orgProtocolURL_storeLink() throws {
+        if let url = randomURL() {
+            let body = AttributedString(randomSentence(words: 5))
+            
+            orgProtocolURL_testbench(pType: .storeLink,
+                                     url: url,
+                                     title: randomSentence(words: 5),
+                                     body: body,
+                                     template: randomString(length: 1))
+        } else {
+            XCTAssert(false, "failed to generate random URL")
+        }
+    }
+    
+    func test_orgProtocolURL_nil_url() throws {
+        orgProtocolURL_testbench(pType: .storeLink, url: nil,
+                                 title: nil,
+                                 body: nil,
+                                 template: nil)
+    }
+    
+    func test_orgProtocolURL_nil_title() throws {
+        if let url = randomURL() {
+            let body = AttributedString(randomSentence(words: 5))
+            
+            orgProtocolURL_testbench(pType: .capture,
+                                     url: url,
+                                     title: nil,
+                                     body: body,
+                                     template: randomString(length: 1))
+        } else {
+            XCTAssert(false, "failed to generate random URL")
+        }
+    }
+    
+    func test_orgProtocolURL_nil_body() throws {
+        if let url = randomURL() {
+            orgProtocolURL_testbench(pType: .capture,
+                                     url: url,
+                                     title: randomSentence(words: 5),
+                                     body: nil,
+                                     template: randomString(length: 1))
+        } else {
+            XCTAssert(false, "failed to generate random URL")
+        }
+    }
+
+    func test_orgProtocolURL_nil_template() throws {
+        if let url = randomURL() {
+            let body = AttributedString(randomSentence(words: 5))
+            
+            orgProtocolURL_testbench(pType: .capture,
+                                     url: url,
+                                     title: randomSentence(words: 5),
+                                     body: body,
+                                     template: nil)
+        }
+    }
+
+    
+    func test_orgLinkMarkup() throws {
+        let capteeManager = CapteeManager()
+
+        if let url = randomURL() {
+            let title = randomSentence(words: 7)
+            if let link = capteeManager.orgLinkMarkup(url: url, title: title) {
+                verifyOrgLinkMarkup(link, url, title)
+            }
+        } else {
+            XCTAssert(false, "failed to generate random URL")
+        }
+
+    }
+    
+    func test_orgLinkMarkup_url_only() throws {
+        let capteeManager = CapteeManager()
+        
+        if let url = randomURL() {
+            if let link = capteeManager.orgLinkMarkup(url: url, title: nil) {
+                print("\(link)")
+                
+                let pat = Regex {
+                    #"[["#
+                    Capture {
+                        OneOrMore {
+                            CharacterClass.any
+                        }
+                    }
+                    #"]]"#
+                }
+                
+                if let match = link.firstMatch(of: pat) {
+                    let testUrlString = String(match.1)
+                    XCTAssertEqual(url.absoluteString, testUrlString)
+                } else {
+                    XCTAssert(false, "failed to match org link pattern \(link)")
+                }
+            }
+        } else {
+            XCTAssert(false, "failed to generate random URL")
+        }
+    }
+    
+
+    func test_markdownLinkMarkup () throws {
+        let capteeManager = CapteeManager()
+
+        if let url = randomURL() {
+            let title = randomSentence(words: 7)
+            if let link = capteeManager.markdownLinkMarkup(url: url, title: title) {
+                print("\(link)")
+                verifyMarkdownLinkMarkup(link, url, title)
+                
+            }
+        } else {
+            XCTAssert(false, "failed to generate random URL")
+        }
+
+    }
+    
+    
+    func test_markdownLinkMarkup_url_only() throws {
+        let capteeManager = CapteeManager()
+        
+        if let url = randomURL() {
+            if let link = capteeManager.markdownLinkMarkup(url: url, title: nil) {
+                print("\(link)")
+                
+                let pat = Regex {
+                    #"<"#
+                    Capture {
+                        OneOrMore {
+                            CharacterClass.any
+                        }
+                    }
+                    #">"#
+                }
+                
+                if let match = link.firstMatch(of: pat) {
+                    let testUrlString = String(match.1)
+                    XCTAssertEqual(url.absoluteString, testUrlString)
+                } else {
+                    XCTAssert(false, "failed to match org link pattern \(link)")
+                }
+            }
+        } else {
+            XCTAssert(false, "failed to generate random URL")
+        }
+    }
+    
+    func test_orgMessage() throws {
+        let capteeManager = CapteeManager()
+        let title = randomSentence(words: 5)
+        let body = AttributedString(randomSentence(words: 10))
+        let template = randomString(length: 2)
+        
+        if let url = randomURL() {
+            if let message = capteeManager.orgMessage(payloadType: .capture,
+                                                      url: url,
+                                                      title: title,
+                                                      body: body,
+                                                      template: template) {
+                //print("\(message)")
+                let bufList = message.split(separator: "\n")
+                //print("\(bufList)")
+                
+                XCTAssert(bufList.count == 3)
+                XCTAssertEqual("* " + title, String(bufList[0]))
+                verifyOrgLinkMarkup(String(bufList[1]), url, title)
+                let bodyString = String(body.characters[...])
+                XCTAssertEqual(bodyString, String(bufList[2]))
+            }
+            
+            if let message = capteeManager.orgMessage(payloadType: .link,
+                                                      url: url,
+                                                      title: title,
+                                                      body: nil,
+                                                      template: nil) {
+                //print("\(message)")
+                verifyOrgLinkMarkup(message, url, title)
+            }
+        }
+    }
+    
+    func test_markdownMessage() throws {
+        let capteeManager = CapteeManager()
+        let title = randomSentence(words: 5)
+        let body = AttributedString(randomSentence(words: 10))
+
+        if let url = randomURL() {
+            if let message = capteeManager.markdownMessage(payloadType: .capture,
+                                                           url: url,
+                                                           title: title,
+                                                           body: body) {
+                //print("\(message)")
+                let bufList = message.split(separator: "\n")
+                //print("\(bufList)")
+                
+                XCTAssert(bufList.count == 3)
+                XCTAssertEqual("# " + title, String(bufList[0]))
+                verifyMarkdownLinkMarkup(String(bufList[1]), url, title)
+                let bodyString = String(body.characters[...])
+                XCTAssertEqual(bodyString, String(bufList[2]))
+            }
+            
+            if let message = capteeManager.markdownMessage(payloadType: .link,
+                                                           url: url,
+                                                           title: title,
+                                                           body: nil) {
+                verifyMarkdownLinkMarkup(message, url, title)
+            }
+                
+        }
+    }
+
 }
