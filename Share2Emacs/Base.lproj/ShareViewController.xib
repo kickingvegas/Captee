@@ -88,8 +88,8 @@ Gw
                                     <action selector="formatButtonAction:" target="-2" id="LLr-hn-WD2"/>
                                 </connections>
                             </button>
-                            <button toolTip="Use Org Mode syntax" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s9h-VY-RKb">
-                                <rect key="frame" x="7" y="34" width="87" height="18"/>
+                            <button toolTip="Use Org Mode syntax" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s9h-VY-RKb">
+                                <rect key="frame" x="7" y="35" width="87" height="18"/>
                                 <buttonCell key="cell" type="radio" title="Org Mode" bezelStyle="regularSquare" imagePosition="left" inset="2" id="IGX-IY-732">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -150,7 +150,7 @@ Gw
                         <constraint firstAttribute="width" constant="110" id="pN2-O0-7mS"/>
                     </constraints>
                 </box>
-                <box borderType="line" title="Send to" translatesAutoresizingMaskIntoConstraints="NO" id="hi8-aa-py1">
+                <box borderType="line" title="Use" translatesAutoresizingMaskIntoConstraints="NO" id="hi8-aa-py1">
                     <rect key="frame" x="277" y="614" width="126" height="85"/>
                     <view key="contentView" id="tDE-tN-6Gs">
                         <rect key="frame" x="4" y="5" width="118" height="65"/>
