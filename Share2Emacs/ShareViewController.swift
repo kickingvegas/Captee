@@ -18,7 +18,7 @@ import Cocoa
 import UniformTypeIdentifiers
 import CapteeKit
 
-class ShareViewController: NSViewController {
+class ShareViewController: NSViewController, NSTextFieldDelegate, NSTextViewDelegate {
     
     var capturedURL: URL?
     var contentText: NSAttributedString?
@@ -57,17 +57,36 @@ class ShareViewController: NSViewController {
         return NSNib.Name("ShareViewController")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let url = URL(string: "org-protocol://capture/"),
+           let _ = NSWorkspace.shared.urlForApplication(toOpen: url) {
+            sendtoOrgProtocolButton.state = .on
+        } else {
+            sendtoClipboardButton.state = .on
+            sendtoClipboardButton.isEnabled = false
+            sendtoOrgProtocolButton.isEnabled = false
+            sendtoType = .clipboard
+            
+            sendtoOrgProtocolButton.toolTip = "You do not have installed a version of Emacs that supports the org-protocol:// scheme."
+            
+        }
+        
+        templateField.stringValue = capteeManager.defaultTemplate
+    }
+    
     override func loadView() {
         super.loadView()
         
         self.formatOrgModeButton.state = .on
         self.payloadLinkButton.state = .on
-        self.sendtoOrgProtocolButton.state = .on
-
+        
         formatButtonAction(formatOrgModeButton as Any)
         payloadButtonAction(payloadLinkButton as Any)
-        sendtoButtonAction(sendtoOrgProtocolButton as Any)
-        
+        //sendtoButtonAction(sendtoOrgProtocolButton as Any)
+
+                
         textView.isEditable = false
 
         // Insert code here to customize the view
@@ -92,7 +111,7 @@ class ShareViewController: NSViewController {
             }
         }
         
-        self.templateField.stringValue = capteeManager.defaultTemplate
+        //self.templateField.stringValue = capteeManager.defaultTemplate
         
                 
         if let attachments = item.attachments {
@@ -234,4 +253,41 @@ class ShareViewController: NSViewController {
     }
 
 }
+
+
+extension ShareViewController {
+    
+    func controlTextDidBeginEditing(_ obj: Notification) {
+        guard obj.object is NSTextField else {
+            return
+        }
+        
+        if let targetObject = obj.object {
+            let textField = targetObject as! NSTextField
+            
+            if textField == urlField {
+            } else if textField == titleField {
+            } else if textField == templateField {
+            }
+        }
+    }
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        guard obj.object is NSTextField else {
+            return
+        }
+        
+        if let targetObject = obj.object {
+            let textField = targetObject as! NSTextField
+            
+            if textField == urlField {
+            } else if textField == titleField {
+            } else if textField == templateField {
+                // TODO: persist field
+            }
+        }
+    }
+    
+}
+
 

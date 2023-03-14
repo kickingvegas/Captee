@@ -16,19 +16,21 @@
 
 
 import SwiftUI
+import CapteeKit
 
 public struct CapteeUtils {
     public static func extractPayloadContent(urlString: String,
                                              titleString: String,
                                              templateString: String,
-                                             body: AttributedString) -> (url: URL?,
-                                                                         title: String?,
-                                                                         template: String?,
-                                                                         body: AttributedString?) {
+                                             body: AttributedString) -> CapteePayload {
         
         let titleBuf: String? = (titleString != "") ? titleString : nil
         let templateBuf: String? = (templateString != "") ? templateString : nil
         let url: URL? = URL(string: urlString)
-        return (url, titleBuf, templateBuf, body)
+        
+        return CapteePayload(url: url, title: titleBuf, template: templateBuf, body: body)
     }
 }
+
+
+
