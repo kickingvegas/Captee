@@ -19,14 +19,15 @@ import CapteeKit
 
 struct ContentView: View {
     @StateObject var capteeObservableManager = CapteeObservableManager()
-    
-    
+
     var body: some View {
         VStack (alignment: .leading) {
             OrgProtocolPickerView(capteeObservableManager: capteeObservableManager)
             OrgURLView(capteeObservableManager: capteeObservableManager)
             OrgTitleView(capteeObservableManager: capteeObservableManager)
-            OrgTemplateView(capteeObservableManager: capteeObservableManager)
+            if !capteeObservableManager.hideTemplate {
+                OrgTemplateView(capteeObservableManager: capteeObservableManager)
+            }
             OrgBodyView(capteeObservableManager: capteeObservableManager)
 
             HStack(alignment: .bottom) {
@@ -78,6 +79,7 @@ struct OrgTemplateView: View {
         
         Divider()
     }
+        
 }
 
 struct OrgTitleView: View {
@@ -151,9 +153,12 @@ struct OrgProtocolPickerView: View {
                     if newValue == .markdown {
                         capteeObservableManager.sendtoPickerDisabled = true
                         capteeObservableManager.sendtoType = .clipboard
-                    } else {
+                        capteeObservableManager.hideTemplate = true
+
+                    } else if newValue == .orgMode {
                         capteeObservableManager.sendtoPickerDisabled = false
                         capteeObservableManager.sendtoType = .orgProtocol
+                        capteeObservableManager.hideTemplate = false
                     }
                     
                 }
