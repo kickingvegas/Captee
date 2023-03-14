@@ -68,4 +68,16 @@ public protocol CapteePersistenceProtocol {
     var defaultTemplate: String { get set }
 }
 
-  
+public struct CapteePayload {
+    public let url: URL?
+    public let title: String?
+    public let template: String?
+    public let body: AttributedString?
+    
+    public init(url: URL?, title: String?, template: String?, body: AttributedString?) {
+        self.url = url
+        self.title = title
+        self.template = template
+        self.body = body
+    }
+}

@@ -34,7 +34,7 @@ struct CAPTextEditor: NSViewRepresentable {
         textView.isSelectable = true
         textView.allowsUndo = true
         textView.isEditable = true
-        textView.isFieldEditor = true
+        textView.isFieldEditor = false
         textView.importsGraphics = true
         textView.usesRuler = true
         textView.usesInspectorBar = true

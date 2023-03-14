@@ -195,13 +195,16 @@ Gw
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Yet-af-6oK">
                             <rect key="frame" x="5" y="30" width="940" height="5"/>
                         </box>
-                        <textField toolTip="URL to share" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pp3-eZ-hJL">
-                            <rect key="frame" x="3" y="3" width="944" height="19"/>
+                        <textField toolTip="URL to share" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pp3-eZ-hJL">
+                            <rect key="frame" x="-2" y="8" width="944" height="19"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="URL" id="DVc-Tn-RPK">
                                 <font key="font" metaFont="system" size="16"/>
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="fxA-Ff-F8e"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <constraints>
@@ -227,6 +230,9 @@ Gw
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="V6r-vc-AU4"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <constraints>
@@ -259,7 +265,7 @@ Gw
                                 <rect key="frame" x="0.0" y="0.0" width="922" height="419"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textView wantsLayer="YES" verticallyResizable="YES" fieldEditor="YES" usesFontPanel="YES" usesInspectorBar="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" usesRuler="YES" smartInsertDelete="YES" id="fYw-db-zWZ">
+                                    <textView wantsLayer="YES" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" usesInspectorBar="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" usesRuler="YES" smartInsertDelete="YES" id="fYw-db-zWZ">
                                         <rect key="frame" x="0.0" y="0.0" width="922" height="419"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -267,6 +273,9 @@ Gw
                                         <size key="minSize" width="922" height="419"/>
                                         <size key="maxSize" width="1173" height="10000000"/>
                                         <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="-2" id="9q6-ec-iLU"/>
+                                        </connections>
                                     </textView>
                                 </subviews>
                             </clipView>
@@ -314,6 +323,7 @@ Gw
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <outlet property="delegate" destination="-2" id="Oij-LQ-WXY"/>
                         <outlet property="nextKeyView" destination="1uM-r7-H1c" id="Gvk-g5-fPx"/>
                     </connections>
                 </textField>

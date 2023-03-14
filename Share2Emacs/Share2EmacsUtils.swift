@@ -15,16 +15,14 @@
 //
 
 import Cocoa
+import CapteeKit
 
 public struct Share2EmacsUtils {
     
     public static func extractPayloadContentFromAppKit(urlField: NSTextField,
                                                        titleField: NSTextField,
                                                        templateField: NSTextField,
-                                                       textView: NSTextView) -> (url: URL?,
-                                                                                 title: String?,
-                                                                                 template: String?,
-                                                                                 body: AttributedString?) {
+                                                       textView: NSTextView) -> CapteePayload {
         var url: URL?
         let urlString: String? = urlField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         var titleString: String? = titleField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -51,6 +49,6 @@ public struct Share2EmacsUtils {
             // do nothing
         }
         
-        return (url, titleString, templateString, body)
+        return CapteePayload(url: url, title: titleString, template: templateString, body: body)
     }
 }

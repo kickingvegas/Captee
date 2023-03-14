@@ -27,16 +27,25 @@ class CapteeObservableManager: ObservableObject {
     @Published var payloadType: PayloadType = .link
     @Published var sendtoType: SendtoType = .orgProtocol
     @Published var bodyDisabled: Bool = true
+    @Published var showOrgProtocolNotSupportedAlert = false
+    @Published var sendtoPickerDisabled: Bool = false
     
     var capteeManager = CapteeManager()
     var connectionManager = ConnectionManager()
     
     init() {
         self.template = capteeManager.defaultTemplate
+        
+        if let url = URL(string: "org-protocol://capture/"),
+           let _ = NSWorkspace.shared.urlForApplication(toOpen: url) {
+            sendtoType = .orgProtocol
+        } else {
+            sendtoType = .clipboard
+            sendtoPickerDisabled = true
+        }
     }
     
     func orgProtocolURL() -> URL? {
-        // TODO: must scrub arguments
         capteeManager.orgProtcolURL(pType: orgProtocol,
                                     url: URL(string: urlString),
                                     title: title,
@@ -54,6 +63,14 @@ class CapteeObservableManager: ObservableObject {
         service.sendToClipboard(payload: payload, with: reply)
     }
     
+    func extractPayload() -> CapteePayload {
+        CapteeUtils.extractPayloadContent(urlString: urlString,
+                                          titleString: title,
+                                          templateString: template,
+                                          body: body)
+    }
+        
+    
     func captureAction(with reply: @escaping (Bool) -> Void) {
         var orgProtocolType: OrgProtocolType
         switch payloadType {
@@ -63,10 +80,8 @@ class CapteeObservableManager: ObservableObject {
             orgProtocolType = .capture
         }
         
-        let payload = CapteeUtils.extractPayloadContent(urlString: urlString,
-                                                        titleString: title,
-                                                        templateString: template,
-                                                        body: body)
+        let payload = extractPayload()
+
         switch markupFormat {
         case .orgMode:
             switch sendtoType {
@@ -76,7 +91,13 @@ class CapteeObservableManager: ObservableObject {
                                                          title: payload.title,
                                                          body: payload.body,
                                                          template: payload.template) {
-                    connectionManager.xpcService().openURL(url: url as NSURL, with: reply)
+                    if let appURL = NSWorkspace.shared.urlForApplication(toOpen: URL(string: "fuck://sdfksladf/sfjlksdf/sdfkl")!) {
+                        print("\(appURL.absoluteString)")
+                        connectionManager.xpcService().openURL(url: url as NSURL, with: reply)
+                    } else {
+                        showOrgProtocolNotSupportedAlert = true
+                        reply(false)
+                    }
                 }
             case .clipboard:
                 if let message = capteeManager.orgMessage(payloadType: payloadType,
@@ -97,5 +118,4 @@ class CapteeObservableManager: ObservableObject {
             }
         }
     }
-    
 }

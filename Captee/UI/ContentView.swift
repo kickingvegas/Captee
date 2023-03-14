@@ -20,6 +20,7 @@ import CapteeKit
 struct ContentView: View {
     @StateObject var capteeObservableManager = CapteeObservableManager()
     
+    
     var body: some View {
         VStack (alignment: .leading) {
             OrgProtocolPickerView(capteeObservableManager: capteeObservableManager)
@@ -33,6 +34,13 @@ struct ContentView: View {
                 Button("Capture") {
                     captureAction()
                 }
+                .alert(isPresented: $capteeObservableManager.showOrgProtocolNotSupportedAlert) {
+                    let message = "You do not have installed a version of Emacs that supports the org-protocol:// scheme."
+                    return Alert(title: Text("Missing Org Protocol"),
+                                 message: Text(message),
+                                 dismissButton: .default(Text("Dismiss")))
+                }
+
                 .frame(alignment: .trailing)
                 .buttonStyle(.borderedProminent)
                 .help("Send to Org")
@@ -42,25 +50,9 @@ struct ContentView: View {
     }
     
     func captureAction() {
-        
         capteeObservableManager.captureAction { result in
             print("\(result)")
         }
-        
-//        if capteeObservableManager.sendtoType == .orgProtocol {
-//            if let url = capteeObservableManager.orgProtocolURL() {
-//                print("\(url.absoluteString)")
-//                capteeObservableManager.openURL(url: url as NSURL) { result in
-//                    print("\(result)")
-//                }
-//
-//            }
-//        } else {
-//            capteeObservableManager.sendToClipboard(payload: capteeObservableManager.clipboardPayload()) { result in
-//                print("\(result)")
-//            }
-//        }
-
     }
     
 }
@@ -143,7 +135,7 @@ struct OrgBodyView: View {
 
 struct OrgProtocolPickerView: View {
     @ObservedObject var capteeObservableManager: CapteeObservableManager
-    @State var sendDisable: Bool = false
+    //@State var sendDisable: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -157,10 +149,10 @@ struct OrgProtocolPickerView: View {
                 .pickerStyle(.radioGroup)
                 .onChange(of: capteeObservableManager.markupFormat) { newValue in
                     if newValue == .markdown {
-                        sendDisable = true
+                        capteeObservableManager.sendtoPickerDisabled = true
                         capteeObservableManager.sendtoType = .clipboard
                     } else {
-                        sendDisable = false
+                        capteeObservableManager.sendtoPickerDisabled = false
                         capteeObservableManager.sendtoType = .orgProtocol
                     }
                     
@@ -191,7 +183,7 @@ struct OrgProtocolPickerView: View {
                     }
                 }
                 .pickerStyle(.radioGroup)
-                .disabled(sendDisable)
+                .disabled(capteeObservableManager.sendtoPickerDisabled)
 
             }
             Divider()
