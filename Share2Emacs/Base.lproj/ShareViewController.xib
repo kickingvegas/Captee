@@ -16,6 +16,7 @@
                 <outlet property="sendtoClipboardButton" destination="Sej-1H-T14" id="bRB-gD-qnn"/>
                 <outlet property="sendtoOrgProtocolButton" destination="itA-WA-Dpw" id="QhC-xG-hV2"/>
                 <outlet property="templateField" destination="2IH-Xn-JeT" id="GcW-pG-KcH"/>
+                <outlet property="templateLabel" destination="GAZ-gL-TmL" id="UgF-72-o1r"/>
                 <outlet property="textView" destination="fYw-db-zWZ" id="hw3-92-ZmJ"/>
                 <outlet property="titleField" destination="fTU-b4-KzC" id="Kud-F2-tfh"/>
                 <outlet property="urlField" destination="Pp3-eZ-hJL" id="fuU-sF-nrr"/>

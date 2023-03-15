@@ -19,11 +19,6 @@ import UniformTypeIdentifiers
 import CapteeKit
 
 class ShareViewController: NSViewController, NSTextFieldDelegate, NSTextViewDelegate {
-    
-    var capturedURL: URL?
-    var contentText: NSAttributedString?
-    var capturedTitle: String?
-    
     var capteeManager = CapteeManager()
     var connectionManager = ConnectionManager()
     
@@ -32,6 +27,7 @@ class ShareViewController: NSViewController, NSTextFieldDelegate, NSTextViewDele
     @IBOutlet weak var bodyField: NSScrollView!
     @IBOutlet var textView: NSTextView!
     @IBOutlet weak var templateField: NSTextField!
+    @IBOutlet weak var templateLabel: NSTextField!
         
     @IBOutlet weak var formatOrgModeButton: NSButton!
     @IBOutlet weak var formatMarkdownButton: NSButton!
@@ -40,17 +36,95 @@ class ShareViewController: NSViewController, NSTextFieldDelegate, NSTextViewDele
     @IBOutlet weak var sendtoOrgProtocolButton: NSButton!
     @IBOutlet weak var sendtoClipboardButton: NSButton!
     
+    
+    var isOrgProtocolSupported = false {
+        didSet {
+            if isOrgProtocolSupported {
+                sendtoClipboardButton.isEnabled = true
+                sendtoOrgProtocolButton.isEnabled = true
+                sendtoOrgProtocolButton.toolTip = "Use the org-protocol:// scheme."
+            } else {
+                sendtoClipboardButton.isEnabled = false
+                sendtoOrgProtocolButton.isEnabled = false
+                sendtoOrgProtocolButton.toolTip = "You do not have installed a version of Emacs that supports the org-protocol:// scheme."
+            }
+        }
+    }
+    
     var markupFormat: MarkupFormat = .orgMode {
-        didSet {}
+        didSet {
+            switch markupFormat {
+            case .orgMode:
+                // direct control
+                formatOrgModeButton.state = .on
+                
+                if isOrgProtocolSupported {
+                    sendtoOrgProtocolButton.isEnabled = true
+                    sendtoClipboardButton.isEnabled = true
+                }
+                templateField.isEnabled = true
+                templateField.isHidden = false
+                templateLabel.isHidden = false
+            case .markdown:
+                // direct control
+                formatMarkdownButton.state = .on
+                
+                sendtoClipboardButton.state = .on
+                sendtoOrgProtocolButton.isEnabled = false
+                sendtoClipboardButton.isEnabled = false
+                sendtoType = .clipboard
+                templateField.isEnabled = false
+                templateField.isHidden = true
+                templateLabel.isHidden = true
+            }
+            
+        }
     }
+    
     var payloadType: PayloadType = .link {
-        didSet {}
+        didSet {
+            switch payloadType {
+            case .link:
+                // direct control
+                payloadLinkButton.state = .on
+                
+                orgProtocolType = .storeLink
+                textView.isEditable = false
+                templateField.isEnabled = false
+                templateLabel.isHidden = true
+                templateField.isHidden = true
+            case .capture:
+                // direct control
+                payloadCaptureButton.state = .on
+                
+                orgProtocolType = .capture
+                textView.isEditable = true
+                if markupFormat == .orgMode {
+                    templateField.isEnabled = true
+                    templateField.isHidden = false
+                    templateLabel.isHidden = false
+
+                } else {
+                    templateField.isEnabled = false
+                    templateField.isHidden = true
+                    templateLabel.isHidden = true
+                }
+            }
+        }
     }
+    
     var orgProtocolType: OrgProtocolType = .storeLink {
         didSet {}
     }
     var sendtoType: SendtoType = .orgProtocol {
-        didSet {}
+        didSet {
+            switch sendtoType {
+            case .orgProtocol:
+                sendtoOrgProtocolButton.state = .on
+            case .clipboard:
+                sendtoClipboardButton.state = .on
+            }
+        }
     }
     
     override var nibName: NSNib.Name? {
@@ -60,73 +134,46 @@ class ShareViewController: NSViewController, NSTextFieldDelegate, NSTextViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard let extensionContext = self.extensionContext else {
+            return
+        }
+        
         if let url = URL(string: "org-protocol://capture/"),
            let _ = NSWorkspace.shared.urlForApplication(toOpen: url) {
-            sendtoOrgProtocolButton.state = .on
+            isOrgProtocolSupported = true
+            sendtoType = .orgProtocol
         } else {
-            sendtoClipboardButton.state = .on
-            sendtoClipboardButton.isEnabled = false
-            sendtoOrgProtocolButton.isEnabled = false
+            isOrgProtocolSupported = false
             sendtoType = .clipboard
             
-            sendtoOrgProtocolButton.toolTip = "You do not have installed a version of Emacs that supports the org-protocol:// scheme."
-            
         }
         
-        templateField.stringValue = capteeManager.defaultTemplate
-    }
-    
-    override func loadView() {
-        super.loadView()
         
-        self.formatOrgModeButton.state = .on
-        self.payloadLinkButton.state = .on
+        // TODO: revisit initial state
+        markupFormat = .orgMode
         
-        formatButtonAction(formatOrgModeButton as Any)
-        payloadButtonAction(payloadLinkButton as Any)
-        //sendtoButtonAction(sendtoOrgProtocolButton as Any)
-
-                
-        textView.isEditable = false
-
-        // Insert code here to customize the view
-        let item = self.extensionContext!.inputItems[0] as! NSExtensionItem
-        
-//        if let userInfo = item.userInfo as? [String: Any],
-//           let data = userInfo[NSExtensionItemAttributedContentTextKey] as? Data {
-//            let payload = String(decoding: data, as: UTF8.self)
-//            print("AYE!: \(payload)")
-//
-//        }
-
-            
-        if let contentText = item.attributedContentText {
-            print("\(contentText.string)")
-            self.contentText = contentText
-            print("\(contentText)\n\(contentText.attributeKeys)")
+        if let item = extensionContext.inputItems.first as? NSExtensionItem,
+           let contentText = item.attributedContentText {
             if let textStorage = self.textView.textStorage {
                 textStorage.append(contentText)
-                payloadCaptureButton.state = .on
-                payloadButtonAction(payloadCaptureButton as Any)
             }
+            payloadType = .capture
+        } else {
+            payloadType = .link
         }
+
+        templateField.stringValue = capteeManager.defaultTemplate
         
-        //self.templateField.stringValue = capteeManager.defaultTemplate
-        
-                
-        if let attachments = item.attachments {
-            NSLog("Attachments = %@", attachments as NSArray)
+        if let item = extensionContext.inputItems.first as? NSExtensionItem,
+           let attachments = item.attachments {
             for itemProvider in attachments {
                 if itemProvider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
                     itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.url.identifier) { [weak self] data, error in
+                        guard let self else { return }
                         if let data = data {
                             let buf = String(decoding: data, as: UTF8.self)
-                            // TODO: amend
-                            NSLog("URL: %@", buf)
-                            
-                            self?.capturedURL = URL(string: buf)
-                            if let url = self?.capturedURL {
-                                self?.urlField.stringValue = url.absoluteString
+                            if let url = URL(string: buf) {
+                                self.urlField.stringValue = url.absoluteString
                             }
                         }
                     }
@@ -135,56 +182,41 @@ class ShareViewController: NSViewController, NSTextFieldDelegate, NSTextViewDele
                         forTypeIdentifier: UTType.propertyList.identifier,
                         options: nil,
                         completionHandler: { [weak self] (item, error) -> Void in
-
+                            guard let self else { return }
+                            
                             guard let dictionary = item as? NSDictionary,
                                   let results = dictionary[NSExtensionJavaScriptPreprocessingResultsKey] as? NSDictionary,
                                   let title = results["title"] as? String,
-                                  let href = results["href"] as? String else {
+                                  let _ = results["href"] as? String else {
                                 return
                             }
-
-                            // TODO: amend
-                            print("title: \(title)")
-                            self?.capturedTitle = title
-                            // TODO: amend
-                            print("href: \(href)")
-                            self?.titleField.stringValue = title
+                            
+                            //print("title: \(title)")
+                            //print("href: \(href)")
+                            self.titleField.stringValue = title
                         })
                 }
             }
-        } else {
-            // TODO: amend
-            NSLog("No Attachments")
         }
     }
+    
 
     @IBAction func formatButtonAction(_ sender: Any) {
         let formatButton = sender as! NSButton
         if formatButton == formatOrgModeButton {
             markupFormat = .orgMode
-            sendtoOrgProtocolButton.state = .on
-            sendtoOrgProtocolButton.isEnabled = true
-            sendtoClipboardButton.isEnabled = true
         } else if formatButton == formatMarkdownButton {
             markupFormat = .markdown
-            sendtoClipboardButton.state = .on
-            sendtoOrgProtocolButton.isEnabled = false
-            sendtoClipboardButton.isEnabled = false
-            sendtoType = .clipboard
         }
-
     }
+
     
     @IBAction func payloadButtonAction(_ sender: Any) {
         let payloadButton = sender as! NSButton
         if payloadButton == payloadLinkButton {
             payloadType = .link
-            orgProtocolType = .storeLink
-            textView.isEditable = false
         } else if payloadButton == payloadCaptureButton {
             payloadType = .capture
-            orgProtocolType = .capture
-            textView.isEditable = true
         }
     }
     
@@ -287,7 +319,4 @@ extension ShareViewController {
             }
         }
     }
-    
 }
-
-

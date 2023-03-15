@@ -29,6 +29,7 @@ class CapteeObservableManager: ObservableObject {
     @Published var bodyDisabled: Bool = true
     @Published var showOrgProtocolNotSupportedAlert = false
     @Published var sendtoPickerDisabled: Bool = false
+    @Published var hideTemplate: Bool = false
     
     var capteeManager = CapteeManager()
     var connectionManager = ConnectionManager()
