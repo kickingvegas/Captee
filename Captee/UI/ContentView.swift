@@ -28,22 +28,26 @@ struct ContentView: View {
             if !capteeObservableManager.hideTemplate {
                 OrgTemplateView(capteeObservableManager: capteeObservableManager)
             }
-            OrgBodyView(capteeObservableManager: capteeObservableManager)
+            if !capteeObservableManager.hideBody {
+                OrgBodyView(capteeObservableManager: capteeObservableManager)
+            } else {
+                Spacer()
+            }
 
             HStack(alignment: .bottom) {
                 Spacer()
                 Button("Capture") {
                     captureAction()
                 }
-                .alert(isPresented: $capteeObservableManager.showOrgProtocolNotSupportedAlert) {
-                    let message = "You do not have installed a version of Emacs that supports the org-protocol:// scheme."
-                    return Alert(title: Text("Missing Org Protocol"),
-                                 message: Text(message),
+                .alert(isPresented: $capteeObservableManager.showSentToClipboardAlert) {
+                    return Alert(title: Text(capteeObservableManager.alertTitle),
+                                 message: Text(capteeObservableManager.alertMessage),
                                  dismissButton: .default(Text("Dismiss")))
                 }
 
                 .frame(alignment: .trailing)
                 .buttonStyle(.borderedProminent)
+                .disabled(capteeObservableManager.sendButtonDisabled)
                 .help("Send to Org")
             }
         }
@@ -89,7 +93,6 @@ struct OrgTitleView: View {
         TextField("Title", text: $capteeObservableManager.title)
             .textFieldStyle(.plain)
             .help("Org Capture Link Title")
-        
         Divider()
     }
 }
@@ -113,6 +116,8 @@ struct OrgURLView: View {
                 } else {
                     foregroundColor = .red
                 }
+                
+                capteeObservableManager.evalEnableSendButton()
 
             }
             .foregroundColor(foregroundColor)
@@ -132,6 +137,9 @@ struct OrgBodyView: View {
         CAPTextEditor(text: $capteeObservableManager.body)
             .textFieldStyle(.roundedBorder)
             .disabled(capteeObservableManager.bodyDisabled)
+            .onChange(of: capteeObservableManager.body) { newValue in
+                capteeObservableManager.evalEnableSendButton()
+            }
     }
 }
 
@@ -175,10 +183,20 @@ struct OrgProtocolPickerView: View {
                     if newValue == .capture {
                         capteeObservableManager.bodyDisabled = false
                         capteeObservableManager.orgProtocol = .capture
-                    } else {
+                        capteeObservableManager.hideBody = false
+                        if capteeObservableManager.markupFormat == .orgMode {
+                            capteeObservableManager.hideTemplate = false
+                        } else {
+                            capteeObservableManager.hideTemplate = true
+                        }
+                        
+                    } else if newValue == .link {
                         capteeObservableManager.bodyDisabled = true
                         capteeObservableManager.orgProtocol = .storeLink
+                        capteeObservableManager.hideTemplate = true
+                        capteeObservableManager.hideBody = true
                     }
+                    capteeObservableManager.evalEnableSendButton()
                 }
                 
                 Picker("Use", selection: $capteeObservableManager.sendtoType) {

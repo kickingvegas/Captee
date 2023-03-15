@@ -27,9 +27,13 @@ class CapteeObservableManager: ObservableObject {
     @Published var payloadType: PayloadType = .link
     @Published var sendtoType: SendtoType = .orgProtocol
     @Published var bodyDisabled: Bool = true
-    @Published var showOrgProtocolNotSupportedAlert = false
+    @Published var showSentToClipboardAlert = false
     @Published var sendtoPickerDisabled: Bool = false
-    @Published var hideTemplate: Bool = false
+    @Published var hideTemplate: Bool = true
+    @Published var hideBody: Bool = true
+    @Published var sendButtonDisabled: Bool = false
+    @Published var alertTitle = ""
+    @Published var alertMessage = ""
     
     var capteeManager = CapteeManager()
     var connectionManager = ConnectionManager()
@@ -44,6 +48,21 @@ class CapteeObservableManager: ObservableObject {
             sendtoType = .clipboard
             sendtoPickerDisabled = true
         }
+
+        if payloadType == .link {
+            hideTemplate = true
+            hideBody = true
+        } else {
+            hideBody = false
+            switch markupFormat {
+            case .orgMode:
+                hideTemplate = false
+            case .markdown:
+                hideTemplate = true
+            }
+        }
+        
+        evalEnableSendButton()
     }
     
     func orgProtocolURL() -> URL? {
@@ -92,11 +111,10 @@ class CapteeObservableManager: ObservableObject {
                                                          title: payload.title,
                                                          body: payload.body,
                                                          template: payload.template) {
-                    if let appURL = NSWorkspace.shared.urlForApplication(toOpen: URL(string: "fuck://sdfksladf/sfjlksdf/sdfkl")!) {
+                    if let appURL = NSWorkspace.shared.urlForApplication(toOpen: url) {
                         print("\(appURL.absoluteString)")
                         connectionManager.xpcService().openURL(url: url as NSURL, with: reply)
                     } else {
-                        showOrgProtocolNotSupportedAlert = true
                         reply(false)
                     }
                 }
@@ -106,7 +124,20 @@ class CapteeObservableManager: ObservableObject {
                                                           title: payload.title,
                                                           body: payload.body,
                                                           template: payload.template) {
-                    connectionManager.xpcService().sendToClipboard(payload: message, with: reply)
+
+                    connectionManager.xpcService().sendToClipboard(payload: message) { [weak self] result in
+                        guard let self else { return }
+                        
+                        DispatchQueue.main.async {
+                            self.alertTitle = "Sent to Clipboard"
+                            self.alertMessage = self.shortenMessage(buf: message, length: 120)
+                            self.showSentToClipboardAlert = true
+                        }
+
+                        reply(result)
+                    }
+
+
                 }
             }
 
@@ -115,8 +146,45 @@ class CapteeObservableManager: ObservableObject {
                                                            url: payload.url,
                                                            title: payload.title,
                                                            body: payload.body) {
-                connectionManager.xpcService().sendToClipboard(payload: message, with: reply)
+                connectionManager.xpcService().sendToClipboard(payload: message) { [weak self] result in
+                    guard let self else { return }
+                    
+                    DispatchQueue.main.async {
+                        self.alertTitle = "Sent to Clipboard"
+                        self.alertMessage = self.shortenMessage(buf: message, length: 120)
+                        self.showSentToClipboardAlert = true
+                    }
+                    reply(result)
+                }
+
             }
         }
+    }
+    
+    func evalEnableSendButton() {
+        let payload = extractPayload()
+        
+        switch payloadType {
+        case .link:
+            sendButtonDisabled = !(payload.url != nil)
+            
+        case .capture:
+            sendButtonDisabled = !((payload.url != nil) || (payload.body != nil))
+            
+            if let body = payload.body {
+                let bodyString = String(body.characters[...])
+                sendButtonDisabled = sendButtonDisabled || (bodyString == "")
+            }
+
+        }
+
+    }
+    
+    func shortenMessage(buf: String, length: Int) -> String {
+        var result: String = buf
+        if buf.count > length {
+            result = String(buf.prefix(length - 1)) + "…"
+        }
+        return result
     }
 }
