@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D92774AC29B94AA500A15CC9 /* Share2EmacsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */; };
-		D92774AE29B94BF400A15CC9 /* CapteeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */; };
 		D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D971A71529A819C00029F6F6 /* CAPTextEditor.swift */; };
 		D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B8EC299BFCB800C00D0B /* CapteeApp.swift */; };
 		D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B8EE299BFCB800C00D0B /* ContentView.swift */; };
@@ -18,20 +17,25 @@
 		D978B909299BFCB900C00D0B /* CapteeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B908299BFCB900C00D0B /* CapteeUITests.swift */; };
 		D978B90B299BFCB900C00D0B /* CapteeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B90A299BFCB900C00D0B /* CapteeUITestsLaunchTests.swift */; };
 		D978B91E299BFD1000C00D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D978B91D299BFD1000C00D0B /* icon.icns */; };
-		D978B920299BFD1000C00D0B /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B91F299BFD1000C00D0B /* ShareViewController.swift */; };
-		D978B923299BFD1000C00D0B /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D978B921299BFD1000C00D0B /* ShareViewController.xib */; };
 		D978B928299BFD1000C00D0B /* Share2Emacs.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D978B91B299BFD1000C00D0B /* Share2Emacs.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D978B92E299C096800C00D0B /* ExtensionClass.js in Resources */ = {isa = PBXBuildFile; fileRef = D978B92D299C096800C00D0B /* ExtensionClass.js */; };
-		D985493129B6C9F800D41F24 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */; };
-		D985493229B6CA0E00D41F24 /* CapteeXPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6EC9629B696B4004E0040 /* CapteeXPCServiceProtocol.swift */; };
-		D985493329B6CAED00D41F24 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */; };
-		D985493429B6CB2800D41F24 /* CapteeXPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6EC9629B696B4004E0040 /* CapteeXPCServiceProtocol.swift */; };
 		D985493629B6CB8300D41F24 /* CapteeXPCService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9F6EC9429B696B4004E0040 /* CapteeXPCService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D985493829B6CB9900D41F24 /* CapteeXPCService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9F6EC9429B696B4004E0040 /* CapteeXPCService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D9BFE92B29CA319F005F0970 /* Share2EmacsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFE92A29CA319F005F0970 /* Share2EmacsViewController.swift */; };
+		D9BFE93129CA3B13005F0970 /* Share2EmacsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9BFE93029CA3B13005F0970 /* Share2EmacsViewController.xib */; };
+		D9BFE93729CA54F4005F0970 /* CXUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFE93629CA54F4005F0970 /* CXUtils.swift */; };
+		D9BFE93B29CA8DFB005F0970 /* CXScrollableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFE93A29CA8DFB005F0970 /* CXScrollableTextView.swift */; };
+		D9BFE93D29CADEE6005F0970 /* CXRadioPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFE93C29CADEE6005F0970 /* CXRadioPicker.swift */; };
+		D9BFE93F29CADF57005F0970 /* CXRadioPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9BFE93E29CADF57005F0970 /* CXRadioPicker.xib */; };
+		D9BFE94429CB8985005F0970 /* ShareCXCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFE94329CB8985005F0970 /* ShareCXCoordinator.swift */; };
+		D9BFE94629CBA515005F0970 /* CXRadioPickerMaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFE94529CBA515005F0970 /* CXRadioPickerMaps.swift */; };
+		D9BFE94A29CC06E0005F0970 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */; };
+		D9BFE94C29CC070B005F0970 /* CapteeXPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFE94B29CC070A005F0970 /* CapteeXPCServiceProtocol.swift */; };
+		D9BFE95229CC16A1005F0970 /* CapteeObservableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */; };
+		D9BFE95329CC16DC005F0970 /* CapteeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */; };
 		D9D6BC1729B7F79400B9416C /* CapteeKitProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */; };
 		D9D6BC1929B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */; };
 		D9D6BC1B29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */; };
-		D9E9311D29B0156600348A7B /* CapteeObservableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */; };
 		D9F36E1B29A5464E00C17E5A /* CapteeKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */; };
 		D9F36E2129A5464E00C17E5A /* CapteeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F36E1729A5464E00C17E5A /* CapteeKit.framework */; };
 		D9F36E2829A5464F00C17E5A /* CapteeKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F36E2729A5464F00C17E5A /* CapteeKitTests.swift */; };
@@ -184,17 +188,26 @@
 		D978B925299BFD1000C00D0B /* Share2Emacs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share2Emacs.entitlements; sourceTree = "<group>"; };
 		D978B92D299C096800C00D0B /* ExtensionClass.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExtensionClass.js; sourceTree = "<group>"; };
 		D9ACA41529B97295005FC3E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapteeKitProtocol.swift; path = capteekit/CapteeKitProtocol.swift; sourceTree = SOURCE_ROOT; };
-		D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeManagerProtocol.swift"; path = "capteekit/CapteeManager+CapteeManagerProtocol.swift"; sourceTree = SOURCE_ROOT; };
-		D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeePersistenceProtocol.swift"; path = "capteekit/CapteeManager+CapteeePersistenceProtocol.swift"; sourceTree = SOURCE_ROOT; };
-		D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = Captee/Managers/ConnectionManager.swift; sourceTree = SOURCE_ROOT; };
+		D9BFE92A29CA319F005F0970 /* Share2EmacsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share2EmacsViewController.swift; sourceTree = "<group>"; };
+		D9BFE93029CA3B13005F0970 /* Share2EmacsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Share2EmacsViewController.xib; sourceTree = "<group>"; };
+		D9BFE93629CA54F4005F0970 /* CXUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXUtils.swift; sourceTree = "<group>"; };
+		D9BFE93A29CA8DFB005F0970 /* CXScrollableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXScrollableTextView.swift; sourceTree = "<group>"; };
+		D9BFE93C29CADEE6005F0970 /* CXRadioPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXRadioPicker.swift; sourceTree = "<group>"; };
+		D9BFE93E29CADF57005F0970 /* CXRadioPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CXRadioPicker.xib; sourceTree = "<group>"; };
+		D9BFE94329CB8985005F0970 /* ShareCXCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCXCoordinator.swift; sourceTree = "<group>"; };
+		D9BFE94529CBA515005F0970 /* CXRadioPickerMaps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXRadioPickerMaps.swift; sourceTree = "<group>"; };
+		D9BFE94B29CC070A005F0970 /* CapteeXPCServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeXPCServiceProtocol.swift; sourceTree = "<group>"; };
+		D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapteeKitProtocol.swift; path = CapteeKit/Protocols/CapteeKitProtocol.swift; sourceTree = SOURCE_ROOT; };
+		D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeManagerProtocol.swift"; path = "CapteeKit/Managers/CapteeManager+CapteeManagerProtocol.swift"; sourceTree = SOURCE_ROOT; };
+		D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeePersistenceProtocol.swift"; path = "CapteeKit/Managers/CapteeManager+CapteeePersistenceProtocol.swift"; sourceTree = SOURCE_ROOT; };
+		D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = CapteeKit/Managers/ConnectionManager.swift; sourceTree = SOURCE_ROOT; };
 		D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeObservableManager.swift; sourceTree = "<group>"; };
 		D9F36E1729A5464E00C17E5A /* CapteeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CapteeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F36E1929A5464E00C17E5A /* CapteeKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapteeKit.h; sourceTree = "<group>"; };
 		D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CapteeKit.docc; sourceTree = "<group>"; };
 		D9F36E2029A5464E00C17E5A /* CapteeKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapteeKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F36E2729A5464F00C17E5A /* CapteeKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeKitTests.swift; sourceTree = "<group>"; };
-		D9F36E3729A5472F00C17E5A /* CapteeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CapteeManager.swift; path = capteekit/CapteeManager.swift; sourceTree = SOURCE_ROOT; };
+		D9F36E3729A5472F00C17E5A /* CapteeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CapteeManager.swift; path = CapteeKit/Managers/CapteeManager.swift; sourceTree = SOURCE_ROOT; };
 		D9F6EC9429B696B4004E0040 /* CapteeXPCService.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = CapteeXPCService.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F6EC9629B696B4004E0040 /* CapteeXPCServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeXPCServiceProtocol.swift; sourceTree = "<group>"; };
 		D9F6EC9829B696B4004E0040 /* CapteeXPCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeXPCService.swift; sourceTree = "<group>"; };
@@ -328,10 +341,13 @@
 		D978B91C299BFD1000C00D0B /* Share2Emacs */ = {
 			isa = PBXGroup;
 			children = (
+				D9BFE94229CB894A005F0970 /* Managers */,
 				D978B91D299BFD1000C00D0B /* icon.icns */,
 				D978B91F299BFD1000C00D0B /* ShareViewController.swift */,
 				D978B921299BFD1000C00D0B /* ShareViewController.xib */,
 				D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */,
+				D9BFE93229CA4DE3005F0970 /* UI */,
+				D9BFE93329CA4DEF005F0970 /* Utils */,
 				D978B924299BFD1000C00D0B /* Info.plist */,
 				D978B925299BFD1000C00D0B /* Share2Emacs.entitlements */,
 				D978B92D299C096800C00D0B /* ExtensionClass.js */,
@@ -339,12 +355,69 @@
 			path = Share2Emacs;
 			sourceTree = "<group>";
 		};
+		D9BFE93229CA4DE3005F0970 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D9BFE92A29CA319F005F0970 /* Share2EmacsViewController.swift */,
+				D9BFE93029CA3B13005F0970 /* Share2EmacsViewController.xib */,
+				D9BFE93629CA54F4005F0970 /* CXUtils.swift */,
+				D9BFE93A29CA8DFB005F0970 /* CXScrollableTextView.swift */,
+				D9BFE93C29CADEE6005F0970 /* CXRadioPicker.swift */,
+				D9BFE93E29CADF57005F0970 /* CXRadioPicker.xib */,
+				D9BFE94529CBA515005F0970 /* CXRadioPickerMaps.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		D9BFE93329CA4DEF005F0970 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		D9BFE94229CB894A005F0970 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D9BFE94329CB8985005F0970 /* ShareCXCoordinator.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		D9BFE94929CC068B005F0970 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D9F36E3729A5472F00C17E5A /* CapteeManager.swift */,
+				D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */,
+				D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */,
+				D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */,
+				D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		D9BFE95429CC1E67005F0970 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */,
+				D9BFE94B29CC070A005F0970 /* CapteeXPCServiceProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D9BFE95529CC1E7F005F0970 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		D9E9311A29B014C600348A7B /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				D978B8EE299BFCB800C00D0B /* ContentView.swift */,
 				D971A71529A819C00029F6F6 /* CAPTextEditor.swift */,
-				D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -352,8 +425,6 @@
 		D9E9311B29B014D900348A7B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				D9E9311C29B0156600348A7B /* CapteeObservableManager.swift */,
-				D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -361,12 +432,11 @@
 		D9F36E1829A5464E00C17E5A /* CapteeKit */ = {
 			isa = PBXGroup;
 			children = (
+				D9BFE95429CC1E67005F0970 /* Protocols */,
+				D9BFE94929CC068B005F0970 /* Managers */,
+				D9BFE95529CC1E7F005F0970 /* Utils */,
 				D9F36E1929A5464E00C17E5A /* CapteeKit.h */,
 				D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */,
-				D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */,
-				D9F36E3729A5472F00C17E5A /* CapteeManager.swift */,
-				D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */,
-				D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */,
 			);
 			path = CapteeKit;
 			sourceTree = "<group>";
@@ -633,9 +703,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D978B923299BFD1000C00D0B /* ShareViewController.xib in Resources */,
 				D978B92E299C096800C00D0B /* ExtensionClass.js in Resources */,
 				D978B91E299BFD1000C00D0B /* icon.icns in Resources */,
+				D9BFE93F29CADF57005F0970 /* CXRadioPicker.xib in Resources */,
+				D9BFE93129CA3B13005F0970 /* Share2EmacsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,12 +738,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D92774AE29B94BF400A15CC9 /* CapteeUtils.swift in Sources */,
-				D985493129B6C9F800D41F24 /* ConnectionManager.swift in Sources */,
 				D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */,
 				D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */,
-				D985493229B6CA0E00D41F24 /* CapteeXPCServiceProtocol.swift in Sources */,
-				D9E9311D29B0156600348A7B /* CapteeObservableManager.swift in Sources */,
 				D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,10 +765,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9BFE94429CB8985005F0970 /* ShareCXCoordinator.swift in Sources */,
 				D92774AC29B94AA500A15CC9 /* Share2EmacsUtils.swift in Sources */,
-				D985493429B6CB2800D41F24 /* CapteeXPCServiceProtocol.swift in Sources */,
-				D978B920299BFD1000C00D0B /* ShareViewController.swift in Sources */,
-				D985493329B6CAED00D41F24 /* ConnectionManager.swift in Sources */,
+				D9BFE93D29CADEE6005F0970 /* CXRadioPicker.swift in Sources */,
+				D9BFE94629CBA515005F0970 /* CXRadioPickerMaps.swift in Sources */,
+				D9BFE93B29CA8DFB005F0970 /* CXScrollableTextView.swift in Sources */,
+				D9BFE92B29CA319F005F0970 /* Share2EmacsViewController.swift in Sources */,
+				D9BFE93729CA54F4005F0970 /* CXUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,7 +780,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9F36E1B29A5464E00C17E5A /* CapteeKit.docc in Sources */,
+				D9BFE94A29CC06E0005F0970 /* ConnectionManager.swift in Sources */,
+				D9BFE95329CC16DC005F0970 /* CapteeUtils.swift in Sources */,
+				D9BFE95229CC16A1005F0970 /* CapteeObservableManager.swift in Sources */,
 				D9D6BC1729B7F79400B9416C /* CapteeKitProtocol.swift in Sources */,
+				D9BFE94C29CC070B005F0970 /* CapteeXPCServiceProtocol.swift in Sources */,
 				D9F36E3829A5472F00C17E5A /* CapteeManager.swift in Sources */,
 				D9D6BC1B29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift in Sources */,
 				D9D6BC1929B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift in Sources */,

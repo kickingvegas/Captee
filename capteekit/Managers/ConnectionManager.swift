@@ -16,7 +16,7 @@
 
 import Foundation
 
-class ConnectionManager: NSObject {
+public class ConnectionManager: NSObject {
     private var _connection: NSXPCConnection!
     
     private func establishConnection() -> Void {

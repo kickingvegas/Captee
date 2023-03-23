@@ -14,31 +14,32 @@
 // limitations under the License.
 //
 
-import SwiftUI
-import CapteeKit
+import Combine
+import Cocoa
+//import CapteeKit
 
-class CapteeObservableManager: ObservableObject {
-    @Published var urlString: String = ""
-    @Published var title: String = ""
-    @Published var body: AttributedString = AttributedString("")
-    @Published var template: String = ""
-    @Published var orgProtocol: OrgProtocolType = .storeLink
-    @Published var markupFormat: MarkupFormat = .orgMode
-    @Published var payloadType: PayloadType = .link
-    @Published var sendtoType: SendtoType = .orgProtocol
-    @Published var bodyDisabled: Bool = true
-    @Published var showSentToClipboardAlert = false
-    @Published var sendtoPickerDisabled: Bool = false
-    @Published var hideTemplate: Bool = true
-    @Published var hideBody: Bool = true
-    @Published var sendButtonDisabled: Bool = false
-    @Published var alertTitle = ""
-    @Published var alertMessage = ""
+public class CapteeObservableManager: ObservableObject {
+    @Published public var urlString: String = ""
+    @Published public var title: String = ""
+    @Published public var body: AttributedString = AttributedString("")
+    @Published public var template: String = ""
+    @Published public var orgProtocol: OrgProtocolType = .storeLink
+    @Published public var markupFormat: MarkupFormat = .orgMode
+    @Published public var payloadType: PayloadType = .link
+    @Published public var sendtoType: SendtoType = .orgProtocol
+    @Published public var bodyDisabled: Bool = true
+    @Published public var showSentToClipboardAlert = false
+    @Published public var sendtoPickerDisabled: Bool = false
+    @Published public var hideTemplate: Bool = true
+    @Published public var hideBody: Bool = true
+    @Published public var sendButtonDisabled: Bool = false
+    @Published public var alertTitle = ""
+    @Published public var alertMessage = ""
     
-    var capteeManager = CapteeManager()
-    var connectionManager = ConnectionManager()
+    public var capteeManager = CapteeManager()
+    public var connectionManager = ConnectionManager()
     
-    init() {
+    public init() {
         self.template = capteeManager.defaultTemplate
         
         if let url = URL(string: "org-protocol://capture/"),
@@ -65,7 +66,7 @@ class CapteeObservableManager: ObservableObject {
         evalEnableSendButton()
     }
     
-    func orgProtocolURL() -> URL? {
+    public func orgProtocolURL() -> URL? {
         capteeManager.orgProtcolURL(pType: orgProtocol,
                                     url: URL(string: urlString),
                                     title: title,
@@ -73,17 +74,17 @@ class CapteeObservableManager: ObservableObject {
                                     template: template)
     }
     
-    func openURL(url: NSURL, with reply: @escaping (Bool) -> Void) {
+    public func openURL(url: NSURL, with reply: @escaping (Bool) -> Void) {
         let service = connectionManager.xpcService()
         service.openURL(url: url, with: reply)
     }
 
-    func sendToClipboard(payload: String, with reply: @escaping (Bool) -> Void) {
+    public func sendToClipboard(payload: String, with reply: @escaping (Bool) -> Void) {
         let service = connectionManager.xpcService()
         service.sendToClipboard(payload: payload, with: reply)
     }
     
-    func extractPayload() -> CapteePayload {
+    public func extractPayload() -> CapteePayload {
         CapteeUtils.extractPayloadContent(urlString: urlString,
                                           titleString: title,
                                           templateString: template,
@@ -91,7 +92,7 @@ class CapteeObservableManager: ObservableObject {
     }
         
     
-    func captureAction(with reply: @escaping (Bool) -> Void) {
+    public func captureAction(with reply: @escaping (Bool) -> Void) {
         var orgProtocolType: OrgProtocolType
         switch payloadType {
         case .link:
@@ -161,7 +162,7 @@ class CapteeObservableManager: ObservableObject {
         }
     }
     
-    func evalEnableSendButton() {
+    public func evalEnableSendButton() {
         let payload = extractPayload()
         
         switch payloadType {
@@ -180,7 +181,7 @@ class CapteeObservableManager: ObservableObject {
 
     }
     
-    func shortenMessage(buf: String, length: Int) -> String {
+    public func shortenMessage(buf: String, length: Int) -> String {
         var result: String = buf
         if buf.count > length {
             result = String(buf.prefix(length - 1)) + "…"

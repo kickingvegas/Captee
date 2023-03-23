@@ -16,7 +16,7 @@
 
 
 import SwiftUI
-import CapteeKit
+//import CapteeKit
 
 public struct CapteeUtils {
     public static func extractPayloadContent(urlString: String,

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CXRadioPicker" customModule="Share2Emacs" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="c22-O7-iKe" id="CYw-Nu-b3B"/>
+                <outlet property="label" destination="ryN-Gc-p4K" id="iJJ-so-khM"/>
+                <outlet property="radio1" destination="zwe-n0-dRH" id="JXW-87-QHY"/>
+                <outlet property="radio2" destination="rV8-n5-6qh" id="ZbG-Dc-9P6"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="186" height="60"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ryN-Gc-p4K">
+                    <rect key="frame" x="8" y="35" width="37" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="NpT-pG-z9f">
+                        <font key="font" usesAppearanceFont="YES"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="cN1-SA-oUE" userLabel="ButtonView">
+                    <rect key="frame" x="53" y="0.0" width="133" height="60"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zwe-n0-dRH">
+                            <rect key="frame" x="-2" y="34" width="70" height="18"/>
+                            <buttonCell key="cell" type="radio" title="Radio 1" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="hHN-C8-dbk">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="buttonAction:" target="-2" id="nOe-69-rJT"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rV8-n5-6qh">
+                            <rect key="frame" x="-2" y="12" width="72" height="18"/>
+                            <buttonCell key="cell" type="radio" title="Radio 2" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="YJ3-2J-Etm">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="buttonAction:" target="-2" id="Mls-ER-ij8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="rV8-n5-6qh" firstAttribute="leading" secondItem="zwe-n0-dRH" secondAttribute="leading" id="9y9-6F-3IV"/>
+                        <constraint firstItem="zwe-n0-dRH" firstAttribute="leading" secondItem="cN1-SA-oUE" secondAttribute="leading" id="BS2-89-ohw"/>
+                        <constraint firstItem="rV8-n5-6qh" firstAttribute="top" secondItem="zwe-n0-dRH" secondAttribute="bottom" constant="6" symbolic="YES" id="etT-wR-Hug"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="cN1-SA-oUE" secondAttribute="trailing" id="5YA-jo-Z1x"/>
+                <constraint firstItem="cN1-SA-oUE" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="AdK-Tz-8Jq"/>
+                <constraint firstItem="cN1-SA-oUE" firstAttribute="leading" secondItem="ryN-Gc-p4K" secondAttribute="trailing" constant="10" id="GUc-0u-IhJ"/>
+                <constraint firstAttribute="height" constant="60" id="bau-nf-CRu"/>
+                <constraint firstItem="zwe-n0-dRH" firstAttribute="firstBaseline" secondItem="ryN-Gc-p4K" secondAttribute="firstBaseline" id="e9r-lW-gOE"/>
+                <constraint firstItem="ryN-Gc-p4K" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="9" id="eY9-Pb-vnF"/>
+                <constraint firstAttribute="bottom" secondItem="cN1-SA-oUE" secondAttribute="bottom" id="gBl-Z5-L9b"/>
+                <constraint firstItem="ryN-Gc-p4K" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="10" id="npJ-4W-syF"/>
+                <constraint firstAttribute="width" constant="186" id="xqe-rW-yrF"/>
+            </constraints>
+            <point key="canvasLocation" x="-1" y="121"/>
+        </customView>
+    </objects>
+</document>
