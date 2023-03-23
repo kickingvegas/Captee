@@ -49,12 +49,11 @@ class Share2EmacsViewController: NSViewController {
     }
     
     private func initUI() {
-            
         CXRadioPickerMaps.configurePickerUI(formatPicker, stringMap: CXRadioPickerMaps.formatStringDB)
         CXRadioPickerMaps.configurePickerUI(payloadPicker, stringMap: CXRadioPickerMaps.payloadStringDB)
         CXRadioPickerMaps.configurePickerUI(usePicker, stringMap: CXRadioPickerMaps.useStringDB)
         
-        let observableManager = CapteeObservableManager()
+        let observableManager = CapteeViewModel()
 
         let cxCoordinator = ShareCXCoordinator(observableManager: observableManager,
                                                formatPicker: formatPicker,
@@ -66,7 +65,8 @@ class Share2EmacsViewController: NSViewController {
                                                templateLine: templateLine,
                                                textView: textView,
                                                scrollableTextView: scrollableTextView,
-                                               textViewLine: textViewLine)
+                                               textViewLine: textViewLine,
+                                               sendButton: sendButton)
                 
         // populate
         guard let extensionContext = self.extensionContext else {
@@ -84,8 +84,11 @@ class Share2EmacsViewController: NSViewController {
         cxCoordinator.configureTemplateField()
         cxCoordinator.configureLinkFields(extensionContext: extensionContext)
         
+        //cxCoordinator.synchronizeObservableManagerWithUI()
+        //observableManager.evalEnableSendButton()
+        
+        
         self.shareCXCoordinator = cxCoordinator
-
     }
     
     

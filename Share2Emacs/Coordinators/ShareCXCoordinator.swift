@@ -22,7 +22,7 @@ import UniformTypeIdentifiers
 
 class ShareCXCoordinator {
     
-    var observableManager: CapteeObservableManager
+    var observableManager: CapteeViewModel
     
     var formatPicker: CXRadioPicker
     var payloadPicker: CXRadioPicker
@@ -38,8 +38,15 @@ class ShareCXCoordinator {
     private var formatPickerCancellable: AnyCancellable?
     private var payloadPickerCancellable: AnyCancellable?
     private var usePickerCancellable: AnyCancellable?
+    private var sendButtonEnableCancellable: AnyCancellable?
+    private var isURLValidCancellable: AnyCancellable?
     
-    init(observableManager: CapteeObservableManager,
+    private var urlFieldValidator: CXURLFieldValidator
+    private var titleFieldValidator: CXTitleFieldValidator
+    private var templateFieldValidator: CXTemplateFieldValidator
+    private var textViewValidator: CXTextViewValidator
+    
+    init(observableManager: CapteeViewModel,
          formatPicker: CXRadioPicker,
          payloadPicker: CXRadioPicker,
          usePicker: CXRadioPicker,
@@ -49,7 +56,9 @@ class ShareCXCoordinator {
          templateLine: NSBox,
          textView: NSTextView,
          scrollableTextView: NSScrollView,
-         textViewLine: NSBox) {
+         textViewLine: NSBox,
+         sendButton: NSButton) {
+        
         
         self.observableManager = observableManager
         self.formatPicker = formatPicker
@@ -63,6 +72,16 @@ class ShareCXCoordinator {
         self.scrollableTextView = scrollableTextView
         self.textViewLine = textViewLine
         
+        self.urlFieldValidator = CXURLFieldValidator(observableManager)
+        self.titleFieldValidator = CXTitleFieldValidator(observableManager)
+        self.templateFieldValidator = CXTemplateFieldValidator()
+        self.textViewValidator = CXTextViewValidator(observableManager)
+        
+        urlField.delegate = urlFieldValidator
+        titleField.delegate = titleFieldValidator
+        templateField.delegate = templateFieldValidator
+        textView.delegate = textViewValidator
+
         formatPickerCancellable = formatPicker.$selection.sink { [weak self] selection in
             guard let self else { return }
             guard let selection = selection else { return }
@@ -136,7 +155,32 @@ class ShareCXCoordinator {
                 self.observableManager.sendtoType = sendtoType
             }
         }
+        
+        sendButtonEnableCancellable = observableManager.$sendButtonDisabled.sink { sendButtonDisabled in
+            sendButton.isEnabled = !sendButtonDisabled
+        }
+        
+        isURLValidCancellable = observableManager.$isURLValid.sink { [weak self] isURLValid in
+            guard let self else { return }
+            
+            if isURLValid {
+                self.urlField.textColor = NSColor.labelColor
+            } else {
+                self.urlField.textColor = .red
+            }
+        }
 
+    }
+    
+    
+    func synchronizeObservableManagerWithUI() {
+        let payload = Share2EmacsUtils.extractPayloadContentFromAppKit(urlField: urlField,
+                                                                       titleField: titleField,
+                                                                       templateField: templateField,
+                                                                       textView: textView)
+        
+        observableManager.synchronizePayload(payload)
+        
     }
     
     
@@ -154,6 +198,7 @@ class ShareCXCoordinator {
     
     func configureTemplateField() {
         templateField.stringValue = observableManager.capteeManager.defaultTemplate
+        observableManager.template = observableManager.capteeManager.defaultTemplate
     }
     
     func configureLinkFields(extensionContext: NSExtensionContext) {
@@ -167,7 +212,11 @@ class ShareCXCoordinator {
                             let buf = String(decoding: data, as: UTF8.self)
                             if let url = URL(string: buf) {
                                 self.urlField.stringValue = url.absoluteString
+                                self.observableManager.urlString = url.absoluteString
+                                self.observableManager.isURLValid = true
                             }
+                            
+                            self.observableManager.evalEnableSendButton()
                         }
                     }
                 } else if itemProvider.hasItemConformingToTypeIdentifier(UTType.propertyList.identifier) {
@@ -187,6 +236,7 @@ class ShareCXCoordinator {
                             //print("title: \(title)")
                             //print("href: \(href)")
                             self.titleField.stringValue = title
+                            self.observableManager.title = title
                         })
                 }
             }

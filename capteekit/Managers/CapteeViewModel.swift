@@ -16,9 +16,8 @@
 
 import Combine
 import Cocoa
-//import CapteeKit
 
-public class CapteeObservableManager: ObservableObject {
+public class CapteeViewModel: ObservableObject {
     @Published public var urlString: String = ""
     @Published public var title: String = ""
     @Published public var body: AttributedString = AttributedString("")
@@ -33,6 +32,7 @@ public class CapteeObservableManager: ObservableObject {
     @Published public var hideTemplate: Bool = true
     @Published public var hideBody: Bool = true
     @Published public var sendButtonDisabled: Bool = false
+    @Published public var isURLValid: Bool = true
     @Published public var alertTitle = ""
     @Published public var alertMessage = ""
     
@@ -164,21 +164,22 @@ public class CapteeObservableManager: ObservableObject {
     
     public func evalEnableSendButton() {
         let payload = extractPayload()
-        
+
         switch payloadType {
         case .link:
-            sendButtonDisabled = !(payload.url != nil)
-            
+            sendButtonDisabled = !isURLValid
+
         case .capture:
-            sendButtonDisabled = !((payload.url != nil) || (payload.body != nil))
+            var bodyString: String?
             
             if let body = payload.body {
-                let bodyString = String(body.characters[...])
-                sendButtonDisabled = sendButtonDisabled || (bodyString == "")
+                bodyString = String(body.characters[...])
             }
-
+            
+            sendButtonDisabled = ((payload.url == nil)
+                                  && ((payload.title == nil) || (payload.title == ""))
+                                  && ((bodyString == nil) || (bodyString == "")))
         }
-
     }
     
     public func shortenMessage(buf: String, length: Int) -> String {
@@ -187,5 +188,23 @@ public class CapteeObservableManager: ObservableObject {
             result = String(buf.prefix(length - 1)) + "…"
         }
         return result
+    }
+    
+    public func synchronizePayload(_ payload: CapteePayload) {
+        if let url = payload.url {
+            urlString = url.absoluteString
+        }
+        
+        if let title = payload.title {
+            self.title = title
+        }
+        
+        if let template = payload.template {
+            self.template = template
+        }
+        
+        if let body = payload.body {
+            self.body = body
+        }
     }
 }
