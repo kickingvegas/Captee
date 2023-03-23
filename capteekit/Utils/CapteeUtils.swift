@@ -16,7 +16,6 @@
 
 
 import SwiftUI
-//import CapteeKit
 
 public struct CapteeUtils {
     public static func extractPayloadContent(urlString: String,
@@ -30,7 +29,27 @@ public struct CapteeUtils {
         
         return CapteePayload(url: url, title: titleBuf, template: templateBuf, body: body)
     }
+    
+    
+    public static func validateURL(string: String) -> Bool {
+        var test = true
+        
+        if let urlComponents = URLComponents(string: string) {
+            if let scheme = urlComponents.scheme {
+                if !(["http", "https", "file"].contains(scheme)) {
+                    test = false
+                }
+            } else {
+                test = false
+            }
+            
+            if urlComponents.url == nil {
+                test = false
+            }
+        } else {
+            test = false
+        }
+        
+        return test
+    }
 }
-
-
-

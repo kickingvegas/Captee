@@ -14,21 +14,8 @@
 // limitations under the License.
 //
 
-import Foundation
+import Cocoa
 
-extension CapteeManager {
-    public var defaultTemplate: String {
-            get {
-                if let result = UserDefaults.standard.value(forKey: "template") as? String {
-                    return result
-                } else {
-                    return "c"
-                }
-            }
-            
-            set(newTemplate) {
-                UserDefaults.standard.setValue(newTemplate, forKey: "template")
-            }
-        }
+class CXTemplateFieldValidator: NSObject, NSTextFieldDelegate {
+    
 }
-

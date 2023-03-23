@@ -18,18 +18,18 @@ import SwiftUI
 import CapteeKit
 
 struct ContentView: View {
-    @StateObject var capteeObservableManager = CapteeObservableManager()
+    @StateObject var capteeViewModel = CapteeViewModel()
 
     var body: some View {
         VStack (alignment: .leading) {
-            OrgProtocolPickerView(capteeObservableManager: capteeObservableManager)
-            OrgURLView(capteeObservableManager: capteeObservableManager)
-            OrgTitleView(capteeObservableManager: capteeObservableManager)
-            if !capteeObservableManager.hideTemplate {
-                OrgTemplateView(capteeObservableManager: capteeObservableManager)
+            OrgProtocolPickerView(capteeViewModel: capteeViewModel)
+            OrgURLView(capteeViewModel: capteeViewModel)
+            OrgTitleView(capteeViewModel: capteeViewModel)
+            if !capteeViewModel.hideTemplate {
+                OrgTemplateView(capteeViewModel: capteeViewModel)
             }
-            if !capteeObservableManager.hideBody {
-                OrgBodyView(capteeObservableManager: capteeObservableManager)
+            if !capteeViewModel.hideBody {
+                OrgBodyView(capteeViewModel: capteeViewModel)
             } else {
                 Spacer()
             }
@@ -39,15 +39,15 @@ struct ContentView: View {
                 Button("Capture") {
                     captureAction()
                 }
-                .alert(isPresented: $capteeObservableManager.showSentToClipboardAlert) {
-                    return Alert(title: Text(capteeObservableManager.alertTitle),
-                                 message: Text(capteeObservableManager.alertMessage),
+                .alert(isPresented: $capteeViewModel.showSentToClipboardAlert) {
+                    return Alert(title: Text(capteeViewModel.alertTitle),
+                                 message: Text(capteeViewModel.alertMessage),
                                  dismissButton: .default(Text("Dismiss")))
                 }
 
                 .frame(alignment: .trailing)
                 .buttonStyle(.borderedProminent)
-                .disabled(capteeObservableManager.sendButtonDisabled)
+                .disabled(capteeViewModel.sendButtonDisabled)
                 .help("Send to Org")
             }
         }
@@ -55,7 +55,7 @@ struct ContentView: View {
     }
     
     func captureAction() {
-        capteeObservableManager.captureAction { result in
+        capteeViewModel.captureAction { result in
             print("\(result)")
         }
     }
@@ -69,16 +69,16 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct OrgTemplateView: View {
-    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @ObservedObject var capteeViewModel: CapteeViewModel
 
     var body: some View {
         HStack(alignment: .lastTextBaseline) {
             Text("Template Key")
                 .foregroundColor(.gray)
-            TextField("Key", text: $capteeObservableManager.template)
+            TextField("Key", text: $capteeViewModel.template)
                 .textFieldStyle(.plain)
             .help("Org Capture Link Template Key")
-            .disabled(capteeObservableManager.orgProtocol == .storeLink)
+            .disabled(capteeViewModel.orgProtocol == .storeLink)
         }
         
         Divider()
@@ -87,10 +87,10 @@ struct OrgTemplateView: View {
 }
 
 struct OrgTitleView: View {
-    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @ObservedObject var capteeViewModel: CapteeViewModel
     
     var body: some View {
-        TextField("Title", text: $capteeObservableManager.title)
+        TextField("Title", text: $capteeViewModel.title)
             .textFieldStyle(.plain)
             .help("Org Capture Link Title")
         Divider()
@@ -98,17 +98,17 @@ struct OrgTitleView: View {
 }
 
 struct OrgURLView: View {
-    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @ObservedObject var capteeViewModel: CapteeViewModel
     
     @State var foregroundColor: Color = .black
 
     var body: some View {
-        TextField("URL", text: $capteeObservableManager.urlString)
+        TextField("URL", text: $capteeViewModel.urlString)
             .textFieldStyle(.plain)
             .help("Org Capture Link URL")
-            .onChange(of: capteeObservableManager.urlString) { newValue in
+            .onChange(of: capteeViewModel.urlString) { newValue in
                 print("\(newValue)")
-                
+                // TODO: revisit when validating
                 if let _ = URL(string: newValue) {
                     foregroundColor = .black
                 } else if newValue == "" {
@@ -117,7 +117,7 @@ struct OrgURLView: View {
                     foregroundColor = .red
                 }
                 
-                capteeObservableManager.evalEnableSendButton()
+                capteeViewModel.evalEnableSendButton()
 
             }
             .foregroundColor(foregroundColor)
@@ -127,86 +127,86 @@ struct OrgURLView: View {
 }
 
 struct OrgBodyView: View {
-    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @ObservedObject var capteeViewModel: CapteeViewModel
 
     var body: some View {
         Text("Body Text")
             .help("Enter body text")
             .foregroundColor(.gray)
         
-        CAPTextEditor(text: $capteeObservableManager.body)
+        CAPTextEditor(text: $capteeViewModel.body)
             .textFieldStyle(.roundedBorder)
-            .disabled(capteeObservableManager.bodyDisabled)
-            .onChange(of: capteeObservableManager.body) { newValue in
-                capteeObservableManager.evalEnableSendButton()
+            .disabled(capteeViewModel.bodyDisabled)
+            .onChange(of: capteeViewModel.body) { newValue in
+                capteeViewModel.evalEnableSendButton()
             }
     }
 }
 
 struct OrgProtocolPickerView: View {
-    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @ObservedObject var capteeViewModel: CapteeViewModel
     //@State var sendDisable: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Picker("Format", selection: $capteeObservableManager.markupFormat) {
+                Picker("Format", selection: $capteeViewModel.markupFormat) {
                     ForEach(MarkupFormat.allCases, id: \.self) { value in
                         Text(value.rawValue)
                             .tag(value)
                     }
                 }
                 .pickerStyle(.radioGroup)
-                .onChange(of: capteeObservableManager.markupFormat) { newValue in
+                .onChange(of: capteeViewModel.markupFormat) { newValue in
                     if newValue == .markdown {
-                        capteeObservableManager.sendtoPickerDisabled = true
-                        capteeObservableManager.sendtoType = .clipboard
-                        capteeObservableManager.hideTemplate = true
+                        capteeViewModel.sendtoPickerDisabled = true
+                        capteeViewModel.sendtoType = .clipboard
+                        capteeViewModel.hideTemplate = true
 
                     } else if newValue == .orgMode {
-                        capteeObservableManager.sendtoPickerDisabled = false
-                        capteeObservableManager.sendtoType = .orgProtocol
-                        capteeObservableManager.hideTemplate = false
+                        capteeViewModel.sendtoPickerDisabled = false
+                        capteeViewModel.sendtoType = .orgProtocol
+                        capteeViewModel.hideTemplate = false
                     }
                     
                 }
 
                 
-                Picker("Payload", selection: $capteeObservableManager.payloadType) {
+                Picker("Payload", selection: $capteeViewModel.payloadType) {
                     ForEach(PayloadType.allCases, id: \.self) { value in
                         Text(value.rawValue)
                             .tag(value)
                     }
                 }
                 .pickerStyle(.radioGroup)
-                .onChange(of: capteeObservableManager.payloadType) { newValue in
+                .onChange(of: capteeViewModel.payloadType) { newValue in
                     if newValue == .capture {
-                        capteeObservableManager.bodyDisabled = false
-                        capteeObservableManager.orgProtocol = .capture
-                        capteeObservableManager.hideBody = false
-                        if capteeObservableManager.markupFormat == .orgMode {
-                            capteeObservableManager.hideTemplate = false
+                        capteeViewModel.bodyDisabled = false
+                        capteeViewModel.orgProtocol = .capture
+                        capteeViewModel.hideBody = false
+                        if capteeViewModel.markupFormat == .orgMode {
+                            capteeViewModel.hideTemplate = false
                         } else {
-                            capteeObservableManager.hideTemplate = true
+                            capteeViewModel.hideTemplate = true
                         }
                         
                     } else if newValue == .link {
-                        capteeObservableManager.bodyDisabled = true
-                        capteeObservableManager.orgProtocol = .storeLink
-                        capteeObservableManager.hideTemplate = true
-                        capteeObservableManager.hideBody = true
+                        capteeViewModel.bodyDisabled = true
+                        capteeViewModel.orgProtocol = .storeLink
+                        capteeViewModel.hideTemplate = true
+                        capteeViewModel.hideBody = true
                     }
-                    capteeObservableManager.evalEnableSendButton()
+                    capteeViewModel.evalEnableSendButton()
                 }
                 
-                Picker("Use", selection: $capteeObservableManager.sendtoType) {
+                Picker("Use", selection: $capteeViewModel.sendtoType) {
                     ForEach(SendtoType.allCases, id: \.self) { value in
                         Text(value.rawValue)
                             .tag(value)
                     }
                 }
                 .pickerStyle(.radioGroup)
-                .disabled(capteeObservableManager.sendtoPickerDisabled)
+                .disabled(capteeViewModel.sendtoPickerDisabled)
 
             }
             Divider()

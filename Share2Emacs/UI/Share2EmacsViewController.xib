@@ -108,12 +108,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="225" height="315"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textView wantsLayer="YES" ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" usesInspectorBar="YES" usesRuler="YES" smartInsertDelete="YES" id="bKq-tb-ELq">
+                                    <textView wantsLayer="YES" ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" usesInspectorBar="YES" allowsDocumentBackgroundColorChange="YES" usesRuler="YES" smartInsertDelete="YES" id="bKq-tb-ELq">
                                         <rect key="frame" x="0.0" y="0.0" width="225" height="315"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         <size key="minSize" width="225" height="315"/>
-                                        <size key="maxSize" width="225" height="10000000"/>
+                                        <size key="maxSize" width="240" height="10000000"/>
                                         <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     </textView>
                                 </subviews>
@@ -131,24 +131,26 @@
                             <rect key="frame" x="367" y="29" width="96" height="5"/>
                         </box>
                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="100" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNO-vv-Ynn">
-                            <rect key="frame" x="305" y="0.0" width="220" height="23"/>
+                            <rect key="frame" x="296" y="0.0" width="238" height="23"/>
                             <subviews>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qPs-vR-OlC">
-                                    <rect key="frame" x="0.0" y="4" width="60" height="19"/>
-                                    <buttonCell key="cell" type="roundRect" title="Cancel" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xrW-x1-Xj0">
+                                    <rect key="frame" x="-3" y="-1" width="75" height="27"/>
+                                    <buttonCell key="cell" type="bevel" title="Cancel" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xrW-x1-Xj0">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="cellTitle"/>
+                                        <font key="font" metaFont="system"/>
                                     </buttonCell>
+                                    <color key="bezelColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                     <connections>
                                         <action selector="cancelAction:" target="-2" id="sra-LL-Nzh"/>
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAB-79-hbI">
-                                    <rect key="frame" x="160" y="4" width="60" height="19"/>
-                                    <buttonCell key="cell" type="roundRect" title="Capture" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oaL-Bc-gSe">
+                                    <rect key="frame" x="166" y="-1" width="75" height="27"/>
+                                    <buttonCell key="cell" type="bevel" title="Capture" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oaL-Bc-gSe">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="cellTitle"/>
+                                        <font key="font" metaFont="system"/>
                                     </buttonCell>
+                                    <color key="bezelColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                     <connections>
                                         <action selector="sendAction:" target="-2" id="CNH-El-lYi"/>
                                     </connections>
