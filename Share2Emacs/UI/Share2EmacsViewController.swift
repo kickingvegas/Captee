@@ -53,9 +53,9 @@ class Share2EmacsViewController: NSViewController {
         CXRadioPickerMaps.configurePickerUI(payloadPicker, stringMap: CXRadioPickerMaps.payloadStringDB)
         CXRadioPickerMaps.configurePickerUI(usePicker, stringMap: CXRadioPickerMaps.useStringDB)
         
-        let observableManager = CapteeViewModel()
+        let viewModel = CapteeViewModel()
 
-        let cxCoordinator = ShareCXCoordinator(observableManager: observableManager,
+        let cxCoordinator = ShareCXCoordinator(viewModel: viewModel,
                                                formatPicker: formatPicker,
                                                payloadPicker: payloadPicker,
                                                usePicker: usePicker,
@@ -76,7 +76,7 @@ class Share2EmacsViewController: NSViewController {
         
         formatPicker.selection = CXRadioPickerMaps.inverseFormatMap[.orgMode]
         
-        if observableManager.markupFormat != .markdown {
+        if viewModel.markupFormat != .markdown {
             usePicker.selection = CXRadioPickerMaps.inverseUseMap[.orgProtocol]
         }
         
@@ -84,9 +84,9 @@ class Share2EmacsViewController: NSViewController {
         cxCoordinator.configureTemplateField()
         cxCoordinator.configureLinkFields(extensionContext: extensionContext)
         
-        //cxCoordinator.synchronizeObservableManagerWithUI()
-        //observableManager.evalEnableSendButton()
+        // !!!: At this point everything should be at a stable state.
         
+        cxCoordinator.initCancellables()
         
         self.shareCXCoordinator = cxCoordinator
     }

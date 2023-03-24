@@ -107,11 +107,11 @@ struct OrgURLView: View {
             .textFieldStyle(.plain)
             .help("Org Capture Link URL")
             .onChange(of: capteeViewModel.urlString) { newValue in
-                print("\(newValue)")
-                // TODO: revisit when validating
-                if let _ = URL(string: newValue) {
-                    foregroundColor = .black
-                } else if newValue == "" {
+                //print("\(newValue)")
+                
+                capteeViewModel.isURLValid = CapteeUtils.validateURL(string: newValue)
+                
+                if capteeViewModel.isURLValid || newValue == "" {
                     foregroundColor = .black
                 } else {
                     foregroundColor = .red

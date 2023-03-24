@@ -63,7 +63,7 @@ public class CapteeViewModel: ObservableObject {
             }
         }
         
-        evalEnableSendButton()
+        //evalEnableSendButton()
     }
     
     public func orgProtocolURL() -> URL? {
@@ -168,7 +168,7 @@ public class CapteeViewModel: ObservableObject {
         switch payloadType {
         case .link:
             sendButtonDisabled = !isURLValid
-
+            
         case .capture:
             var bodyString: String?
             
@@ -176,9 +176,17 @@ public class CapteeViewModel: ObservableObject {
                 bodyString = String(body.characters[...])
             }
             
-            sendButtonDisabled = ((payload.url == nil)
-                                  && ((payload.title == nil) || (payload.title == ""))
-                                  && ((bodyString == nil) || (bodyString == "")))
+            /*
+             | url | title | template | body | sendDisabled |
+             |-----+-------+----------+------+--------------|
+             |   0 |     0 |        0 |    0 |            1 |
+             |   0 |     0 |        1 |    0 |            1 |
+
+             */
+
+            sendButtonDisabled = (!isURLValid &&
+                                  ((payload.title == nil) || (payload.title == "")) &&
+                                  ((bodyString == nil) || (bodyString == "")))
         }
     }
     

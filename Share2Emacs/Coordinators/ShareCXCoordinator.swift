@@ -22,7 +22,7 @@ import UniformTypeIdentifiers
 
 class ShareCXCoordinator {
     
-    var observableManager: CapteeViewModel
+    var viewModel: CapteeViewModel
     
     var formatPicker: CXRadioPicker
     var payloadPicker: CXRadioPicker
@@ -34,19 +34,21 @@ class ShareCXCoordinator {
     var textView: NSTextView
     var scrollableTextView: NSScrollView
     var textViewLine: NSBox
+    var sendButton: NSButton
 
     private var formatPickerCancellable: AnyCancellable?
     private var payloadPickerCancellable: AnyCancellable?
     private var usePickerCancellable: AnyCancellable?
     private var sendButtonEnableCancellable: AnyCancellable?
     private var isURLValidCancellable: AnyCancellable?
+    private var isSendtoPickerDisabledCancellable: AnyCancellable?
     
     private var urlFieldValidator: CXURLFieldValidator
     private var titleFieldValidator: CXTitleFieldValidator
     private var templateFieldValidator: CXTemplateFieldValidator
     private var textViewValidator: CXTextViewValidator
     
-    init(observableManager: CapteeViewModel,
+    init(viewModel: CapteeViewModel,
          formatPicker: CXRadioPicker,
          payloadPicker: CXRadioPicker,
          usePicker: CXRadioPicker,
@@ -60,7 +62,7 @@ class ShareCXCoordinator {
          sendButton: NSButton) {
         
         
-        self.observableManager = observableManager
+        self.viewModel = viewModel
         self.formatPicker = formatPicker
         self.payloadPicker = payloadPicker
         self.usePicker = usePicker
@@ -71,27 +73,31 @@ class ShareCXCoordinator {
         self.textView = textView
         self.scrollableTextView = scrollableTextView
         self.textViewLine = textViewLine
+        self.sendButton = sendButton
         
-        self.urlFieldValidator = CXURLFieldValidator(observableManager)
-        self.titleFieldValidator = CXTitleFieldValidator(observableManager)
+        self.urlFieldValidator = CXURLFieldValidator(viewModel)
+        self.titleFieldValidator = CXTitleFieldValidator(viewModel)
         self.templateFieldValidator = CXTemplateFieldValidator()
-        self.textViewValidator = CXTextViewValidator(observableManager)
+        self.textViewValidator = CXTextViewValidator(viewModel)
         
         urlField.delegate = urlFieldValidator
         titleField.delegate = titleFieldValidator
         templateField.delegate = templateFieldValidator
         textView.delegate = textViewValidator
-
+    }
+    
+    
+    func initCancellables() {
         formatPickerCancellable = formatPicker.$selection.sink { [weak self] selection in
             guard let self else { return }
             guard let selection = selection else { return }
             
             if let markupFormat = CXRadioPickerMaps.formatMap[selection] {
-                self.observableManager.markupFormat = markupFormat
+                self.viewModel.markupFormat = markupFormat
                 
                 switch markupFormat {
                 case .markdown:
-                    self.observableManager.sendtoType = .clipboard
+                    self.viewModel.sendtoType = .clipboard
                     // choose clipboard
                     if let useSelection = CXRadioPickerMaps.inverseUseMap[.clipboard] {
                         self.usePicker.selection = useSelection
@@ -104,7 +110,7 @@ class ShareCXCoordinator {
                 case .orgMode:
                     self.usePicker.isEnabled = true
                     
-                    switch self.observableManager.payloadType {
+                    switch self.viewModel.payloadType {
                     case .link:
                         self.templateField.isHidden = true
                         self.templateLine.isHidden = true
@@ -122,19 +128,19 @@ class ShareCXCoordinator {
             guard let selection = selection else { return }
             
             if let payloadType = CXRadioPickerMaps.payloadMap[selection] {
-                self.observableManager.payloadType = payloadType
+                self.viewModel.payloadType = payloadType
                 
                 switch payloadType {
                 case .link:
-                    self.observableManager.orgProtocol = .storeLink
+                    self.viewModel.orgProtocol = .storeLink
                     self.templateLine.isHidden = true
                     self.templateField.isHidden = true
                     self.scrollableTextView.isHidden = true
                     self.textViewLine.isHidden = true
                     
                 case .capture:
-                    self.observableManager.orgProtocol = .capture
-                    if self.observableManager.markupFormat == .markdown {
+                    self.viewModel.orgProtocol = .capture
+                    if self.viewModel.markupFormat == .markdown {
                         self.templateLine.isHidden = true
                         self.templateField.isHidden = true
                     } else {
@@ -144,6 +150,8 @@ class ShareCXCoordinator {
                     self.scrollableTextView.isHidden = false
                     self.textViewLine.isHidden = false
                 }
+                
+                self.viewModel.evalEnableSendButton()
             }
         }
         
@@ -152,15 +160,16 @@ class ShareCXCoordinator {
             guard let selection = selection else { return }
             
             if let sendtoType = CXRadioPickerMaps.useMap[selection] {
-                self.observableManager.sendtoType = sendtoType
+                self.viewModel.sendtoType = sendtoType
             }
         }
         
-        sendButtonEnableCancellable = observableManager.$sendButtonDisabled.sink { sendButtonDisabled in
-            sendButton.isEnabled = !sendButtonDisabled
+        sendButtonEnableCancellable = viewModel.$sendButtonDisabled.sink { [weak self] sendButtonDisabled in
+            guard let self else { return }
+            self.sendButton.isEnabled = !sendButtonDisabled
         }
         
-        isURLValidCancellable = observableManager.$isURLValid.sink { [weak self] isURLValid in
+        isURLValidCancellable = viewModel.$isURLValid.sink { [weak self] isURLValid in
             guard let self else { return }
             
             if isURLValid {
@@ -169,9 +178,13 @@ class ShareCXCoordinator {
                 self.urlField.textColor = .red
             }
         }
-
+        
+        isSendtoPickerDisabledCancellable = viewModel.$sendtoPickerDisabled.sink { [weak self] sendtoPickerDisabled in
+            guard let self else { return }
+            //self.usePicker.selection = CXRadioPickerMaps.inverseUseMap[.clipboard]
+            self.usePicker.isEnabled = !sendtoPickerDisabled
+        }
     }
-    
     
     func synchronizeObservableManagerWithUI() {
         let payload = Share2EmacsUtils.extractPayloadContentFromAppKit(urlField: urlField,
@@ -179,8 +192,7 @@ class ShareCXCoordinator {
                                                                        templateField: templateField,
                                                                        textView: textView)
         
-        observableManager.synchronizePayload(payload)
-        
+        viewModel.synchronizePayload(payload)
     }
     
     
@@ -189,6 +201,14 @@ class ShareCXCoordinator {
            let contentText = item.attributedContentText {
             if let textStorage = self.textView.textStorage {
                 textStorage.append(contentText)
+                do {
+                    let body = try AttributedString(textStorage, including: \.appKit)
+                    viewModel.body = body
+                } catch {
+                    // TODO: need to handle properly
+                    print("ERROR: nothing in text storage: configureTextStorage")
+                }
+                
             }
             payloadPicker.selection = CXRadioPickerMaps.inversePayloadMap[.capture]
         } else {
@@ -197,29 +217,33 @@ class ShareCXCoordinator {
     }
     
     func configureTemplateField() {
-        templateField.stringValue = observableManager.capteeManager.defaultTemplate
-        observableManager.template = observableManager.capteeManager.defaultTemplate
+        templateField.stringValue = viewModel.capteeManager.defaultTemplate
+        viewModel.template = viewModel.capteeManager.defaultTemplate
     }
     
     func configureLinkFields(extensionContext: NSExtensionContext) {
         if let item = extensionContext.inputItems.first as? NSExtensionItem,
            let attachments = item.attachments {
+            
+            let group = DispatchGroup()
             for itemProvider in attachments {
                 if itemProvider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
+                    group.enter()
                     itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.url.identifier) { [weak self] data, error in
                         guard let self else { return }
                         if let data = data {
                             let buf = String(decoding: data, as: UTF8.self)
                             if let url = URL(string: buf) {
                                 self.urlField.stringValue = url.absoluteString
-                                self.observableManager.urlString = url.absoluteString
-                                self.observableManager.isURLValid = true
+                                self.viewModel.urlString = url.absoluteString
+                                self.viewModel.isURLValid = true
+                                self.viewModel.payloadType = .link
                             }
-                            
-                            self.observableManager.evalEnableSendButton()
                         }
+                        group.leave()
                     }
                 } else if itemProvider.hasItemConformingToTypeIdentifier(UTType.propertyList.identifier) {
+                    group.enter()
                     itemProvider.loadItem(
                         forTypeIdentifier: UTType.propertyList.identifier,
                         options: nil,
@@ -236,9 +260,13 @@ class ShareCXCoordinator {
                             //print("title: \(title)")
                             //print("href: \(href)")
                             self.titleField.stringValue = title
-                            self.observableManager.title = title
+                            self.viewModel.title = title
+                            group.leave()
                         })
                 }
+            }
+            group.notify(queue: .main) {
+                print("loaded link and title")
             }
         }
     }
@@ -250,12 +278,12 @@ class ShareCXCoordinator {
                                                                        templateField: templateField,
                                                                        textView: textView)
         
-        let markupFormat = observableManager.markupFormat
-        let sendtoType = observableManager.sendtoType
-        let orgProtocolType = observableManager.orgProtocol
-        let payloadType = observableManager.payloadType
-        let capteeManager = observableManager.capteeManager
-        let connectionManager = observableManager.connectionManager
+        let markupFormat = viewModel.markupFormat
+        let sendtoType = viewModel.sendtoType
+        let orgProtocolType = viewModel.orgProtocol
+        let payloadType = viewModel.payloadType
+        let capteeManager = viewModel.capteeManager
+        let connectionManager = viewModel.connectionManager
         
         switch markupFormat {
         case .orgMode:
