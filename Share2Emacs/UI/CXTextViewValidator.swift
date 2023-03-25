@@ -18,10 +18,10 @@ import Cocoa
 import CapteeKit
 
 class CXTextViewValidator: NSObject, NSTextViewDelegate {
-    let observableManager: CapteeViewModel
+    let viewModel: CapteeViewModel
     
-    init(_ observableManager: CapteeViewModel) {
-        self.observableManager = observableManager
+    init(_ viewModel: CapteeViewModel) {
+        self.viewModel = viewModel
     }
     
     
@@ -39,8 +39,8 @@ class CXTextViewValidator: NSObject, NSTextViewDelegate {
                     let body = try AttributedString(textStorage, including: \.appKit)
                     //let bodyString = String(body.characters[...])
                     //print("#### hey textView changed <<<< \(bodyString)")
-                    observableManager.body = body
-                    observableManager.evalEnableSendButton()
+                    viewModel.body = body
+                    viewModel.evalEnableSendButton()
                     
                 } catch {
                     // TODO: need to handle properly

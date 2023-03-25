@@ -346,10 +346,10 @@
 		D978B91C299BFD1000C00D0B /* Share2Emacs */ = {
 			isa = PBXGroup;
 			children = (
-				D9BFE94229CB894A005F0970 /* Coordinators */,
 				D978B91D299BFD1000C00D0B /* icon.icns */,
 				D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */,
 				D9BFE93229CA4DE3005F0970 /* UI */,
+				D9BFE94229CB894A005F0970 /* Coordinators */,
 				D9BFE93329CA4DEF005F0970 /* Utils */,
 				D978B924299BFD1000C00D0B /* Info.plist */,
 				D978B925299BFD1000C00D0B /* Share2Emacs.entitlements */,

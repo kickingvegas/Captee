@@ -19,10 +19,10 @@ import Cocoa
 import CapteeKit
 
 class CXURLFieldValidator: NSObject, NSTextFieldDelegate {
-    let observableManager: CapteeViewModel
+    let viewModel: CapteeViewModel
     
-    init(_ observableManager: CapteeViewModel) {
-        self.observableManager = observableManager
+    init(_ viewModel: CapteeViewModel) {
+        self.viewModel = viewModel
     }
     
 //    func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
@@ -56,9 +56,9 @@ class CXURLFieldValidator: NSObject, NSTextFieldDelegate {
             let textField = targetObject as! NSTextField
             // TODO: comment out
             print("did change url editing: \(textField.stringValue)")
-            observableManager.urlString = textField.stringValue
-            observableManager.isURLValid = CapteeUtils.validateURL(string: textField.stringValue)
-            observableManager.evalEnableSendButton()
+            viewModel.urlString = textField.stringValue
+            viewModel.isURLValid = CapteeUtils.validateURL(string: textField.stringValue)
+            viewModel.evalEnableSendButton()
         }
 
     }
@@ -72,9 +72,9 @@ class CXURLFieldValidator: NSObject, NSTextFieldDelegate {
             let textField = targetObject as! NSTextField
             // TODO: comment out
             print("did end url editing: \(textField.stringValue)")
-            observableManager.urlString = textField.stringValue
-            observableManager.isURLValid = CapteeUtils.validateURL(string: textField.stringValue)
-            observableManager.evalEnableSendButton()
+            viewModel.urlString = textField.stringValue
+            viewModel.isURLValid = CapteeUtils.validateURL(string: textField.stringValue)
+            viewModel.evalEnableSendButton()
         }
     }
 }

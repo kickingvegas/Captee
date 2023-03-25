@@ -18,9 +18,9 @@ import Cocoa
 import CapteeKit
 
 class CXTitleFieldValidator: NSObject, NSTextFieldDelegate {
-    let observableManager: CapteeViewModel
-    init(_ observableManager: CapteeViewModel) {
-        self.observableManager = observableManager
+    let viewModel: CapteeViewModel
+    init(_ viewModel: CapteeViewModel) {
+        self.viewModel = viewModel
     }
     
     
@@ -45,7 +45,7 @@ class CXTitleFieldValidator: NSObject, NSTextFieldDelegate {
             let textField = targetObject as! NSTextField
             // TODO: comment out
             print("did change title editing: \(textField.stringValue)")
-            observableManager.title = textField.stringValue
+            viewModel.title = textField.stringValue
         }
 
     }
@@ -59,7 +59,7 @@ class CXTitleFieldValidator: NSObject, NSTextFieldDelegate {
             let textField = targetObject as! NSTextField
             // TODO: comment out
             print("did end title editing: \(textField.stringValue)")
-            observableManager.title = textField.stringValue
+            viewModel.title = textField.stringValue
         }
     }
     
