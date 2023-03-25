@@ -103,12 +103,15 @@ class ShareCXCoordinator {
                         self.usePicker.selection = useSelection
                     }
                     
-                    self.usePicker.isEnabled = false
+                    self.viewModel.sendtoPickerDisabled = true
+                    //self.usePicker.isEnabled = false
                     self.templateField.isHidden = true
                     self.templateLine.isHidden = true
 
                 case .orgMode:
-                    self.usePicker.isEnabled = true
+                    if self.viewModel.isOrgProtocolSupported {
+                        self.usePicker.isEnabled = true
+                    }
                     
                     switch self.viewModel.payloadType {
                     case .link:
@@ -181,8 +184,10 @@ class ShareCXCoordinator {
         
         isSendtoPickerDisabledCancellable = viewModel.$sendtoPickerDisabled.sink { [weak self] sendtoPickerDisabled in
             guard let self else { return }
-            //self.usePicker.selection = CXRadioPickerMaps.inverseUseMap[.clipboard]
             self.usePicker.isEnabled = !sendtoPickerDisabled
+            if !self.viewModel.isOrgProtocolSupported {
+              self.usePicker.selection = CXRadioPickerMaps.inverseUseMap[.clipboard]
+            }
         }
     }
     

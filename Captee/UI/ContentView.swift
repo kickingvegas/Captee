@@ -164,8 +164,10 @@ struct OrgProtocolPickerView: View {
                         capteeViewModel.hideTemplate = true
 
                     } else if newValue == .orgMode {
-                        capteeViewModel.sendtoPickerDisabled = false
-                        capteeViewModel.sendtoType = .orgProtocol
+                        if capteeViewModel.isOrgProtocolSupported {
+                            capteeViewModel.sendtoPickerDisabled = false
+                            //capteeViewModel.sendtoType = .orgProtocol
+                        }
                         capteeViewModel.hideTemplate = false
                     }
                     
@@ -206,7 +208,7 @@ struct OrgProtocolPickerView: View {
                     }
                 }
                 .pickerStyle(.radioGroup)
-                .disabled(capteeViewModel.sendtoPickerDisabled)
+                .disabled(capteeViewModel.sendtoPickerDisabled || !capteeViewModel.isOrgProtocolSupported)
 
             }
             Divider()
