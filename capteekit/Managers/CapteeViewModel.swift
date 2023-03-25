@@ -33,6 +33,7 @@ public class CapteeViewModel: ObservableObject {
     @Published public var hideBody: Bool = true
     @Published public var sendButtonDisabled: Bool = false
     @Published public var isURLValid: Bool = true
+    @Published public var isOrgProtocolSupported: Bool = false
     @Published public var alertTitle = ""
     @Published public var alertMessage = ""
     
@@ -44,8 +45,9 @@ public class CapteeViewModel: ObservableObject {
         
         if let url = URL(string: "org-protocol://capture/"),
            let _ = NSWorkspace.shared.urlForApplication(toOpen: url) {
-            sendtoType = .orgProtocol
+            isOrgProtocolSupported = true
         } else {
+            isOrgProtocolSupported = false
             sendtoType = .clipboard
             sendtoPickerDisabled = true
         }
@@ -62,8 +64,6 @@ public class CapteeViewModel: ObservableObject {
                 hideTemplate = true
             }
         }
-        
-        //evalEnableSendButton()
     }
     
     public func orgProtocolURL() -> URL? {
