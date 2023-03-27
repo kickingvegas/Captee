@@ -112,7 +112,7 @@ struct OrgURLView: View {
                 capteeViewModel.isURLValid = CapteeUtils.validateURL(string: newValue)
                 
                 if capteeViewModel.isURLValid || newValue == "" {
-                    foregroundColor = .black
+                    foregroundColor = .primary
                 } else {
                     foregroundColor = .red
                 }
