@@ -31,7 +31,7 @@
                     <subviews>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zwe-n0-dRH">
                             <rect key="frame" x="-2" y="34" width="70" height="18"/>
-                            <buttonCell key="cell" type="radio" title="Radio 1" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="hHN-C8-dbk">
+                            <buttonCell key="cell" type="radio" title="Radio 1" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="hHN-C8-dbk">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>

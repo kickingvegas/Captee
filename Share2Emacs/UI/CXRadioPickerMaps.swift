@@ -39,12 +39,12 @@ struct CXRadioPickerMaps {
         .capture : .radio2
     ]
 
-    static let useMap: [CXRadioPickerSelected: SendtoType] = [
+    static let useMap: [CXRadioPickerSelected: TransmitType] = [
         .radio1: .orgProtocol,
         .radio2: .clipboard
     ]
     
-    static let inverseUseMap: [SendtoType: CXRadioPickerSelected] = [
+    static let inverseUseMap: [TransmitType: CXRadioPickerSelected] = [
         .orgProtocol: .radio1,
         .clipboard: .radio2
     ]

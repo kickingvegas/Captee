@@ -23,7 +23,7 @@ class Share2EmacsViewController: NSViewController {
     @IBOutlet weak var sendButton: NSButton!
     @IBOutlet weak var payloadPicker: CXRadioPicker!
     @IBOutlet weak var formatPicker: CXRadioPicker!
-    @IBOutlet weak var usePicker: CXRadioPicker!
+    @IBOutlet weak var transmitPicker: CXRadioPicker!
 
     @IBOutlet weak var urlField: NSTextField!
     @IBOutlet weak var titleField: NSTextField!
@@ -51,14 +51,14 @@ class Share2EmacsViewController: NSViewController {
     private func initUI() {
         CXRadioPickerMaps.configurePickerUI(formatPicker, stringMap: CXRadioPickerMaps.formatStringDB)
         CXRadioPickerMaps.configurePickerUI(payloadPicker, stringMap: CXRadioPickerMaps.payloadStringDB)
-        CXRadioPickerMaps.configurePickerUI(usePicker, stringMap: CXRadioPickerMaps.useStringDB)
+        CXRadioPickerMaps.configurePickerUI(transmitPicker, stringMap: CXRadioPickerMaps.useStringDB)
         
         let viewModel = CapteeViewModel()
 
         let cxCoordinator = ShareCXCoordinator(viewModel: viewModel,
                                                formatPicker: formatPicker,
                                                payloadPicker: payloadPicker,
-                                               usePicker: usePicker,
+                                               transmitPicker: transmitPicker,
                                                urlField: urlField,
                                                titleField: titleField,
                                                templateField: templateField,
@@ -72,20 +72,12 @@ class Share2EmacsViewController: NSViewController {
         guard let extensionContext = self.extensionContext else {
             return
         }
-        
-        
-        formatPicker.selection = CXRadioPickerMaps.inverseFormatMap[.orgMode]
-        
-        if viewModel.markupFormat != .markdown {
-            usePicker.selection = CXRadioPickerMaps.inverseUseMap[.orgProtocol]
-        }
-        
+  
         cxCoordinator.configureTextStorage(extensionContext: extensionContext)
         cxCoordinator.configureTemplateField()
         cxCoordinator.configureLinkFields(extensionContext: extensionContext)
         
         // !!!: At this point everything should be at a stable state.
-        
         cxCoordinator.initCancellables()
         
         self.shareCXCoordinator = cxCoordinator

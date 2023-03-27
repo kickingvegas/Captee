@@ -19,16 +19,16 @@ import CapteeKit
 
 struct ContentView: View {
     @StateObject var capteeViewModel = CapteeViewModel()
-
+    
     var body: some View {
         VStack (alignment: .leading) {
             OrgProtocolPickerView(capteeViewModel: capteeViewModel)
             OrgURLView(capteeViewModel: capteeViewModel)
             OrgTitleView(capteeViewModel: capteeViewModel)
-            if !capteeViewModel.hideTemplate {
+            if !capteeViewModel.isTemplateHidden() {
                 OrgTemplateView(capteeViewModel: capteeViewModel)
             }
-            if !capteeViewModel.hideBody {
+            if !capteeViewModel.isBodyHidden() {
                 OrgBodyView(capteeViewModel: capteeViewModel)
             } else {
                 Spacer()
@@ -78,7 +78,6 @@ struct OrgTemplateView: View {
             TextField("Key", text: $capteeViewModel.template)
                 .textFieldStyle(.plain)
             .help("Org Capture Link Template Key")
-            .disabled(capteeViewModel.orgProtocol == .storeLink)
         }
         
         Divider()
@@ -136,7 +135,6 @@ struct OrgBodyView: View {
         
         CAPTextEditor(text: $capteeViewModel.body)
             .textFieldStyle(.roundedBorder)
-            .disabled(capteeViewModel.bodyDisabled)
             .onChange(of: capteeViewModel.body) { newValue in
                 capteeViewModel.evalEnableSendButton()
             }
@@ -159,16 +157,13 @@ struct OrgProtocolPickerView: View {
                 .pickerStyle(.radioGroup)
                 .onChange(of: capteeViewModel.markupFormat) { newValue in
                     if newValue == .markdown {
-                        capteeViewModel.sendtoPickerDisabled = true
-                        capteeViewModel.sendtoType = .clipboard
-                        capteeViewModel.hideTemplate = true
+                        capteeViewModel.transmitPickerDisabled = true
+                        capteeViewModel.transmitType = .clipboard
 
                     } else if newValue == .orgMode {
                         if capteeViewModel.isOrgProtocolSupported {
-                            capteeViewModel.sendtoPickerDisabled = false
-                            //capteeViewModel.sendtoType = .orgProtocol
+                            capteeViewModel.transmitPickerDisabled = false
                         }
-                        capteeViewModel.hideTemplate = false
                     }
                     
                 }
@@ -182,33 +177,17 @@ struct OrgProtocolPickerView: View {
                 }
                 .pickerStyle(.radioGroup)
                 .onChange(of: capteeViewModel.payloadType) { newValue in
-                    if newValue == .capture {
-                        capteeViewModel.bodyDisabled = false
-                        capteeViewModel.orgProtocol = .capture
-                        capteeViewModel.hideBody = false
-                        if capteeViewModel.markupFormat == .orgMode {
-                            capteeViewModel.hideTemplate = false
-                        } else {
-                            capteeViewModel.hideTemplate = true
-                        }
-                        
-                    } else if newValue == .link {
-                        capteeViewModel.bodyDisabled = true
-                        capteeViewModel.orgProtocol = .storeLink
-                        capteeViewModel.hideTemplate = true
-                        capteeViewModel.hideBody = true
-                    }
                     capteeViewModel.evalEnableSendButton()
                 }
                 
-                Picker("Use", selection: $capteeViewModel.sendtoType) {
-                    ForEach(SendtoType.allCases, id: \.self) { value in
+                Picker("Use", selection: $capteeViewModel.transmitType) {
+                    ForEach(TransmitType.allCases, id: \.self) { value in
                         Text(value.rawValue)
                             .tag(value)
                     }
                 }
                 .pickerStyle(.radioGroup)
-                .disabled(capteeViewModel.sendtoPickerDisabled || !capteeViewModel.isOrgProtocolSupported)
+                .disabled(capteeViewModel.transmitPickerDisabled || !capteeViewModel.isOrgProtocolSupported)
 
             }
             Divider()

@@ -14,17 +14,9 @@
 // limitations under the License.
 //
 
-import Cocoa
-import UniformTypeIdentifiers
+import Foundation
 
-  
-public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
-    public init() {
-        UserDefaults.standard.register(defaults: [
-            "template": "c",
-            "markup_format": MarkupFormat.orgMode.rawValue,
-            "payload_type": PayloadType.link.rawValue,
-            "transmit_type": TransmitType.orgProtocol.rawValue
-        ])
-    }
+public enum TransmitType: String, Equatable, CaseIterable {
+    case orgProtocol = "Org Protocol"
+    case clipboard = "Clipboard"
 }

@@ -14,28 +14,7 @@
 // limitations under the License.
 //
 
-
 import Foundation
-
-public enum OrgProtocolType: String, Equatable, CaseIterable {
-    case storeLink = "store-link"
-    case capture
-}
-
-public enum MarkupFormat: String, Equatable, CaseIterable {
-    case orgMode = "Org Mode"
-    case markdown = "Markdown"
-}
-
-public enum PayloadType: String, Equatable, CaseIterable {
-    case link = "Link"
-    case capture = "Capture"
-}
-
-public enum SendtoType: String, Equatable, CaseIterable {
-    case orgProtocol = "Org Protocol"
-    case clipboard = "Clipboard"
-}
 
 public protocol CapteeManagerProtocol {
     /// Generate URL from parameters
@@ -64,20 +43,3 @@ public protocol CapteeManagerProtocol {
                          body: AttributedString?) -> String?
 }
 
-public protocol CapteePersistenceProtocol {
-    var defaultTemplate: String { get set }
-}
-
-public struct CapteePayload {
-    public let url: URL?
-    public let title: String?
-    public let template: String?
-    public let body: AttributedString?
-    
-    public init(url: URL?, title: String?, template: String?, body: AttributedString?) {
-        self.url = url
-        self.title = title
-        self.template = template
-        self.body = body
-    }
-}

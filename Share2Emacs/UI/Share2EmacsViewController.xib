@@ -17,8 +17,8 @@
                 <outlet property="textView" destination="bKq-tb-ELq" id="VxN-L1-zQN"/>
                 <outlet property="textViewLine" destination="ejQ-wq-DT5" id="n6g-iQ-4Io"/>
                 <outlet property="titleField" destination="IZT-c3-1Q6" id="i5W-Cu-Nhe"/>
+                <outlet property="transmitPicker" destination="BQ6-81-SME" id="fAB-R1-xU3"/>
                 <outlet property="urlField" destination="9b8-Uj-Xah" id="GXb-v4-xW3"/>
-                <outlet property="usePicker" destination="BQ6-81-SME" id="fAB-R1-xU3"/>
                 <outlet property="view" destination="c22-O7-iKe" id="6PK-8h-RSe"/>
             </connections>
         </customObject>
