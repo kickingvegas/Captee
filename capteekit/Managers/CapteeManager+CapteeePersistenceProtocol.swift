@@ -17,18 +17,94 @@
 import Foundation
 
 extension CapteeManager {
-    public var defaultTemplate: String {
-            get {
-                if let result = UserDefaults.standard.value(forKey: "template") as? String {
-                    return result
-                } else {
-                    return "c"
-                }
-            }
-            
-            set(newTemplate) {
-                UserDefaults.standard.setValue(newTemplate, forKey: "template")
+    
+    private static let templateKey = "template"
+    private static let markupFormatKey = "markup_format"
+    private static let payloadTypeKey = "payload_type"
+    private static let transmitTypeKey = "transmit_type"
+    
+    public var persistedTemplateKey: String? {
+        get {
+            var result: String?
+            let defaults = UserDefaults.standard
+            result = defaults.value(forKey: Self.templateKey) as? String
+            return result
+        }
+        
+        set(newValue) {
+            let defaults = UserDefaults.standard
+            if let newValue = newValue {
+                defaults.setValue(newValue, forKey: Self.templateKey)
+            } else {
+                defaults.removeObject(forKey: Self.templateKey)
             }
         }
+    }
+    
+    
+    public var persistedMarkupFormat: MarkupFormat? {
+        get {
+            var result: MarkupFormat?
+            let defaults = UserDefaults.standard
+            if let persistedValue = defaults.value(forKey: Self.markupFormatKey) as? String {
+                result = MarkupFormat(rawValue: persistedValue)
+            }
+            return result
+        }
+        
+        set(newValue) {
+            let defaults = UserDefaults.standard
+
+            if let newValue = newValue {
+                defaults.setValue(newValue.rawValue, forKey: Self.markupFormatKey)
+            } else {
+                defaults.removeObject(forKey: Self.markupFormatKey)
+            }
+        }
+        
+    }
+
+    public var persistedPayloadType: PayloadType? {
+        get {
+            var result: PayloadType?
+            let defaults = UserDefaults.standard
+            if let persistedValue = defaults.value(forKey: Self.payloadTypeKey) as? String {
+                result = PayloadType(rawValue: persistedValue)
+            }
+            return result
+        }
+        
+        set(newValue) {
+            let defaults = UserDefaults.standard
+
+            if let newValue = newValue {
+                defaults.setValue(newValue.rawValue, forKey: Self.payloadTypeKey)
+            } else {
+                defaults.removeObject(forKey: Self.payloadTypeKey)
+            }
+        }
+    }
+
+
+    public var persistedTransmitType: TransmitType? {
+        get {
+            var result: TransmitType?
+            let defaults = UserDefaults.standard
+            if let persistedValue = defaults.value(forKey: Self.transmitTypeKey) as? String {
+                result = TransmitType(rawValue: persistedValue)
+            }
+            return result
+        }
+        
+        set(newValue) {
+            let defaults = UserDefaults.standard
+
+            if let newValue = newValue {
+                defaults.setValue(newValue.rawValue, forKey: Self.transmitTypeKey)
+            } else {
+                defaults.removeObject(forKey: Self.transmitTypeKey)
+            }
+        }
+    }
 }
 

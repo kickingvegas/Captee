@@ -15,7 +15,52 @@
 //
 
 import Cocoa
+import CapteeKit
 
 class CXTemplateFieldValidator: NSObject, NSTextFieldDelegate {
+    let viewModel: CapteeViewModel
+    
+    init(_ viewModel: CapteeViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    func controlTextDidBeginEditing(_ obj: Notification) {
+        guard obj.object is NSTextField else {
+            return
+        }
+        
+        if let targetObject = obj.object {
+            let textField = targetObject as! NSTextField
+            // TODO: comment out
+            print("did begin template editing: \(textField.stringValue)")
+        }
+
+    }
+    
+    func controlTextDidChange(_ obj: Notification) {
+        guard obj.object is NSTextField else {
+            return
+        }
+        if let targetObject = obj.object {
+            let textField = targetObject as! NSTextField
+            // TODO: comment out
+            print("did change template editing: \(textField.stringValue)")
+            viewModel.template = textField.stringValue
+        }
+
+    }
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        guard obj.object is NSTextField else {
+            return
+        }
+        
+        if let targetObject = obj.object {
+            let textField = targetObject as! NSTextField
+            // TODO: comment out
+            print("did end template editing: \(textField.stringValue)")
+            viewModel.template = textField.stringValue
+        }
+    }
     
 }

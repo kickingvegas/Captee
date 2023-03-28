@@ -13,6 +13,12 @@
 		D92774AC29B94AA500A15CC9 /* Share2EmacsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */; };
 		D931DF2B29CD087200421EC8 /* CXTextViewValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */; };
 		D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D971A71529A819C00029F6F6 /* CAPTextEditor.swift */; };
+		D973BB7F29D2054500B29126 /* OrgProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB7E29D2054500B29126 /* OrgProtocolType.swift */; };
+		D973BB8129D2056000B29126 /* MarkupFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB8029D2056000B29126 /* MarkupFormat.swift */; };
+		D973BB8429D205A900B29126 /* PayloadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB8329D205A900B29126 /* PayloadType.swift */; };
+		D973BB8629D205D800B29126 /* TransmitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB8529D205D800B29126 /* TransmitType.swift */; };
+		D973BB8929D206A400B29126 /* CapteePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB8829D206A400B29126 /* CapteePayload.swift */; };
+		D973BB8B29D206D900B29126 /* CapteePersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB8A29D206D900B29126 /* CapteePersistenceProtocol.swift */; };
 		D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B8EC299BFCB800C00D0B /* CapteeApp.swift */; };
 		D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B8EE299BFCB800C00D0B /* ContentView.swift */; };
 		D978B8F1299BFCB900C00D0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D978B8F0299BFCB900C00D0B /* Assets.xcassets */; };
@@ -37,7 +43,7 @@
 		D9BFE94C29CC070B005F0970 /* CapteeXPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFE94B29CC070A005F0970 /* CapteeXPCServiceProtocol.swift */; };
 		D9BFE95229CC16A1005F0970 /* CapteeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9311C29B0156600348A7B /* CapteeViewModel.swift */; };
 		D9BFE95329CC16DC005F0970 /* CapteeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */; };
-		D9D6BC1729B7F79400B9416C /* CapteeKitProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */; };
+		D9D6BC1729B7F79400B9416C /* CapteeManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1629B7F79400B9416C /* CapteeManagerProtocol.swift */; };
 		D9D6BC1929B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */; };
 		D9D6BC1B29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */; };
 		D9F36E1B29A5464E00C17E5A /* CapteeKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */; };
@@ -177,6 +183,12 @@
 		D92774B029B95CEA00A15CC9 /* CapteeXPCService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CapteeXPCService.entitlements; sourceTree = "<group>"; };
 		D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXTextViewValidator.swift; sourceTree = "<group>"; };
 		D971A71529A819C00029F6F6 /* CAPTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPTextEditor.swift; sourceTree = "<group>"; };
+		D973BB7E29D2054500B29126 /* OrgProtocolType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrgProtocolType.swift; path = CapteeKit/Enums/OrgProtocolType.swift; sourceTree = SOURCE_ROOT; };
+		D973BB8029D2056000B29126 /* MarkupFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarkupFormat.swift; path = CapteeKit/Enums/MarkupFormat.swift; sourceTree = SOURCE_ROOT; };
+		D973BB8329D205A900B29126 /* PayloadType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PayloadType.swift; path = capteekit/Enums/PayloadType.swift; sourceTree = SOURCE_ROOT; };
+		D973BB8529D205D800B29126 /* TransmitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransmitType.swift; path = capteekit/Enums/TransmitType.swift; sourceTree = SOURCE_ROOT; };
+		D973BB8829D206A400B29126 /* CapteePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CapteePayload.swift; path = capteekit/Constructs/CapteePayload.swift; sourceTree = SOURCE_ROOT; };
+		D973BB8A29D206D900B29126 /* CapteePersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CapteePersistenceProtocol.swift; path = capteekit/Protocols/CapteePersistenceProtocol.swift; sourceTree = SOURCE_ROOT; };
 		D978B8E9299BFCB800C00D0B /* Captee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Captee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D978B8EC299BFCB800C00D0B /* CapteeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeApp.swift; sourceTree = "<group>"; };
 		D978B8EE299BFCB800C00D0B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -203,7 +215,7 @@
 		D9BFE94329CB8985005F0970 /* ShareCXCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCXCoordinator.swift; sourceTree = "<group>"; };
 		D9BFE94529CBA515005F0970 /* CXRadioPickerMaps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXRadioPickerMaps.swift; sourceTree = "<group>"; };
 		D9BFE94B29CC070A005F0970 /* CapteeXPCServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeXPCServiceProtocol.swift; sourceTree = "<group>"; };
-		D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapteeKitProtocol.swift; path = CapteeKit/Protocols/CapteeKitProtocol.swift; sourceTree = SOURCE_ROOT; };
+		D9D6BC1629B7F79400B9416C /* CapteeManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapteeManagerProtocol.swift; path = CapteeKit/Protocols/CapteeManagerProtocol.swift; sourceTree = SOURCE_ROOT; };
 		D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeManagerProtocol.swift"; path = "CapteeKit/Managers/CapteeManager+CapteeManagerProtocol.swift"; sourceTree = SOURCE_ROOT; };
 		D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeePersistenceProtocol.swift"; path = "CapteeKit/Managers/CapteeManager+CapteeePersistenceProtocol.swift"; sourceTree = SOURCE_ROOT; };
 		D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = CapteeKit/Managers/ConnectionManager.swift; sourceTree = SOURCE_ROOT; };
@@ -276,6 +288,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D973BB8229D2058E00B29126 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				D973BB8029D2056000B29126 /* MarkupFormat.swift */,
+				D973BB7E29D2054500B29126 /* OrgProtocolType.swift */,
+				D973BB8329D205A900B29126 /* PayloadType.swift */,
+				D973BB8529D205D800B29126 /* TransmitType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		D973BB8729D2065200B29126 /* Constructs */ = {
+			isa = PBXGroup;
+			children = (
+				D973BB8829D206A400B29126 /* CapteePayload.swift */,
+			);
+			path = Constructs;
+			sourceTree = "<group>";
+		};
+		D973BB8C29D2090B00B29126 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D9E9311C29B0156600348A7B /* CapteeViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		D978B8E0299BFCB800C00D0B = {
 			isa = PBXGroup;
 			children = (
@@ -397,7 +436,6 @@
 				D9F36E3729A5472F00C17E5A /* CapteeManager.swift */,
 				D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */,
 				D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */,
-				D9E9311C29B0156600348A7B /* CapteeViewModel.swift */,
 				D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */,
 			);
 			path = Managers;
@@ -406,7 +444,8 @@
 		D9BFE95429CC1E67005F0970 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				D9D6BC1629B7F79400B9416C /* CapteeKitProtocol.swift */,
+				D9D6BC1629B7F79400B9416C /* CapteeManagerProtocol.swift */,
+				D973BB8A29D206D900B29126 /* CapteePersistenceProtocol.swift */,
 				D9BFE94B29CC070A005F0970 /* CapteeXPCServiceProtocol.swift */,
 			);
 			path = Protocols;
@@ -432,8 +471,11 @@
 		D9F36E1829A5464E00C17E5A /* CapteeKit */ = {
 			isa = PBXGroup;
 			children = (
+				D973BB8229D2058E00B29126 /* Enums */,
 				D9BFE95429CC1E67005F0970 /* Protocols */,
+				D973BB8729D2065200B29126 /* Constructs */,
 				D9BFE94929CC068B005F0970 /* Managers */,
+				D973BB8C29D2090B00B29126 /* ViewModels */,
 				D9BFE95529CC1E7F005F0970 /* Utils */,
 				D9F36E1929A5464E00C17E5A /* CapteeKit.h */,
 				D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */,
@@ -783,14 +825,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D973BB7F29D2054500B29126 /* OrgProtocolType.swift in Sources */,
 				D9F36E1B29A5464E00C17E5A /* CapteeKit.docc in Sources */,
 				D9BFE94A29CC06E0005F0970 /* ConnectionManager.swift in Sources */,
 				D9BFE95329CC16DC005F0970 /* CapteeUtils.swift in Sources */,
 				D9BFE95229CC16A1005F0970 /* CapteeViewModel.swift in Sources */,
-				D9D6BC1729B7F79400B9416C /* CapteeKitProtocol.swift in Sources */,
+				D9D6BC1729B7F79400B9416C /* CapteeManagerProtocol.swift in Sources */,
 				D9BFE94C29CC070B005F0970 /* CapteeXPCServiceProtocol.swift in Sources */,
 				D9F36E3829A5472F00C17E5A /* CapteeManager.swift in Sources */,
+				D973BB8929D206A400B29126 /* CapteePayload.swift in Sources */,
+				D973BB8429D205A900B29126 /* PayloadType.swift in Sources */,
 				D9D6BC1B29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift in Sources */,
+				D973BB8B29D206D900B29126 /* CapteePersistenceProtocol.swift in Sources */,
+				D973BB8629D205D800B29126 /* TransmitType.swift in Sources */,
+				D973BB8129D2056000B29126 /* MarkupFormat.swift in Sources */,
 				D9D6BC1929B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -892,7 +940,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -954,7 +1002,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

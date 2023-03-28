@@ -14,17 +14,15 @@
 // limitations under the License.
 //
 
-import Cocoa
-import UniformTypeIdentifiers
 
-  
-public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
-    public init() {
-        UserDefaults.standard.register(defaults: [
-            "template": "c",
-            "markup_format": MarkupFormat.orgMode.rawValue,
-            "payload_type": PayloadType.link.rawValue,
-            "transmit_type": TransmitType.orgProtocol.rawValue
-        ])
-    }
+import Foundation
+
+public protocol CapteePersistenceProtocol {
+    var persistedTemplateKey: String? { get set }
+    
+    var persistedMarkupFormat: MarkupFormat? { get set }
+    
+    var persistedPayloadType: PayloadType? { get set }
+    
+    var persistedTransmitType: TransmitType? { get set }
 }

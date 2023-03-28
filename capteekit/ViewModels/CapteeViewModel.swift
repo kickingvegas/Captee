@@ -21,16 +21,42 @@ public class CapteeViewModel: ObservableObject {
     @Published public var urlString: String = ""
     @Published public var title: String = ""
     @Published public var body: AttributedString = AttributedString("")
-    @Published public var template: String = ""
-    @Published public var orgProtocol: OrgProtocolType = .storeLink
-    @Published public var markupFormat: MarkupFormat = .orgMode
-    @Published public var payloadType: PayloadType = .link
-    @Published public var sendtoType: SendtoType = .orgProtocol
-    @Published public var bodyDisabled: Bool = true
+    
+    @Published public var template: String {
+        didSet {
+            capteeManager.persistedTemplateKey = template
+        }
+    }
+    
+    @Published public var markupFormat: MarkupFormat {
+        didSet {
+            capteeManager.persistedMarkupFormat = markupFormat
+        }
+    }
+    
+    @Published public var payloadType: PayloadType {
+        didSet {
+            capteeManager.persistedPayloadType = payloadType
+            switch payloadType {
+            case .link:
+                orgProtocol = .storeLink
+            case .capture:
+                orgProtocol = .capture
+            }
+        }
+
+    }
+    
+    @Published public var orgProtocol: OrgProtocolType
+    
+    @Published public var transmitType: TransmitType {
+        didSet {
+            capteeManager.persistedTransmitType = transmitType
+        }
+    }
+        
     @Published public var showSentToClipboardAlert = false
-    @Published public var sendtoPickerDisabled: Bool = false
-    @Published public var hideTemplate: Bool = true
-    @Published public var hideBody: Bool = true
+    @Published public var transmitPickerDisabled: Bool = false
     @Published public var sendButtonDisabled: Bool = false
     @Published public var isURLValid: Bool = true
     @Published public var isOrgProtocolSupported: Bool = false
@@ -41,31 +67,45 @@ public class CapteeViewModel: ObservableObject {
     public var connectionManager = ConnectionManager()
     
     public init() {
-        self.template = capteeManager.defaultTemplate
-        
+        orgProtocol = .storeLink
+        template = capteeManager.persistedTemplateKey ?? "c"
+        markupFormat = capteeManager.persistedMarkupFormat ?? .orgMode
+        payloadType = capteeManager.persistedPayloadType ?? .capture
+        transmitType = capteeManager.persistedTransmitType ?? .orgProtocol
+
         if let url = URL(string: "org-protocol://capture/"),
            let _ = NSWorkspace.shared.urlForApplication(toOpen: url) {
             isOrgProtocolSupported = true
         } else {
             isOrgProtocolSupported = false
-            sendtoType = .clipboard
-            sendtoPickerDisabled = true
+            transmitType = .clipboard
+            transmitPickerDisabled = true
         }
-
-        if payloadType == .link {
-            hideTemplate = true
-            hideBody = true
-        } else {
-            hideBody = false
+    }
+    
+    public func isTemplateHidden() -> Bool {
+        switch payloadType {
+        case .link:
+            return true
+        case .capture:
             switch markupFormat {
             case .orgMode:
-                hideTemplate = false
+                return false
             case .markdown:
-                hideTemplate = true
+                return true
             }
         }
     }
     
+    public func isBodyHidden() -> Bool {
+        switch payloadType {
+        case .link:
+            return true
+        case .capture:
+            return false
+        }
+    }
+
     public func orgProtocolURL() -> URL? {
         capteeManager.orgProtcolURL(pType: orgProtocol,
                                     url: URL(string: urlString),
@@ -105,7 +145,7 @@ public class CapteeViewModel: ObservableObject {
 
         switch markupFormat {
         case .orgMode:
-            switch sendtoType {
+            switch transmitType {
             case .orgProtocol:
                 if let url = capteeManager.orgProtcolURL(pType: orgProtocolType,
                                                          url: payload.url,
