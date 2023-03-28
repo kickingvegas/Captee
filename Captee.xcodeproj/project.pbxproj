@@ -14,6 +14,7 @@
 		D931DF2B29CD087200421EC8 /* CXTextViewValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */; };
 		D96459A229D35885002CC78E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D96459A429D35885002CC78E /* Localizable.strings */; };
 		D96459A629D35F31002CC78E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A529D35F31002CC78E /* Constants.swift */; };
+		D96459A829D382C9002CC78E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A729D382C9002CC78E /* AppDelegate.swift */; };
 		D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D971A71529A819C00029F6F6 /* CAPTextEditor.swift */; };
 		D973BB7F29D2054500B29126 /* OrgProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB7E29D2054500B29126 /* OrgProtocolType.swift */; };
 		D973BB8129D2056000B29126 /* MarkupFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB8029D2056000B29126 /* MarkupFormat.swift */; };
@@ -186,6 +187,7 @@
 		D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXTextViewValidator.swift; sourceTree = "<group>"; };
 		D96459A329D35885002CC78E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D96459A529D35F31002CC78E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = capteekit/Utils/Constants.swift; sourceTree = SOURCE_ROOT; };
+		D96459A729D382C9002CC78E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D971A71529A819C00029F6F6 /* CAPTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPTextEditor.swift; sourceTree = "<group>"; };
 		D973BB7E29D2054500B29126 /* OrgProtocolType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrgProtocolType.swift; path = CapteeKit/Enums/OrgProtocolType.swift; sourceTree = SOURCE_ROOT; };
 		D973BB8029D2056000B29126 /* MarkupFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarkupFormat.swift; path = CapteeKit/Enums/MarkupFormat.swift; sourceTree = SOURCE_ROOT; };
@@ -353,6 +355,7 @@
 			children = (
 				D9ACA41529B97295005FC3E4 /* Info.plist */,
 				D978B8EC299BFCB800C00D0B /* CapteeApp.swift */,
+				D96459A729D382C9002CC78E /* AppDelegate.swift */,
 				D9E9311A29B014C600348A7B /* UI */,
 				D978B8F0299BFCB900C00D0B /* Assets.xcassets */,
 				D978B8F5299BFCB900C00D0B /* Captee.entitlements */,
@@ -787,6 +790,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D96459A829D382C9002CC78E /* AppDelegate.swift in Sources */,
 				D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */,
 				D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */,
 				D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */,
@@ -960,7 +964,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1022,7 +1026,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
