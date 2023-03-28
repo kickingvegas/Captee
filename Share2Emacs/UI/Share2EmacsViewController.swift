@@ -15,7 +15,6 @@
 //
 
 import Cocoa
-//import Combine
 import CapteeKit
 
 class Share2EmacsViewController: NSViewController {
@@ -49,9 +48,9 @@ class Share2EmacsViewController: NSViewController {
     }
     
     private func initUI() {
-        CXRadioPickerMaps.configurePickerUI(formatPicker, stringMap: CXRadioPickerMaps.formatStringDB)
-        CXRadioPickerMaps.configurePickerUI(payloadPicker, stringMap: CXRadioPickerMaps.payloadStringDB)
-        CXRadioPickerMaps.configurePickerUI(transmitPicker, stringMap: CXRadioPickerMaps.useStringDB)
+        CXRadioPickerMaps.configurePickerUI(formatPicker, stringMap: CapteeKit.Constants.formatPickerDB)
+        CXRadioPickerMaps.configurePickerUI(payloadPicker, stringMap: CapteeKit.Constants.payloadPickerDB)
+        CXRadioPickerMaps.configurePickerUI(transmitPicker, stringMap: CapteeKit.Constants.transmitPickerDB)
         
         let viewModel = CapteeViewModel()
 

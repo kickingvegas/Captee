@@ -14,7 +14,6 @@
 // limitations under the License.
 //
 
-
 import SwiftUI
 
 public struct CapteeUtils {
@@ -29,7 +28,6 @@ public struct CapteeUtils {
         
         return CapteePayload(url: url, title: titleBuf, template: templateBuf, body: body)
     }
-    
     
     public static func validateURL(string: String) -> Bool {
         var test = true

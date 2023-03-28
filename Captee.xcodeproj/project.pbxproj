@@ -12,6 +12,8 @@
 		D9057B3E29CCD20D0001B4FC /* CXTemplateFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3D29CCD20D0001B4FC /* CXTemplateFieldValidator.swift */; };
 		D92774AC29B94AA500A15CC9 /* Share2EmacsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */; };
 		D931DF2B29CD087200421EC8 /* CXTextViewValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */; };
+		D96459A229D35885002CC78E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D96459A429D35885002CC78E /* Localizable.strings */; };
+		D96459A629D35F31002CC78E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A529D35F31002CC78E /* Constants.swift */; };
 		D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D971A71529A819C00029F6F6 /* CAPTextEditor.swift */; };
 		D973BB7F29D2054500B29126 /* OrgProtocolType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB7E29D2054500B29126 /* OrgProtocolType.swift */; };
 		D973BB8129D2056000B29126 /* MarkupFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB8029D2056000B29126 /* MarkupFormat.swift */; };
@@ -182,6 +184,8 @@
 		D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeUtils.swift; sourceTree = "<group>"; };
 		D92774B029B95CEA00A15CC9 /* CapteeXPCService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CapteeXPCService.entitlements; sourceTree = "<group>"; };
 		D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXTextViewValidator.swift; sourceTree = "<group>"; };
+		D96459A329D35885002CC78E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D96459A529D35F31002CC78E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = capteekit/Utils/Constants.swift; sourceTree = SOURCE_ROOT; };
 		D971A71529A819C00029F6F6 /* CAPTextEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPTextEditor.swift; sourceTree = "<group>"; };
 		D973BB7E29D2054500B29126 /* OrgProtocolType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrgProtocolType.swift; path = CapteeKit/Enums/OrgProtocolType.swift; sourceTree = SOURCE_ROOT; };
 		D973BB8029D2056000B29126 /* MarkupFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarkupFormat.swift; path = CapteeKit/Enums/MarkupFormat.swift; sourceTree = SOURCE_ROOT; };
@@ -455,6 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */,
+				D96459A529D35F31002CC78E /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -479,6 +484,7 @@
 				D9BFE95529CC1E7F005F0970 /* Utils */,
 				D9F36E1929A5464E00C17E5A /* CapteeKit.h */,
 				D9F36E1A29A5464E00C17E5A /* CapteeKit.docc */,
+				D96459A429D35885002CC78E /* Localizable.strings */,
 			);
 			path = CapteeKit;
 			sourceTree = "<group>";
@@ -756,6 +762,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D96459A229D35885002CC78E /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,6 +839,7 @@
 				D9BFE95229CC16A1005F0970 /* CapteeViewModel.swift in Sources */,
 				D9D6BC1729B7F79400B9416C /* CapteeManagerProtocol.swift in Sources */,
 				D9BFE94C29CC070B005F0970 /* CapteeXPCServiceProtocol.swift in Sources */,
+				D96459A629D35F31002CC78E /* Constants.swift in Sources */,
 				D9F36E3829A5472F00C17E5A /* CapteeManager.swift in Sources */,
 				D973BB8929D206A400B29126 /* CapteePayload.swift in Sources */,
 				D973BB8429D205A900B29126 /* PayloadType.swift in Sources */,
@@ -906,6 +914,18 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		D96459A429D35885002CC78E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D96459A329D35885002CC78E /* en */,
+			);
+			name = Localizable.strings;
+			path = capteekit;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		D978B90C299BFCB900C00D0B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -940,7 +960,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1002,7 +1022,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
