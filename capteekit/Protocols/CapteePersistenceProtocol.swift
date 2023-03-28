@@ -18,8 +18,6 @@
 import Foundation
 
 public protocol CapteePersistenceProtocol {
-    var defaultTemplate: String { get set }
-    
     var persistedTemplateKey: String? { get set }
     
     var persistedMarkupFormat: MarkupFormat? { get set }

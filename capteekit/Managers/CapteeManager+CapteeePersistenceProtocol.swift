@@ -22,20 +22,6 @@ extension CapteeManager {
     private static let markupFormatKey = "markup_format"
     private static let payloadTypeKey = "payload_type"
     private static let transmitTypeKey = "transmit_type"
-
-    public var defaultTemplate: String {
-        get {
-            if let result = UserDefaults.standard.value(forKey: "template") as? String {
-                return result
-            } else {
-                return "c"
-            }
-        }
-        
-        set(newTemplate) {
-            UserDefaults.standard.setValue(newTemplate, forKey: "template")
-        }
-    }
     
     public var persistedTemplateKey: String? {
         get {
