@@ -32,8 +32,8 @@
                     <rect key="frame" x="10" y="10" width="830" height="604"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PP6-9q-TPf">
-                            <rect key="frame" x="323" y="585" width="185" height="19"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" title="Captee - Share to Emacs" id="I8z-DV-cmw">
+                            <rect key="frame" x="270" y="585" width="290" height="19"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" title="Captee - Share link in Markdown or Org" id="I8z-DV-cmw">
                                 <font key="font" metaFont="system" size="16"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -93,7 +93,7 @@
                         </box>
                         <textField verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jPp-o7-miE">
                             <rect key="frame" x="367" y="372" width="96" height="16"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="Template" id="gFp-Pw-kSl">
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="Template Key" id="gFp-Pw-kSl">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
