@@ -192,7 +192,19 @@ class ShareCXCoordinator {
         if let item = extensionContext.inputItems.first as? NSExtensionItem,
            let contentText = item.attributedContentText {
             if let textStorage = self.textView.textStorage {
-                textStorage.append(contentText)
+                // Coerce foreground and background text color to conform to system appearance
+                let newContentText = NSMutableAttributedString(attributedString: contentText)
+                newContentText.addAttribute(.foregroundColor,
+                                            value: NSColor.textColor,
+                                            range: NSMakeRange(0, contentText.string.count))
+                
+                newContentText.addAttribute(.backgroundColor,
+                                            value: NSColor.textBackgroundColor,
+                                            range: NSMakeRange(0, contentText.string.count))
+                
+                //print ("contentText: \(newContentText)")
+                textStorage.append(newContentText)
+
                 do {
                     let body = try AttributedString(textStorage, including: \.appKit)
                     viewModel.body = body
