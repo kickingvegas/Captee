@@ -24,6 +24,9 @@ struct CapteeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    NSWindow.allowsAutomaticWindowTabbing = false
+                }
         }
         .commands {
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
