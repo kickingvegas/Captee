@@ -70,7 +70,16 @@ extension CAPTextEditor {
             
             //Update text
             if let textStorage = textView.textStorage {
-                // TODO: convert to attributedstring
+                let newContentText = NSMutableAttributedString(attributedString: textStorage)
+                newContentText.addAttribute(.foregroundColor,
+                                            value: NSColor.textColor,
+                                            range: NSMakeRange(0, textStorage.string.count))
+                
+                newContentText.addAttribute(.backgroundColor,
+                                            value: NSColor.textBackgroundColor,
+                                            range: NSMakeRange(0, textStorage.string.count))
+                
+                textView.layoutManager?.replaceTextStorage(NSTextStorage(attributedString: newContentText))
                 
                 do {
                     let a = try AttributedString(textStorage, including: \.appKit)
@@ -84,5 +93,6 @@ extension CAPTextEditor {
         func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
             return true
         }
+        
     }
 }
