@@ -1,6 +1,26 @@
-* Captee - share links and content with Emacs
+* Captee - wrap link and content to Markdown or Org Mode from the macOS Share Menu
 
-Captee is a macOS app that provides support to share links and content with Emacs using the native share action sheet.
+Captee is a macOS utility to create a Markdown or an Org formatted link (URL and title) from the [[https://support.apple.com/guide/mac-help/use-the-share-menu-on-mac-mh40614/mac][Share Menu]]. The shared content can be either stored in the system clipboard or be put directly into Emacs via [[https://orgmode.org/manual/Protocols.html][Org Protocol]].
 
-The mechanism used to share to Emacs is [[https://orgmode.org/manual/Protocols.html][Org Protocol]]. 
+* Features
+
+- Works with any macOS app that supports the Share Menu
+- Wrap a URL link with either Markdown or Org Mode syntax
+- Selected text can be shared too!
+- Share link and content is put into the system clipboard for easy pasting
+- Alternately, Org Protocol supporting Emacs installs can get shared content directly from Captee
+
+* Distribution
+
+For users interested in using *Captee*, it is strongly recommended to install it from the Mac App Store for the sake of convenience. This is because access via the Share Menu requires that *Captee* to be [[https://developer.apple.com/documentation/security/app_sandbox][sandboxed]]. The source code here is provided as a courtesy for users who are motivated to understand its internals.
+
+* License
+
+Copyright © 2023 Charles Y. Choi
+
+Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
