@@ -14,24 +14,21 @@
 // limitations under the License.
 //
 
-import SwiftUI
-import CapteeKit
 
-@main
-struct CapteeApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+import Foundation
+import Cocoa
+
+
+class CapteeXPCService: NSObject, CapteeXPCServiceProtocol {
+    @objc func openURL(url: NSURL, with reply: @escaping (Bool) -> Void) {
+        reply(NSWorkspace.shared.open(url as URL))
+    }
     
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .onAppear {
-                    NSWindow.allowsAutomaticWindowTabbing = false
-                }
-        }
-        .commands {
-            CommandGroup(replacing: CommandGroupPlacement.newItem) {
-                EmptyView()
-            }
-        }
+    func sendToClipboard(payload: String, with reply: @escaping (Bool) -> Void) {
+        
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        pasteboard.setString(payload, forType: .string)
+        reply(true)
     }
 }

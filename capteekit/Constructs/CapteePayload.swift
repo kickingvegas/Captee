@@ -14,24 +14,18 @@
 // limitations under the License.
 //
 
-import SwiftUI
-import CapteeKit
+import Foundation
 
-@main
-struct CapteeApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+public struct CapteePayload {
+    public let url: URL?
+    public let title: String?
+    public let template: String?
+    public let body: AttributedString?
     
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .onAppear {
-                    NSWindow.allowsAutomaticWindowTabbing = false
-                }
-        }
-        .commands {
-            CommandGroup(replacing: CommandGroupPlacement.newItem) {
-                EmptyView()
-            }
-        }
+    public init(url: URL?, title: String?, template: String?, body: AttributedString?) {
+        self.url = url
+        self.title = title
+        self.template = template
+        self.body = body
     }
 }

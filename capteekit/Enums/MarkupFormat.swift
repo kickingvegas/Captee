@@ -14,24 +14,10 @@
 // limitations under the License.
 //
 
-import SwiftUI
-import CapteeKit
+import Foundation
 
-@main
-struct CapteeApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .onAppear {
-                    NSWindow.allowsAutomaticWindowTabbing = false
-                }
-        }
-        .commands {
-            CommandGroup(replacing: CommandGroupPlacement.newItem) {
-                EmptyView()
-            }
-        }
-    }
+public enum MarkupFormat: String, Equatable, CaseIterable {
+    case orgMode = "Org Mode"
+    case markdown = "Markdown"
 }
+

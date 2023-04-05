@@ -14,24 +14,25 @@
 // limitations under the License.
 //
 
-import SwiftUI
-import CapteeKit
+import Foundation
 
-@main
-struct CapteeApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .onAppear {
-                    NSWindow.allowsAutomaticWindowTabbing = false
-                }
-        }
-        .commands {
-            CommandGroup(replacing: CommandGroupPlacement.newItem) {
-                EmptyView()
-            }
-        }
+class ServiceDelegate: NSObject, NSXPCListenerDelegate {
+    func listener(_ listener: NSXPCListener, shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool {
+        newConnection.exportedInterface = NSXPCInterface(with: CapteeXPCServiceProtocol.self)
+
+        let exportedObject = CapteeXPCService()
+        newConnection.exportedObject = exportedObject
+
+        newConnection.resume()
+
+        return true
     }
 }
+
+let delegate = ServiceDelegate()
+let listener = NSXPCListener.service()
+
+listener.delegate = delegate
+
+listener.resume()
+

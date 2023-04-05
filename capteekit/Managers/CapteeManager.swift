@@ -14,24 +14,17 @@
 // limitations under the License.
 //
 
-import SwiftUI
-import CapteeKit
+import Cocoa
+import UniformTypeIdentifiers
 
-@main
-struct CapteeApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .onAppear {
-                    NSWindow.allowsAutomaticWindowTabbing = false
-                }
-        }
-        .commands {
-            CommandGroup(replacing: CommandGroupPlacement.newItem) {
-                EmptyView()
-            }
-        }
+  
+public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
+    public init() {
+        UserDefaults.standard.register(defaults: [
+            "template": "c",
+            "markup_format": MarkupFormat.orgMode.rawValue,
+            "payload_type": PayloadType.link.rawValue,
+            "transmit_type": TransmitType.orgProtocol.rawValue
+        ])
     }
 }

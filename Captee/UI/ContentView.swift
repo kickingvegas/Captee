@@ -18,32 +18,48 @@ import SwiftUI
 import CapteeKit
 
 struct ContentView: View {
-    @StateObject var capteeObservableManager = CapteeObservableManager()
+    @StateObject var capteeViewModel = CapteeViewModel()
     
     var body: some View {
         VStack (alignment: .leading) {
-            OrgProtocolPickerView(capteeObservableManager: capteeObservableManager)
-            OrgURLView(capteeObservableManager: capteeObservableManager)
-            OrgTitleView(capteeObservableManager: capteeObservableManager)
-            OrgTemplateView(capteeObservableManager: capteeObservableManager)
-            OrgBodyView(capteeObservableManager: capteeObservableManager)
+            OrgProtocolPickerView(capteeViewModel: capteeViewModel)
+            OrgURLView(capteeViewModel: capteeViewModel)
+            OrgTitleView(capteeViewModel: capteeViewModel)
+            if !capteeViewModel.isTemplateHidden() {
+                OrgTemplateView(capteeViewModel: capteeViewModel)
+            }
+            if !capteeViewModel.isBodyHidden() {
+                OrgBodyView(capteeViewModel: capteeViewModel)
+            } else {
+                Spacer()
+            }
 
             HStack(alignment: .bottom) {
                 Spacer()
                 Button("Capture") {
-                    if let url = capteeObservableManager.orgProtocolURL() {
-                        print("\(url.absoluteString)")
-                        NSWorkspace.shared.open(url)
-                        
-                    }
+                    captureAction()
                 }
+                .alert(isPresented: $capteeViewModel.showSentToClipboardAlert) {
+                    return Alert(title: Text(capteeViewModel.alertTitle),
+                                 message: Text(capteeViewModel.alertMessage),
+                                 dismissButton: .default(Text("Dismiss")))
+                }
+
                 .frame(alignment: .trailing)
                 .buttonStyle(.borderedProminent)
+                .disabled(capteeViewModel.sendButtonDisabled)
                 .help("Send to Org")
             }
         }
         .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
     }
+    
+    func captureAction() {
+        capteeViewModel.captureAction { result in
+            print("\(result)")
+        }
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -53,89 +69,128 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct OrgTemplateView: View {
-    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @ObservedObject var capteeViewModel: CapteeViewModel
 
     var body: some View {
         HStack(alignment: .lastTextBaseline) {
             Text("Template Key")
                 .foregroundColor(.gray)
-            TextField("Key", text: $capteeObservableManager.template)
+            TextField("Key", text: $capteeViewModel.template)
                 .textFieldStyle(.plain)
             .help("Org Capture Link Template Key")
-            .disabled(capteeObservableManager.orgProtocol == .storeLink)
         }
         
         Divider()
     }
+        
 }
 
 struct OrgTitleView: View {
-    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @ObservedObject var capteeViewModel: CapteeViewModel
     
     var body: some View {
-        TextField("Title", text: $capteeObservableManager.title)
+        TextField("Title", text: $capteeViewModel.title)
             .textFieldStyle(.plain)
             .help("Org Capture Link Title")
-        
         Divider()
     }
 }
 
 struct OrgURLView: View {
-    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @ObservedObject var capteeViewModel: CapteeViewModel
     
     @State var foregroundColor: Color = .black
 
     var body: some View {
-        TextField("URL", text: $capteeObservableManager.urlString)
+        TextField("URL", text: $capteeViewModel.urlString)
             .textFieldStyle(.plain)
             .help("Org Capture Link URL")
-            .onChange(of: capteeObservableManager.urlString) { newValue in
-                print("\(newValue)")
+            .onChange(of: capteeViewModel.urlString) { newValue in
+                //print("\(newValue)")
                 
-                if let _ = URL(string: newValue) {
-                    foregroundColor = .black
-                } else if newValue == "" {
-                    foregroundColor = .black
+                capteeViewModel.isURLValid = CapteeUtils.validateURL(string: newValue)
+                
+                if capteeViewModel.isURLValid || newValue == "" {
+                    foregroundColor = .primary
                 } else {
                     foregroundColor = .red
                 }
+                
+                capteeViewModel.evalEnableSendButton()
 
             }
             .foregroundColor(foregroundColor)
-
-
         
         Divider()
     }
 }
 
 struct OrgBodyView: View {
-    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @ObservedObject var capteeViewModel: CapteeViewModel
 
     var body: some View {
         Text("Body Text")
             .help("Enter body text")
             .foregroundColor(.gray)
         
-        CAPTextEditor(text: $capteeObservableManager.body)
+        CAPTextEditor(text: $capteeViewModel.body)
             .textFieldStyle(.roundedBorder)
-            .disabled(capteeObservableManager.orgProtocol == .storeLink)
+            .onChange(of: capteeViewModel.body) { newValue in
+                capteeViewModel.evalEnableSendButton()
+            }
     }
 }
 
 struct OrgProtocolPickerView: View {
-    @ObservedObject var capteeObservableManager: CapteeObservableManager
+    @ObservedObject var capteeViewModel: CapteeViewModel
+    //@State var sendDisable: Bool = false
 
     var body: some View {
-        Picker("Protocol", selection: $capteeObservableManager.orgProtocol) {
-            ForEach(OrgProtocolType.allCases, id: \.self) { value in
-                Text(value.rawValue)
-                    .tag(value)
+        VStack(alignment: .leading) {
+            HStack {
+                Picker("Format", selection: $capteeViewModel.markupFormat) {
+                    ForEach(MarkupFormat.allCases, id: \.self) { value in
+                        Text(value.rawValue)
+                            .tag(value)
+                    }
+                }
+                .pickerStyle(.radioGroup)
+                .onChange(of: capteeViewModel.markupFormat) { newValue in
+                    if newValue == .markdown {
+                        capteeViewModel.transmitPickerDisabled = true
+                        capteeViewModel.transmitType = .clipboard
+
+                    } else if newValue == .orgMode {
+                        if capteeViewModel.isOrgProtocolSupported {
+                            capteeViewModel.transmitPickerDisabled = false
+                        }
+                    }
+                    
+                }
+
+                
+                Picker("Payload", selection: $capteeViewModel.payloadType) {
+                    ForEach(PayloadType.allCases, id: \.self) { value in
+                        Text(value.rawValue)
+                            .tag(value)
+                    }
+                }
+                .pickerStyle(.radioGroup)
+                .onChange(of: capteeViewModel.payloadType) { newValue in
+                    capteeViewModel.evalEnableSendButton()
+                }
+                
+                Picker("Use", selection: $capteeViewModel.transmitType) {
+                    ForEach(TransmitType.allCases, id: \.self) { value in
+                        Text(value.rawValue)
+                            .tag(value)
+                    }
+                }
+                .pickerStyle(.radioGroup)
+                .disabled(capteeViewModel.transmitPickerDisabled || !capteeViewModel.isOrgProtocolSupported)
+
             }
+            Divider()
         }
-        .pickerStyle(.radioGroup)
-        
-        Divider()
     }
 }

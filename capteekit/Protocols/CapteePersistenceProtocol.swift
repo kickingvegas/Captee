@@ -14,24 +14,15 @@
 // limitations under the License.
 //
 
-import SwiftUI
-import CapteeKit
 
-@main
-struct CapteeApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+import Foundation
+
+public protocol CapteePersistenceProtocol {
+    var persistedTemplateKey: String? { get set }
     
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .onAppear {
-                    NSWindow.allowsAutomaticWindowTabbing = false
-                }
-        }
-        .commands {
-            CommandGroup(replacing: CommandGroupPlacement.newItem) {
-                EmptyView()
-            }
-        }
-    }
+    var persistedMarkupFormat: MarkupFormat? { get set }
+    
+    var persistedPayloadType: PayloadType? { get set }
+    
+    var persistedTransmitType: TransmitType? { get set }
 }
