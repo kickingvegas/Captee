@@ -32,6 +32,7 @@ class Share2EmacsViewController: NSViewController {
     @IBOutlet weak var scrollableTextView: NSScrollView!
     @IBOutlet weak var textViewLine: NSBox!
     
+    @IBOutlet weak var progressIndicator: NSProgressIndicator!
     var shareCXCoordinator: ShareCXCoordinator?
     
     override func loadView() {
@@ -65,7 +66,8 @@ class Share2EmacsViewController: NSViewController {
                                                textView: textView,
                                                scrollableTextView: scrollableTextView,
                                                textViewLine: textViewLine,
-                                               sendButton: sendButton)
+                                               sendButton: sendButton,
+                                               progressIndicator: progressIndicator)
                 
         // populate
         guard let extensionContext = self.extensionContext else {

@@ -19,6 +19,7 @@ import Cocoa
 import Combine
 import CapteeKit
 import UniformTypeIdentifiers
+import RegexBuilder
 
 class ShareCXCoordinator {
     
@@ -35,6 +36,7 @@ class ShareCXCoordinator {
     var scrollableTextView: NSScrollView
     var textViewLine: NSBox
     var sendButton: NSButton
+    var progressIndicator: NSProgressIndicator
 
     private var formatPickerCancellable: AnyCancellable?
     private var payloadPickerCancellable: AnyCancellable?
@@ -59,7 +61,8 @@ class ShareCXCoordinator {
          textView: NSTextView,
          scrollableTextView: NSScrollView,
          textViewLine: NSBox,
-         sendButton: NSButton) {
+         sendButton: NSButton,
+         progressIndicator: NSProgressIndicator) {
         
         self.viewModel = viewModel
         self.formatPicker = formatPicker
@@ -73,6 +76,7 @@ class ShareCXCoordinator {
         self.scrollableTextView = scrollableTextView
         self.textViewLine = textViewLine
         self.sendButton = sendButton
+        self.progressIndicator = progressIndicator
         
         self.urlFieldValidator = CXURLFieldValidator(viewModel)
         self.titleFieldValidator = CXTitleFieldValidator(viewModel)
@@ -268,8 +272,77 @@ class ShareCXCoordinator {
                         })
                 }
             }
-            group.notify(queue: .main) {
-                print("loaded link and title")
+            group.notify(queue: .main) { [weak self] in
+                guard let self else { return }
+                let title = self.viewModel.title.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if let url = URL(string: self.viewModel.urlString),
+                   title == "" {
+                    let urlRequest = URLRequest(url: url)
+                    self.titleField.isEnabled = false
+                    self.progressIndicator.isHidden = false
+                    self.progressIndicator.startAnimation(self.progressIndicator)
+                    
+                    let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
+                        guard let self else { return }
+                        
+                        if let error = error {
+                            print("\(error)")
+                            self.titleField.isEnabled = true
+                            return
+                        }
+                            
+                        if let data = data,
+                           let response = response as? HTTPURLResponse {
+                            if 200...299 ~= response.statusCode,
+                               let url = response.url {
+                                print("ok: \(url.absoluteString)")
+                            
+                                if let buf = String(data: data, encoding: .utf8) {
+                                    let buf1 = buf.replacingOccurrences(of: "<title", with: "<title", options: .caseInsensitive)
+                                    let normalizedBuf = buf1.replacingOccurrences(of: "</title>", with: "</title>", options: .caseInsensitive)
+                                    
+                                    let pat = Regex {
+                                        #"<title"#
+                                        Optionally {
+                                            OneOrMore {
+                                                CharacterClass.any
+                                            }
+                                        }
+                                        #">"#
+                                        Capture {
+                                            OneOrMore {
+                                                CharacterClass.any
+                                            }
+                                        }
+                                        #"</title>"#
+                                    }
+                                    
+                                    for line in normalizedBuf.components(separatedBy: "\n") {
+                                        if let match = line.firstMatch(of: pat) {
+                                            let newTitle = String(match.1)
+                                            
+                                            DispatchQueue.main.async { [weak self] in
+                                                guard let self else { return }
+                                                self.titleField.stringValue = newTitle
+                                                self.viewModel.title = newTitle
+                                            }
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            DispatchQueue.main.async { [weak self] in
+                                guard let self else { return }
+                                self.titleField.isEnabled = true
+                                self.progressIndicator.stopAnimation(self.progressIndicator)
+                                self.progressIndicator.isHidden = true
+                            }
+                        }
+                    }
+                    task.resume()
+                }
             }
         }
     }

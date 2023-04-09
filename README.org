@@ -1,18 +1,22 @@
 * Captee - wrap link and content to Markdown or Org Mode from the macOS Share Menu
 
-Captee is a macOS utility to create a Markdown or an Org formatted link (URL and title) from the [[https://support.apple.com/guide/mac-help/use-the-share-menu-on-mac-mh40614/mac][Share Menu]]. The shared content can be either stored in the system clipboard or be put directly into Emacs via [[https://orgmode.org/manual/Protocols.html][Org Protocol]].
+*Captee* is a *macOS* utility to create a [[https://daringfireball.net/projects/markdown/syntax][Markdown]] or an [[https://orgmode.org/][Org]] formatted link (URL and title) from the [[https://support.apple.com/guide/mac-help/use-the-share-menu-on-mac-mh40614/mac][Share Menu]]. The shared content can be either stored in the system clipboard for pasting or be put directly into *Emacs* via [[https://orgmode.org/manual/Protocols.html][Org Protocol]].
+
+Learn more at http://yummymelon.com/captee 
 
 * Features
 
-- Works with any macOS app that supports the Share Menu
-- Wrap a URL link with either Markdown or Org Mode syntax
+- Works with any *macOS* app that supports the *Share Menu*
+- Wrap a URL link with either *Markdown* or *Org Mode* syntax
 - Selected text can be shared too!
 - Share link and content is put into the system clipboard for easy pasting
-- Alternately, Org Protocol supporting Emacs installs can get shared content directly from Captee
+- Alternately, *Org Protocol* supporting *Emacs* installs can get shared content directly from *Captee*
 
 * Distribution
 
-For users interested in using *Captee*, it is strongly recommended to install it from the Mac App Store for the sake of convenience. This is because access via the Share Menu requires that *Captee* to be [[https://developer.apple.com/documentation/security/app_sandbox][sandboxed]]. The source code here is provided as a courtesy for users who are motivated to understand its internals.
+For users interested in using *Captee*, it is strongly recommended to install it from the *Mac App Store*. This is because access via the *Share Menu* requires that *Captee* be [[https://developer.apple.com/documentation/security/app_sandbox][sandboxed]] and code-signed.
+
+The source code here is provided as a courtesy to those wishing to understand its internals.
 
 * License
 
