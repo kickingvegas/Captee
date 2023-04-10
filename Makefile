@@ -68,7 +68,9 @@ sync-main:
 	git merge main development
 	$(MAKE) bump
 	git commit -m 'Bumped build.' config/base.xcconfig
+	git tag $(CAPTEE_TAG)
 	git push origin merge-development-to-main
+	git push origin $(CAPTEE_TAG)
 	gh pr create -t 'Merge development to main' -b 'Merge development to main' -B main
 
 tag:
