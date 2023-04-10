@@ -65,7 +65,7 @@ sync-main:
 	git checkout -b merge-development-to-main development
 	git merge main development
 	$(MAKE) bump
-	git commit -m 'Bumped build.'
+	git commit -m 'Bumped build.' config/base.xcconfig
 	git push origin merge-development-to-main
 	gh pr create -t 'Merge development to main' -b 'Merge development to main'
 
