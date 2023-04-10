@@ -64,6 +64,11 @@ bump:
 sync-main:
 	git checkout -b merge-development-to-main development
 	git merge main development
-#	git push origin merge-development-to-main
+	$(MAKE) bump
+	git commit -m 'Bumped build.'
+	git push origin merge-development-to-main
+	gh pr create -t 'Merge development to main' -b 'Merge development to main'
+
+
 
 
