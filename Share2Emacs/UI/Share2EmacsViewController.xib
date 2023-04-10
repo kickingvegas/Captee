@@ -112,6 +112,7 @@
                                     <textView wantsLayer="YES" ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" usesInspectorBar="YES" allowsDocumentBackgroundColorChange="YES" usesRuler="YES" smartInsertDelete="YES" id="bKq-tb-ELq">
                                         <rect key="frame" x="0.0" y="0.0" width="225" height="315"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         <size key="minSize" width="225" height="315"/>
                                         <size key="maxSize" width="240" height="10000000"/>

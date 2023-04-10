@@ -69,7 +69,3 @@ sync-main:
 	git push origin merge-development-to-main
 	gh pr create -t 'Merge development to main' -b 'Merge development to main' -B main
 
-
-
-
-
