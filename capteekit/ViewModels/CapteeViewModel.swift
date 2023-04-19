@@ -16,9 +16,23 @@
 
 import Combine
 import Cocoa
+import RegexBuilder
+
+public enum CapteeError: Error {
+    case invalidURLScheme
+    case networkError(error: NSError)
+    case titleNotFound
+    case encodeStringToDataFailed
+    case attributedStringCreationFailed(error: Error)
+}
 
 public class CapteeViewModel: ObservableObject {
-    @Published public var urlString: String = ""
+    @Published public var urlString: String = "" {
+        didSet {
+            isURLValid = CapteeUtils.validateURL(string: urlString)
+            sendButtonDisabled = evalEnableSendButton()
+        }
+    }
     @Published public var title: String = ""
     @Published public var body: AttributedString = AttributedString("")
     
@@ -57,7 +71,7 @@ public class CapteeViewModel: ObservableObject {
         
     @Published public var showSentToClipboardAlert = false
     @Published public var transmitPickerDisabled: Bool = false
-    @Published public var sendButtonDisabled: Bool = false
+    @Published public var sendButtonDisabled: Bool = true
     @Published public var isURLValid: Bool = true
     @Published public var isOrgProtocolSupported: Bool = false
     @Published public var alertTitle = ""
@@ -171,7 +185,7 @@ public class CapteeViewModel: ObservableObject {
                         
                         DispatchQueue.main.async {
                             self.alertTitle = "Sent to Clipboard"
-                            self.alertMessage = self.shortenMessage(buf: message, length: 120)
+                            self.alertMessage = CapteeViewModel.truncate(buf: message, count: 120)
                             self.showSentToClipboardAlert = true
                         }
 
@@ -192,7 +206,7 @@ public class CapteeViewModel: ObservableObject {
                     
                     DispatchQueue.main.async {
                         self.alertTitle = "Sent to Clipboard"
-                        self.alertMessage = self.shortenMessage(buf: message, length: 120)
+                        self.alertMessage = CapteeViewModel.truncate(buf: message, count: 120)
                         self.showSentToClipboardAlert = true
                     }
                     reply(result)
@@ -202,38 +216,25 @@ public class CapteeViewModel: ObservableObject {
         }
     }
     
-    public func evalEnableSendButton() {
-        let payload = extractPayload()
-
-        switch payloadType {
-        case .link:
-            sendButtonDisabled = !isURLValid
-            
-        case .capture:
-            var bodyString: String?
-            
-            if let body = payload.body {
-                bodyString = String(body.characters[...])
-            }
-            
-            /*
-             | url | title | template | body | sendDisabled |
-             |-----+-------+----------+------+--------------|
-             |   0 |     0 |        0 |    0 |            1 |
-             |   0 |     0 |        1 |    0 |            1 |
-
-             */
-
-            sendButtonDisabled = (!isURLValid &&
-                                  ((payload.title == nil) || (payload.title == "")) &&
-                                  ((bodyString == nil) || (bodyString == "")))
+    func evalEnableSendButton() -> Bool {
+        var result: Bool = false
+        if urlString == "" {
+            result = true
+        } else {
+            result = !isURLValid
         }
+        return result
     }
     
-    public func shortenMessage(buf: String, length: Int) -> String {
+    /// Generate truncated string.
+    /// - Parameters:
+    ///   - buf: input string
+    ///   - count: result string count
+    /// - Returns: string of length specified by count
+    public static func truncate(buf: String, count: Int) -> String {
         var result: String = buf
-        if buf.count > length {
-            result = String(buf.prefix(length - 1)) + "…"
+        if buf.count > count {
+            result = String(buf.prefix(count - 1)) + "…"
         }
         return result
     }
@@ -253,6 +254,102 @@ public class CapteeViewModel: ObservableObject {
         
         if let body = payload.body {
             self.body = body
+        }
+    }
+    
+    public func extractTitleFromURL(url: URL, closure: @escaping (Result<String, CapteeError>) -> Void) {
+        let validSchemes = ["http", "https"]
+        
+        guard let urlScheme = url.scheme else {
+            closure(.failure(.invalidURLScheme))
+            return
+        }
+        
+        guard validSchemes.contains(urlScheme) else {
+            closure(.failure(.invalidURLScheme))
+            return
+        }
+        
+        let urlRequest = URLRequest(url: url)
+        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            if let error = error as? NSError {
+                closure(.failure(.networkError(error: error)))
+                return
+            }
+            
+            if let data = data,
+               let response = response as? HTTPURLResponse,
+               200...299 ~= response.statusCode,
+               let buf = String(data: data, encoding: .utf8),
+               let newTitle = CapteeViewModel.extractTitleContent(buf) {
+                
+                DispatchQueue.main.async {
+                    do {
+                        let decodedString = try CapteeViewModel.decodeHTMLEntities(newTitle)
+                        closure(.success(decodedString))
+                    } catch {
+                        closure(.failure(error as! CapteeError))
+                    }
+                }
+            } else {
+                closure(.failure(.titleNotFound))
+            }
+        }
+        task.resume()
+    }
+        
+    static func extractTitleContent(_ string: String) -> String? {
+        var result: String?
+        
+        let pat = Regex {
+            #"<title"#
+            Optionally {
+                OneOrMore {
+                    CharacterClass.any
+                }
+            }
+            #">"#
+            Capture {
+                OneOrMore {
+                    CharacterClass.any
+                }
+            }
+            #"</title>"#
+        }
+        
+        let buf = string
+            .replacingOccurrences(of: "<title", with: "<title", options: .caseInsensitive)
+            .replacingOccurrences(of: "</title>", with: "</title>", options: .caseInsensitive)
+        
+        for line in buf.components(separatedBy: "\n") {
+            if let match = line.firstMatch(of: pat) {
+                result = String(match.1)
+                break
+            }
+        }
+        
+        return result
+    }
+    
+    
+    static func decodeHTMLEntities(_ string: String) throws -> String {
+        guard let data = string.data(using: .utf8) else {
+            throw CapteeError.encodeStringToDataFailed
+        }
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        do {
+            let attributedString = try NSAttributedString(data: data,
+                                                          options: options,
+                                                          documentAttributes: nil)
+            return attributedString.string
+            
+        } catch {
+            throw CapteeError.attributedStringCreationFailed(error: error)
         }
     }
 }

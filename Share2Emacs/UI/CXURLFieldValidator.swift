@@ -42,8 +42,7 @@ class CXURLFieldValidator: NSObject, NSTextFieldDelegate {
         
         if let targetObject = obj.object {
             let textField = targetObject as! NSTextField
-            // TODO: comment out
-            print("did begin url editing: \(textField.stringValue)")
+            //print("did begin url editing: \(textField.stringValue)")
         }
 
     }
@@ -54,11 +53,8 @@ class CXURLFieldValidator: NSObject, NSTextFieldDelegate {
         }
         if let targetObject = obj.object {
             let textField = targetObject as! NSTextField
-            // TODO: comment out
-            print("did change url editing: \(textField.stringValue)")
+            //print("did change url editing: \(textField.stringValue)")
             viewModel.urlString = textField.stringValue
-            viewModel.isURLValid = CapteeUtils.validateURL(string: textField.stringValue)
-            viewModel.evalEnableSendButton()
         }
 
     }
@@ -70,11 +66,9 @@ class CXURLFieldValidator: NSObject, NSTextFieldDelegate {
         
         if let targetObject = obj.object {
             let textField = targetObject as! NSTextField
-            // TODO: comment out
-            print("did end url editing: \(textField.stringValue)")
+
+            //print("did end url editing: \(textField.stringValue)")
             viewModel.urlString = textField.stringValue
-            viewModel.isURLValid = CapteeUtils.validateURL(string: textField.stringValue)
-            viewModel.evalEnableSendButton()
         }
     }
 }
