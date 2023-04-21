@@ -142,8 +142,6 @@ class ShareCXCoordinator {
                 self.templateLine.isHidden = self.viewModel.isTemplateHidden()
                 self.templateField.isHidden = self.viewModel.isTemplateHidden()
                 self.scrollableTextView.isHidden = self.viewModel.isBodyHidden()
-
-                self.viewModel.evalEnableSendButton()
             }
         }
         
@@ -278,70 +276,38 @@ class ShareCXCoordinator {
                 
                 if let url = URL(string: self.viewModel.urlString),
                    title == "" {
-                    let urlRequest = URLRequest(url: url)
+                    
                     self.titleField.isEnabled = false
                     self.progressIndicator.isHidden = false
                     self.progressIndicator.startAnimation(self.progressIndicator)
-                    
-                    let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
+
+                    self.viewModel.extractTitleFromURL(url: url) { [weak self] result in
                         guard let self else { return }
-                        
-                        if let error = error {
-                            print("\(error)")
-                            self.titleField.isEnabled = true
-                            return
-                        }
-                            
-                        if let data = data,
-                           let response = response as? HTTPURLResponse {
-                            if 200...299 ~= response.statusCode,
-                               let url = response.url {
-                                print("ok: \(url.absoluteString)")
-                            
-                                if let buf = String(data: data, encoding: .utf8) {
-                                    let buf1 = buf.replacingOccurrences(of: "<title", with: "<title", options: .caseInsensitive)
-                                    let normalizedBuf = buf1.replacingOccurrences(of: "</title>", with: "</title>", options: .caseInsensitive)
-                                    
-                                    let pat = Regex {
-                                        #"<title"#
-                                        Optionally {
-                                            OneOrMore {
-                                                CharacterClass.any
-                                            }
-                                        }
-                                        #">"#
-                                        Capture {
-                                            OneOrMore {
-                                                CharacterClass.any
-                                            }
-                                        }
-                                        #"</title>"#
-                                    }
-                                    
-                                    for line in normalizedBuf.components(separatedBy: "\n") {
-                                        if let match = line.firstMatch(of: pat) {
-                                            let newTitle = String(match.1)
-                                            
-                                            DispatchQueue.main.async { [weak self] in
-                                                guard let self else { return }
-                                                self.titleField.stringValue = newTitle
-                                                self.viewModel.title = newTitle
-                                            }
-                                            break
-                                        }
-                                    }
-                                }
+                    
+                        switch result {
+                        case .success(let extractedTitle):
+                            DispatchQueue.main.async { [weak self] in
+                                guard let self else { return }
+                                self.titleField.stringValue = extractedTitle
+                                self.viewModel.title = extractedTitle
+                                
                             }
                             
+                        case .failure(_):
                             DispatchQueue.main.async { [weak self] in
                                 guard let self else { return }
                                 self.titleField.isEnabled = true
-                                self.progressIndicator.stopAnimation(self.progressIndicator)
-                                self.progressIndicator.isHidden = true
                             }
                         }
+                        
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self else { return }
+                            self.titleField.isEnabled = true
+                            self.progressIndicator.stopAnimation(self.progressIndicator)
+                            self.progressIndicator.isHidden = true
+                        }
                     }
-                    task.resume()
+                    
                 }
             }
         }
@@ -385,7 +351,7 @@ class ShareCXCoordinator {
                     }
                 }
             }
-
+            
         case .markdown:
             if let message = capteeManager.markdownMessage(payloadType: payloadType,
                                                            url: payload.url,
@@ -396,7 +362,6 @@ class ShareCXCoordinator {
                 }
             }
         }
-
     }
 }
 

@@ -19,7 +19,9 @@ CURRENT_PROJECT_VERSION=$(shell grep CURRENT_PROJECT_VERSION config/base.xcconfi
 
 CAPTEE_VERSION = $(MARKETING_VERSION) ($(CURRENT_PROJECT_VERSION))
 
-CAPTEE_VERSION_SNAKE_CASE=$(SEMVER_MAJOR)_$(SEMVER_MINOR)_$(SEMVER_PATCH)
+CAPTEE_VERSION_SNAKE_CASE=$(subst .,_,$(MARKETING_VERSION))
+
+CAPTEE_TAG = captee_$(MARKETING_VERSION).$(CURRENT_PROJECT_VERSION)
 
 MARKETING_VERSION_PATCH_BUMP = $(shell python -c "import semver; print(semver.VersionInfo.parse(\"$(MARKETING_VERSION)\").bump_patch())" | xargs)
 MARKETING_VERSION_MINOR_BUMP = $(shell python -c "import semver; print(semver.VersionInfo.parse(\"$(MARKETING_VERSION)\").bump_minor())" | xargs)
@@ -66,6 +68,11 @@ sync-main:
 	git merge main development
 	$(MAKE) bump
 	git commit -m 'Bumped build.' config/base.xcconfig
+	git tag $(CAPTEE_TAG)
 	git push origin merge-development-to-main
+	git push origin $(CAPTEE_TAG)
 	gh pr create -t 'Merge development to main' -b 'Merge development to main' -B main
+
+tag:
+	git tag $(CAPTEE_TAG)
 

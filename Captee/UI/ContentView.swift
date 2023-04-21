@@ -106,18 +106,11 @@ struct OrgURLView: View {
             .textFieldStyle(.plain)
             .help("Org Capture Link URL")
             .onChange(of: capteeViewModel.urlString) { newValue in
-                //print("\(newValue)")
-                
-                capteeViewModel.isURLValid = CapteeUtils.validateURL(string: newValue)
-                
                 if capteeViewModel.isURLValid || newValue == "" {
                     foregroundColor = .primary
                 } else {
                     foregroundColor = .red
                 }
-                
-                capteeViewModel.evalEnableSendButton()
-
             }
             .foregroundColor(foregroundColor)
         
@@ -136,7 +129,6 @@ struct OrgBodyView: View {
         CAPTextEditor(text: $capteeViewModel.body)
             .textFieldStyle(.roundedBorder)
             .onChange(of: capteeViewModel.body) { newValue in
-                capteeViewModel.evalEnableSendButton()
             }
     }
 }
@@ -177,7 +169,6 @@ struct OrgProtocolPickerView: View {
                 }
                 .pickerStyle(.radioGroup)
                 .onChange(of: capteeViewModel.payloadType) { newValue in
-                    capteeViewModel.evalEnableSendButton()
                 }
                 
                 Picker("Use", selection: $capteeViewModel.transmitType) {

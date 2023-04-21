@@ -40,7 +40,6 @@ class CXTextViewValidator: NSObject, NSTextViewDelegate {
                     //let bodyString = String(body.characters[...])
                     //print("#### hey textView changed <<<< \(bodyString)")
                     viewModel.body = body
-                    viewModel.evalEnableSendButton()
                     
                 } catch {
                     // TODO: need to handle properly

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D90387D029F195400074F135 /* CapteeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90387CF29F195400074F135 /* CapteeViewModelTests.swift */; };
 		D9057B3A29CCD1360001B4FC /* CXURLFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3929CCD1360001B4FC /* CXURLFieldValidator.swift */; };
 		D9057B3C29CCD1C80001B4FC /* CXTitleFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3B29CCD1C80001B4FC /* CXTitleFieldValidator.swift */; };
 		D9057B3E29CCD20D0001B4FC /* CXTemplateFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3D29CCD20D0001B4FC /* CXTemplateFieldValidator.swift */; };
@@ -178,6 +179,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D90387CF29F195400074F135 /* CapteeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CapteeViewModelTests.swift; path = capteekitTests/CapteeViewModelTests.swift; sourceTree = SOURCE_ROOT; };
 		D9057B3929CCD1360001B4FC /* CXURLFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXURLFieldValidator.swift; sourceTree = "<group>"; };
 		D9057B3B29CCD1C80001B4FC /* CXTitleFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXTitleFieldValidator.swift; sourceTree = "<group>"; };
 		D9057B3D29CCD20D0001B4FC /* CXTemplateFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXTemplateFieldValidator.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				D9F36E2729A5464F00C17E5A /* CapteeKitTests.swift */,
+				D90387CF29F195400074F135 /* CapteeViewModelTests.swift */,
 			);
 			path = CapteeKitTests;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D90387D029F195400074F135 /* CapteeViewModelTests.swift in Sources */,
 				D9F36E2829A5464F00C17E5A /* CapteeKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
