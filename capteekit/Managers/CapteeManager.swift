@@ -22,9 +22,9 @@ public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
     public init() {
         UserDefaults.standard.register(defaults: [
             "template": "c",
-            "markup_format": MarkupFormat.orgMode.rawValue,
+            "markup_format": MarkupFormat.markdown.rawValue,
             "payload_type": PayloadType.link.rawValue,
-            "transmit_type": TransmitType.orgProtocol.rawValue
+            "transmit_type": TransmitType.clipboard.rawValue
         ])
     }
 }

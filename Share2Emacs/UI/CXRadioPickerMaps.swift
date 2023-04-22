@@ -20,13 +20,13 @@ import CapteeKit
 
 struct CXRadioPickerMaps {
     static let formatMap: [CXRadioPickerSelected: MarkupFormat] = [
-        .radio1 : .orgMode,
-        .radio2 : .markdown
+        .radio1 : .markdown,
+        .radio2 : .orgMode
     ]
     
     static let inverseFormatMap: [MarkupFormat: CXRadioPickerSelected] = [
-        .orgMode: .radio1,
-        .markdown: .radio2
+        .markdown: .radio1,
+        .orgMode: .radio2
     ]
     
     static let payloadMap: [CXRadioPickerSelected: PayloadType] = [
@@ -40,16 +40,15 @@ struct CXRadioPickerMaps {
     ]
 
     static let useMap: [CXRadioPickerSelected: TransmitType] = [
-        .radio1: .orgProtocol,
-        .radio2: .clipboard
+        .radio2: .orgProtocol,
+        .radio1: .clipboard
     ]
     
     static let inverseUseMap: [TransmitType: CXRadioPickerSelected] = [
-        .orgProtocol: .radio1,
-        .clipboard: .radio2
+        .orgProtocol: .radio2,
+        .clipboard: .radio1
     ]
 
-    
     static func configurePickerUI(_ picker: CXRadioPicker, stringMap: [String: String]) {
         if let title = stringMap["label.title"] {
             picker.title = title

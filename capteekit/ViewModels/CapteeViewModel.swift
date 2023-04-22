@@ -83,9 +83,12 @@ public class CapteeViewModel: ObservableObject {
     public init() {
         orgProtocol = .storeLink
         template = capteeManager.persistedTemplateKey ?? "c"
-        markupFormat = capteeManager.persistedMarkupFormat ?? .orgMode
-        payloadType = capteeManager.persistedPayloadType ?? .capture
-        transmitType = capteeManager.persistedTransmitType ?? .orgProtocol
+        markupFormat = capteeManager.persistedMarkupFormat ?? .markdown
+        payloadType = capteeManager.persistedPayloadType ?? .link
+        transmitType = capteeManager.persistedTransmitType ?? .clipboard
+        if markupFormat == .markdown {
+            transmitPickerDisabled = true
+        }
 
         if let url = URL(string: "org-protocol://capture/"),
            let _ = NSWorkspace.shared.urlForApplication(toOpen: url) {
