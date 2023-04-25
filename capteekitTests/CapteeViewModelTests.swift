@@ -36,6 +36,12 @@ func randomCase(_ buf: String) -> String {
 final class CapteeViewModelTests: XCTestCase {
     
     override func setUpWithError() throws {
+        let defaults = UserDefaults.standard
+        
+        defaults.removeObject(forKey: "template")
+        defaults.removeObject(forKey: "markup_format")
+        defaults.removeObject(forKey: "payload_type")
+        defaults.removeObject(forKey: "transmit_type")
     }
     
     override func tearDownWithError() throws {
@@ -125,4 +131,53 @@ final class CapteeViewModelTests: XCTestCase {
             }
         }
     }
+    
+    func test_firstRunCapteeManagerState() throws {
+        let manager = CapteeManager()
+        
+        XCTAssertEqual(manager.persistedTemplateKey, "c")
+        
+        if let markupFormat = manager.persistedMarkupFormat {
+            XCTAssertEqual(markupFormat, .markdown)
+        }
+        
+        if let payloadType = manager.persistedPayloadType {
+            XCTAssertEqual(payloadType, .link)
+        }
+
+        if let transmitType = manager.persistedTransmitType {
+            XCTAssertEqual(transmitType, .clipboard)
+        }
+    }
+    
+    func test_firstRunViewModelState() throws {
+        let viewModel = CapteeViewModel()
+        
+        XCTAssertEqual(viewModel.template, "c")
+        XCTAssertEqual(viewModel.markupFormat, .markdown)
+        XCTAssertEqual(viewModel.payloadType, .link)
+        XCTAssertEqual(viewModel.transmitType, .clipboard)
+    }
+    
+    func test_viewModelWrites() throws {
+        let viewModel = CapteeViewModel()
+        let manager = viewModel.capteeManager
+        
+        viewModel.template = "i"
+        XCTAssertEqual(viewModel.template, "i")
+        XCTAssertEqual(manager.persistedTemplateKey, "i")
+        
+        viewModel.markupFormat = .orgMode
+        XCTAssertEqual(viewModel.markupFormat, .orgMode)
+        XCTAssertEqual(manager.persistedMarkupFormat, .orgMode)
+        
+        viewModel.payloadType = .capture
+        XCTAssertEqual(viewModel.payloadType, .capture)
+        XCTAssertEqual(manager.persistedPayloadType, .capture)
+
+        viewModel.transmitType = .orgProtocol
+        XCTAssertEqual(viewModel.transmitType, .orgProtocol)
+        XCTAssertEqual(manager.persistedTransmitType, .orgProtocol)
+    }
+    
 }

@@ -40,10 +40,10 @@ class CXURLFieldValidator: NSObject, NSTextFieldDelegate {
             return
         }
         
-        if let targetObject = obj.object {
-            let textField = targetObject as! NSTextField
-            //print("did begin url editing: \(textField.stringValue)")
-        }
+//        if let targetObject = obj.object {
+//            let textField = targetObject as! NSTextField
+//            //print("did begin url editing: \(textField.stringValue)")
+//        }
 
     }
     
