@@ -19,7 +19,7 @@ import CapteeKit
 
 struct ContentView: View {
     @StateObject var capteeViewModel = CapteeViewModel()
-    
+
     var body: some View {
         VStack (alignment: .leading) {
             OrgProtocolPickerView(capteeViewModel: capteeViewModel)
@@ -50,6 +50,14 @@ struct ContentView: View {
                 .disabled(capteeViewModel.sendButtonDisabled)
                 .help("Send to Org")
             }
+        }
+        .confirmationDialog("Welcome and thank you for getting Captee!\nCaptee needs the macOS permission to be in the Share menu. Please click below to learn how.", isPresented: $capteeViewModel.showOnboardingAlert, titleVisibility: .visible) {
+            Button("Show me how to enable Captee in the Share menu") {
+                if let bookName = Bundle.main.object(forInfoDictionaryKey: "CFBundleHelpBookName") as? String {
+                    NSHelpManager.shared.openHelpAnchor("ShareMenuPermission", inBook: bookName)
+                }
+            }
+            Button("No, I'm good. (above instructions are always in the Help menu)", role: .cancel) {}
         }
         .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
     }

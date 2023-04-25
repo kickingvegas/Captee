@@ -4,6 +4,10 @@
 <dict>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>Captee.help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>com.yummymelon.CapteeHelp</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
