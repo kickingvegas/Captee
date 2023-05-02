@@ -22,6 +22,25 @@ extension CapteeManager {
     private static let markupFormatKey = "markup_format"
     private static let payloadTypeKey = "payload_type"
     private static let transmitTypeKey = "transmit_type"
+    private static let showOnboardingAlertKey = "show_onboarding_alert"
+    
+    public var persistedShowOnboardingAlert: Bool? {
+        get {
+            var result: Bool?
+            let defaults = UserDefaults.standard
+            result = defaults.value(forKey: Self.showOnboardingAlertKey) as? Bool
+            return result
+        }
+        
+        set(newValue) {
+            let defaults = UserDefaults.standard
+            if let newValue = newValue {
+                defaults.setValue(newValue, forKey: Self.showOnboardingAlertKey)
+            } else {
+                defaults.removeObject(forKey: Self.showOnboardingAlertKey)
+            }
+        }
+    }
     
     public var persistedTemplateKey: String? {
         get {

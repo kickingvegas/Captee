@@ -42,6 +42,7 @@ final class CapteeViewModelTests: XCTestCase {
         defaults.removeObject(forKey: "markup_format")
         defaults.removeObject(forKey: "payload_type")
         defaults.removeObject(forKey: "transmit_type")
+        defaults.removeObject(forKey: "show_onboarding_alert")
     }
     
     override func tearDownWithError() throws {
@@ -148,6 +149,10 @@ final class CapteeViewModelTests: XCTestCase {
         if let transmitType = manager.persistedTransmitType {
             XCTAssertEqual(transmitType, .clipboard)
         }
+        
+        if let showOnboardingAlert = manager.persistedShowOnboardingAlert {
+            XCTAssertTrue(showOnboardingAlert)
+        }
     }
     
     func test_firstRunViewModelState() throws {
@@ -157,6 +162,7 @@ final class CapteeViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.markupFormat, .markdown)
         XCTAssertEqual(viewModel.payloadType, .link)
         XCTAssertEqual(viewModel.transmitType, .clipboard)
+        XCTAssertEqual(viewModel.showOnboardingAlert, true)
     }
     
     func test_viewModelWrites() throws {
@@ -178,6 +184,9 @@ final class CapteeViewModelTests: XCTestCase {
         viewModel.transmitType = .orgProtocol
         XCTAssertEqual(viewModel.transmitType, .orgProtocol)
         XCTAssertEqual(manager.persistedTransmitType, .orgProtocol)
+        
+        viewModel.showOnboardingAlert = false
+        XCTAssertEqual(viewModel.showOnboardingAlert, false)
+        XCTAssertEqual(manager.persistedShowOnboardingAlert, false)
     }
-    
 }

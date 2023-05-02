@@ -23,7 +23,8 @@ class Share2EmacsViewController: NSViewController {
     @IBOutlet weak var payloadPicker: CXRadioPicker!
     @IBOutlet weak var formatPicker: CXRadioPicker!
     @IBOutlet weak var transmitPicker: CXRadioPicker!
-
+    @IBOutlet weak var helpButton: NSButton!
+    
     @IBOutlet weak var urlField: NSTextField!
     @IBOutlet weak var titleField: NSTextField!
     @IBOutlet weak var templateField: NSTextField!
@@ -84,7 +85,6 @@ class Share2EmacsViewController: NSViewController {
         self.shareCXCoordinator = cxCoordinator
     }
     
-    
     @IBAction func sendAction(_ sender: Any) {
         print("send")
         let outputItem = NSExtensionItem()
@@ -102,5 +102,10 @@ class Share2EmacsViewController: NSViewController {
         let cancelError = NSError(domain: NSCocoaErrorDomain, code: NSUserCancelledError, userInfo: nil)
         self.extensionContext!.cancelRequest(withError: cancelError)
     }
+    
+    @IBAction func helpAction(_ sender: Any) {
+        if let bookName = Bundle(for: Share2EmacsViewController.self).object(forInfoDictionaryKey: "CFBundleHelpBookName") as? String {
+            NSHelpManager.shared.openHelpAnchor("CapteeUserGuide", inBook: bookName)
+        }
+    }
 }
-

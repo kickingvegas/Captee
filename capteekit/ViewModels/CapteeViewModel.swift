@@ -58,7 +58,6 @@ public class CapteeViewModel: ObservableObject {
                 orgProtocol = .capture
             }
         }
-
     }
     
     @Published public var orgProtocol: OrgProtocolType
@@ -66,6 +65,12 @@ public class CapteeViewModel: ObservableObject {
     @Published public var transmitType: TransmitType {
         didSet {
             capteeManager.persistedTransmitType = transmitType
+        }
+    }
+    
+    @Published public var showOnboardingAlert: Bool {
+        didSet {
+            capteeManager.persistedShowOnboardingAlert = showOnboardingAlert
         }
     }
         
@@ -86,6 +91,8 @@ public class CapteeViewModel: ObservableObject {
         markupFormat = capteeManager.persistedMarkupFormat ?? .markdown
         payloadType = capteeManager.persistedPayloadType ?? .link
         transmitType = capteeManager.persistedTransmitType ?? .clipboard
+        
+        showOnboardingAlert = capteeManager.persistedShowOnboardingAlert ?? true
         if markupFormat == .markdown {
             transmitPickerDisabled = true
         }

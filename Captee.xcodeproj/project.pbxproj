@@ -11,8 +11,10 @@
 		D9057B3A29CCD1360001B4FC /* CXURLFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3929CCD1360001B4FC /* CXURLFieldValidator.swift */; };
 		D9057B3C29CCD1C80001B4FC /* CXTitleFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3B29CCD1C80001B4FC /* CXTitleFieldValidator.swift */; };
 		D9057B3E29CCD20D0001B4FC /* CXTemplateFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3D29CCD20D0001B4FC /* CXTemplateFieldValidator.swift */; };
+		D926B19029F88EA200A11CA3 /* Captee.help in Resources */ = {isa = PBXBuildFile; fileRef = D9DA578E29F88A6600FB7333 /* Captee.help */; };
 		D92774AC29B94AA500A15CC9 /* Share2EmacsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */; };
 		D931DF2B29CD087200421EC8 /* CXTextViewValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */; };
+		D94688762A0191F600C6A5FA /* Captee.help in Resources */ = {isa = PBXBuildFile; fileRef = D9DA578E29F88A6600FB7333 /* Captee.help */; };
 		D96459A229D35885002CC78E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D96459A429D35885002CC78E /* Localizable.strings */; };
 		D96459A629D35F31002CC78E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A529D35F31002CC78E /* Constants.swift */; };
 		D96459A829D382C9002CC78E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A729D382C9002CC78E /* AppDelegate.swift */; };
@@ -227,6 +229,7 @@
 		D9D6BC1629B7F79400B9416C /* CapteeManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapteeManagerProtocol.swift; path = CapteeKit/Protocols/CapteeManagerProtocol.swift; sourceTree = SOURCE_ROOT; };
 		D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeManagerProtocol.swift"; path = "CapteeKit/Managers/CapteeManager+CapteeManagerProtocol.swift"; sourceTree = SOURCE_ROOT; };
 		D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeePersistenceProtocol.swift"; path = "CapteeKit/Managers/CapteeManager+CapteeePersistenceProtocol.swift"; sourceTree = SOURCE_ROOT; };
+		D9DA578E29F88A6600FB7333 /* Captee.help */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Captee.help; sourceTree = "<group>"; };
 		D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = CapteeKit/Managers/ConnectionManager.swift; sourceTree = SOURCE_ROOT; };
 		D9E9311C29B0156600348A7B /* CapteeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeViewModel.swift; sourceTree = "<group>"; };
 		D9F36E1729A5464E00C17E5A /* CapteeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CapteeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,6 +330,7 @@
 		D978B8E0299BFCB800C00D0B = {
 			isa = PBXGroup;
 			children = (
+				D9DA578E29F88A6600FB7333 /* Captee.help */,
 				D984438C29E36A1000696633 /* config */,
 				D978B8EB299BFCB800C00D0B /* Captee */,
 				D978B8FD299BFCB900C00D0B /* CapteeTests */,
@@ -744,6 +748,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D926B19029F88EA200A11CA3 /* Captee.help in Resources */,
 				D978B8F4299BFCB900C00D0B /* Preview Assets.xcassets in Resources */,
 				D978B8F1299BFCB900C00D0B /* Assets.xcassets in Resources */,
 			);
@@ -767,6 +772,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D94688762A0191F600C6A5FA /* Captee.help in Resources */,
 				D978B92E299C096800C00D0B /* ExtensionClass.js in Resources */,
 				D978B91E299BFD1000C00D0B /* icon.icns in Resources */,
 				D9BFE93F29CADF57005F0970 /* CXRadioPicker.xib in Resources */,

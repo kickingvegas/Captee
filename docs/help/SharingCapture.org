@@ -1,0 +1,50 @@
+# Copyright © 2023 Charles Choi
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#+OPTIONS: toc:nil num:0
+#+HTML_HEAD: <meta name="keywords" content="content, capture, sharing"/>
+#+HTML_HEAD: <meta name="description" content="Capturing content with Captee."/>
+#+HTML_HEAD: <meta name="robots" content="index, anchors"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style1.css" />
+
+#+HTML: <a name="SharingCapture"></a>
+
+* Sharing Content to be Captured
+
+In addition to sharing a link, Captee can share text content to go along with it.
+
+To share content, the payload type /Capture/ should be selected as illustrated below.
+
+[[file:images/capture-selected.png]]
+
+When the payload type /Capture/ is selected, the /Body/ text area is made visible. From there you can edit the text to be captured.
+
+[[file:images/body-text.png]]
+
+Note that having the /URL/ field populated is optional when the payload type is set to /Capture/.
+
+** Sharing Selected Text to Captee
+
+You can share selected text from a macOS app by right-mouse button clicking on it and using the *Share menu* to share to *Captee* as illustrated below.
+
+The /Body/ text field will be populated with your selected text. This text is also editable.
+
+#+BEGIN_CENTER
+[[file:CapteeUserGuide.org][Home]]
+#+END_CENTER
+
+
+
+
+
