@@ -18,6 +18,19 @@
 import XCTest
 @testable import CapteeKit
 
+func randomURLString(scheme: String = "https") -> String {
+    var bufList: [String] = []
+    bufList.append(scheme)
+    bufList.append("://")
+    bufList.append(randomString(length: 10))
+    bufList.append(".")
+    bufList.append(randomString(length: 3))
+    bufList.append("/")
+    bufList.append(randomString(length: 10))
+    
+    return bufList.joined()
+}
+
 func randomCase(_ buf: String) -> String {
     var result: String = ""
     
@@ -77,13 +90,52 @@ final class CapteeViewModelTests: XCTestCase {
     func test_sendButtonDisabled() throws {
         let viewModel = CapteeViewModel()
         
-        viewModel.urlString = "https://www.nytimes.com/2023/04/20/world/africa/sudan-us-evacuation-marines.html"
+        // Link
+        viewModel.payloadType = .link
+        
+        viewModel.urlString = randomURLString()
         XCTAssertFalse(viewModel.sendButtonDisabled)
         
         viewModel.urlString = ""
+        XCTAssertFalse(viewModel.sendButtonDisabled)
+        
+        viewModel.urlString = randomString(length: 33)
         XCTAssertTrue(viewModel.sendButtonDisabled)
         
-        viewModel.urlString = "3sflkafjsl"
+        // Capture
+        viewModel.payloadType = .capture
+        
+        viewModel.urlString = ""
+        viewModel.title = randomString(length: 33)
+        XCTAssertFalse(viewModel.sendButtonDisabled)
+        
+        viewModel.urlString = randomString(length: 33)
+        viewModel.title = randomString(length: 33)
+        XCTAssertTrue(viewModel.sendButtonDisabled)
+        
+        viewModel.urlString = ""
+        viewModel.title = ""
+        viewModel.body = AttributedString(randomString(length: 33))
+        XCTAssertFalse(viewModel.sendButtonDisabled)
+        
+        viewModel.urlString = randomString(length: 33)
+        viewModel.title = ""
+        viewModel.body = AttributedString(randomString(length: 33))
+        XCTAssertTrue(viewModel.sendButtonDisabled)
+        
+        viewModel.urlString = randomURLString()
+        viewModel.title = randomString(length: 33)
+        viewModel.body = AttributedString(randomString(length: 33))
+        XCTAssertFalse(viewModel.sendButtonDisabled)
+        
+        viewModel.urlString = randomURLString()
+        viewModel.title = ""
+        viewModel.body = AttributedString("")
+        XCTAssertFalse(viewModel.sendButtonDisabled)
+        
+        viewModel.urlString = randomString(length: 33)
+        viewModel.title = randomString(length: 33)
+        viewModel.body = AttributedString("")
         XCTAssertTrue(viewModel.sendButtonDisabled)
     }
     
