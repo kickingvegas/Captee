@@ -30,11 +30,19 @@ public class CapteeViewModel: ObservableObject {
     @Published public var urlString: String = "" {
         didSet {
             isURLValid = CapteeUtils.validateURL(string: urlString)
-            sendButtonDisabled = evalEnableSendButton()
+            sendButtonDisabled = !isSendButtonEnabled()
         }
     }
-    @Published public var title: String = ""
-    @Published public var body: AttributedString = AttributedString("")
+    @Published public var title: String = "" {
+        didSet {
+            sendButtonDisabled = !isSendButtonEnabled()
+        }
+    }
+    @Published public var body: AttributedString = AttributedString("") {
+        didSet {
+            sendButtonDisabled = !isSendButtonEnabled()
+        }
+    }
     
     @Published public var template: String {
         didSet {
@@ -57,6 +65,7 @@ public class CapteeViewModel: ObservableObject {
             case .capture:
                 orgProtocol = .capture
             }
+            sendButtonDisabled = !isSendButtonEnabled()
         }
     }
     
@@ -226,12 +235,26 @@ public class CapteeViewModel: ObservableObject {
         }
     }
     
-    func evalEnableSendButton() -> Bool {
+    func isSendButtonEnabled() -> Bool {
         var result: Bool = false
-        if urlString == "" {
-            result = true
-        } else {
-            result = !isURLValid
+        
+        switch payloadType {
+        case .link:
+            result = (urlString == "") ? true : isURLValid
+        case .capture:
+            let bodyString = String(body.characters[...])
+
+            if urlString == "" {
+                // test if bodyString or title are populated
+                result = (bodyString != "") || (title != "")
+            } else {
+                let urlIsValid = (urlString == "") ? true : CapteeUtils.validateURL(string: urlString)
+                if urlIsValid {
+                    result = (bodyString != "") || (title != "") || urlIsValid
+                } else {
+                    result = false
+                }
+            }
         }
         return result
     }
