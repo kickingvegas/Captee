@@ -32,6 +32,38 @@ struct CapteeApp: App {
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
                 EmptyView()
             }
+            
+            CommandGroup(after: .help) {
+                Divider()
+                
+                Button("Rate and Review") {
+                    guard let url = URL(string: "https://apps.apple.com/us/app/captee/id6446053750?action=write-review") else {
+                        fatalError("unable to generate URL")
+                    }
+                    NSWorkspace.shared.open(url)
+                }
+                .help("Your feedback is important to us! Please rate and review Captee on the App Store.")
+
+                Divider()
+                
+                Button("Online Discussions") {
+                    guard let url = URL(string: "https://github.com/kickingvegas/Captee/discussions") else {
+                        fatalError("unable to generate URL")
+                    }
+                    NSWorkspace.shared.open(url)
+                }
+                .help("Join the community on GitHub and discuss how you use Captee with others!")
+                
+                Divider()
+                
+                Button("Captee Source") {
+                    guard let url = URL(string: "https://github.com/kickingvegas/Captee") else {
+                        fatalError("unable to generate URL")
+                    }
+                    NSWorkspace.shared.open(url)
+                }
+                .help("Want to know what's inside? Peruse the source code for Captee on GitHub.")
+            }
         }
     }
 }

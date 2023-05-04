@@ -14,17 +14,23 @@
 // limitations under the License.
 //
 
+import SwiftUI
+import CapteeKit
 
-import Foundation
-import AppKit
+struct OrgTemplateView: View {
+    @ObservedObject var capteeViewModel: CapteeViewModel
 
-class AppDelegate: NSObject, NSApplicationDelegate {
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        return true
+    var body: some View {
+        HStack(alignment: .lastTextBaseline) {
+            Text("Template Key")
+                .foregroundColor(.gray)
+                .font(.system(size: 16))
+            TextField("Key", text: $capteeViewModel.template)
+                .textFieldStyle(.plain)
+            .help("Org Capture Link Template Key")
+        }
+        
+        Divider()
     }
-    
-    func application(_ application: NSApplication, open urls: [URL]) {
-        // TODO: TBD
-        print("hey")
-    }
+        
 }

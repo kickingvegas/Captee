@@ -13,6 +13,11 @@
 		D9057B3E29CCD20D0001B4FC /* CXTemplateFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3D29CCD20D0001B4FC /* CXTemplateFieldValidator.swift */; };
 		D926B19029F88EA200A11CA3 /* Captee.help in Resources */ = {isa = PBXBuildFile; fileRef = D9DA578E29F88A6600FB7333 /* Captee.help */; };
 		D92774AC29B94AA500A15CC9 /* Share2EmacsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */; };
+		D92E0FAC2A04665400F13B86 /* OrgTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FAB2A04665400F13B86 /* OrgTemplateView.swift */; };
+		D92E0FAE2A0469E300F13B86 /* OrgTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FAD2A0469E300F13B86 /* OrgTitleView.swift */; };
+		D92E0FB02A046A7100F13B86 /* OrgURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FAF2A046A7100F13B86 /* OrgURLView.swift */; };
+		D92E0FB22A046AD700F13B86 /* OrgBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FB12A046AD700F13B86 /* OrgBodyView.swift */; };
+		D92E0FB42A046B3C00F13B86 /* OrgProtocolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FB32A046B3C00F13B86 /* OrgProtocolPickerView.swift */; };
 		D931DF2B29CD087200421EC8 /* CXTextViewValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */; };
 		D94688762A0191F600C6A5FA /* Captee.help in Resources */ = {isa = PBXBuildFile; fileRef = D9DA578E29F88A6600FB7333 /* Captee.help */; };
 		D96459A229D35885002CC78E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D96459A429D35885002CC78E /* Localizable.strings */; };
@@ -188,6 +193,11 @@
 		D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share2EmacsUtils.swift; sourceTree = "<group>"; };
 		D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeUtils.swift; sourceTree = "<group>"; };
 		D92774B029B95CEA00A15CC9 /* CapteeXPCService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CapteeXPCService.entitlements; sourceTree = "<group>"; };
+		D92E0FAB2A04665400F13B86 /* OrgTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgTemplateView.swift; sourceTree = "<group>"; };
+		D92E0FAD2A0469E300F13B86 /* OrgTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgTitleView.swift; sourceTree = "<group>"; };
+		D92E0FAF2A046A7100F13B86 /* OrgURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgURLView.swift; sourceTree = "<group>"; };
+		D92E0FB12A046AD700F13B86 /* OrgBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgBodyView.swift; sourceTree = "<group>"; };
+		D92E0FB32A046B3C00F13B86 /* OrgProtocolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgProtocolPickerView.swift; sourceTree = "<group>"; };
 		D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXTextViewValidator.swift; sourceTree = "<group>"; };
 		D96459A329D35885002CC78E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D96459A529D35F31002CC78E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = capteekit/Utils/Constants.swift; sourceTree = SOURCE_ROOT; };
@@ -488,6 +498,11 @@
 			children = (
 				D978B8EE299BFCB800C00D0B /* ContentView.swift */,
 				D971A71529A819C00029F6F6 /* CAPTextEditor.swift */,
+				D92E0FB32A046B3C00F13B86 /* OrgProtocolPickerView.swift */,
+				D92E0FAF2A046A7100F13B86 /* OrgURLView.swift */,
+				D92E0FAD2A0469E300F13B86 /* OrgTitleView.swift */,
+				D92E0FAB2A04665400F13B86 /* OrgTemplateView.swift */,
+				D92E0FB12A046AD700F13B86 /* OrgBodyView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -691,7 +706,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					D978B8E8299BFCB800C00D0B = {
 						CreatedOnToolsVersion = 14.2;
@@ -813,6 +828,11 @@
 				D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */,
 				D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */,
 				D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */,
+				D92E0FB42A046B3C00F13B86 /* OrgProtocolPickerView.swift in Sources */,
+				D92E0FAE2A0469E300F13B86 /* OrgTitleView.swift in Sources */,
+				D92E0FB22A046AD700F13B86 /* OrgBodyView.swift in Sources */,
+				D92E0FB02A046A7100F13B86 /* OrgURLView.swift in Sources */,
+				D92E0FAC2A04665400F13B86 /* OrgTemplateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,6 +1006,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1049,6 +1070,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1081,6 +1103,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Captee/Preview Content\"";
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1114,6 +1137,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Captee/Preview Content\"";
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1143,6 +1167,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -1162,6 +1187,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -1180,6 +1206,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
@@ -1197,6 +1224,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
@@ -1216,6 +1244,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1245,6 +1274,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1270,14 +1300,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = 2023;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1287,6 +1320,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yummymelon.CapteeKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1301,14 +1336,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = 2023;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1318,6 +1356,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yummymelon.CapteeKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1334,6 +1374,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
@@ -1351,6 +1392,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
@@ -1369,6 +1411,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1391,6 +1434,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;

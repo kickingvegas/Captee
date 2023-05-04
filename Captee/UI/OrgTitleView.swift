@@ -14,17 +14,25 @@
 // limitations under the License.
 //
 
+import SwiftUI
+import CapteeKit
 
-import Foundation
-import AppKit
-
-class AppDelegate: NSObject, NSApplicationDelegate {
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        return true
-    }
+struct OrgTitleView: View {
+    @ObservedObject var capteeViewModel: CapteeViewModel
     
-    func application(_ application: NSApplication, open urls: [URL]) {
-        // TODO: TBD
-        print("hey")
+    var body: some View {
+        HStack {
+            TextField("Title", text: $capteeViewModel.title)
+                .textFieldStyle(.plain)
+                .font(.system(size: 16))
+                .help("Org Capture Link Title")
+            
+            if capteeViewModel.isNetworkRequestInProgress {
+                ProgressView()
+                    .frame(height: 12)
+                    .scaleEffect(x:0.5, y:0.5)
+            }
+        }
+        Divider()
     }
 }

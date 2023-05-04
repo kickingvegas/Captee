@@ -39,17 +39,18 @@ struct ContentView: View {
                 Button("Capture") {
                     captureAction()
                 }
-                .alert(isPresented: $capteeViewModel.showSentToClipboardAlert) {
-                    return Alert(title: Text(capteeViewModel.alertTitle),
-                                 message: Text(capteeViewModel.alertMessage),
-                                 dismissButton: .default(Text("Dismiss")))
-                }
-
+                .font(.system(size: 16))
                 .frame(alignment: .trailing)
                 .buttonStyle(.borderedProminent)
                 .disabled(capteeViewModel.sendButtonDisabled)
+                .controlSize(.large)
                 .help("Send to Org")
             }
+        }
+        .alert(isPresented: $capteeViewModel.isAlertRaised) {
+            return Alert(title: Text(capteeViewModel.alertTitle),
+                         message: Text(capteeViewModel.alertMessage),
+                         dismissButton: .default(Text("Dismiss")))
         }
         .confirmationDialog("Welcome and thank you for getting Captee!\nCaptee needs the macOS permission to be in the Share menu. Please click below to learn how.", isPresented: $capteeViewModel.showOnboardingAlert, titleVisibility: .visible) {
             Button("Show me how to enable Captee in the Share menu") {
@@ -67,129 +68,10 @@ struct ContentView: View {
             print("\(result)")
         }
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-    }
-}
-
-struct OrgTemplateView: View {
-    @ObservedObject var capteeViewModel: CapteeViewModel
-
-    var body: some View {
-        HStack(alignment: .lastTextBaseline) {
-            Text("Template Key")
-                .foregroundColor(.gray)
-            TextField("Key", text: $capteeViewModel.template)
-                .textFieldStyle(.plain)
-            .help("Org Capture Link Template Key")
-        }
-        
-        Divider()
-    }
-        
-}
-
-struct OrgTitleView: View {
-    @ObservedObject var capteeViewModel: CapteeViewModel
-    
-    var body: some View {
-        TextField("Title", text: $capteeViewModel.title)
-            .textFieldStyle(.plain)
-            .help("Org Capture Link Title")
-        Divider()
-    }
-}
-
-struct OrgURLView: View {
-    @ObservedObject var capteeViewModel: CapteeViewModel
-    
-    @State var foregroundColor: Color = .black
-
-    var body: some View {
-        TextField("URL", text: $capteeViewModel.urlString)
-            .textFieldStyle(.plain)
-            .help("Org Capture Link URL")
-            .onChange(of: capteeViewModel.urlString) { newValue in
-                if capteeViewModel.isURLValid || newValue == "" {
-                    foregroundColor = .primary
-                } else {
-                    foregroundColor = .red
-                }
-            }
-            .foregroundColor(foregroundColor)
-        
-        Divider()
-    }
-}
-
-struct OrgBodyView: View {
-    @ObservedObject var capteeViewModel: CapteeViewModel
-
-    var body: some View {
-        Text("Body Text")
-            .help("Enter body text")
-            .foregroundColor(.gray)
-        
-        CAPTextEditor(text: $capteeViewModel.body)
-            .textFieldStyle(.roundedBorder)
-            .onChange(of: capteeViewModel.body) { newValue in
-            }
-    }
-}
-
-struct OrgProtocolPickerView: View {
-    @ObservedObject var capteeViewModel: CapteeViewModel
-    //@State var sendDisable: Bool = false
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Picker("Format", selection: $capteeViewModel.markupFormat) {
-                    ForEach(MarkupFormat.allCases, id: \.self) { value in
-                        Text(value.rawValue)
-                            .tag(value)
-                    }
-                }
-                .pickerStyle(.radioGroup)
-                .onChange(of: capteeViewModel.markupFormat) { newValue in
-                    if newValue == .markdown {
-                        capteeViewModel.transmitPickerDisabled = true
-                        capteeViewModel.transmitType = .clipboard
-
-                    } else if newValue == .orgMode {
-                        if capteeViewModel.isOrgProtocolSupported {
-                            capteeViewModel.transmitPickerDisabled = false
-                        }
-                    }
-                    
-                }
-
-                
-                Picker("Payload", selection: $capteeViewModel.payloadType) {
-                    ForEach(PayloadType.allCases, id: \.self) { value in
-                        Text(value.rawValue)
-                            .tag(value)
-                    }
-                }
-                .pickerStyle(.radioGroup)
-                .onChange(of: capteeViewModel.payloadType) { newValue in
-                }
-                
-                Picker("Use", selection: $capteeViewModel.transmitType) {
-                    ForEach(TransmitType.allCases, id: \.self) { value in
-                        Text(value.rawValue)
-                            .tag(value)
-                    }
-                }
-                .pickerStyle(.radioGroup)
-                .disabled(capteeViewModel.transmitPickerDisabled || !capteeViewModel.isOrgProtocolSupported)
-
-            }
-            Divider()
-        }
     }
 }
