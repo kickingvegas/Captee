@@ -14,17 +14,21 @@
 // limitations under the License.
 //
 
+import SwiftUI
+import CapteeKit
 
-import Foundation
-import AppKit
+struct OrgBodyView: View {
+    @ObservedObject var capteeViewModel: CapteeViewModel
 
-class AppDelegate: NSObject, NSApplicationDelegate {
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        return true
-    }
-    
-    func application(_ application: NSApplication, open urls: [URL]) {
-        // TODO: TBD
-        print("hey")
+    var body: some View {
+        Text("Body Text")
+            .font(.system(size: 16))
+            .help("Enter body text")
+            .foregroundColor(.gray)
+        
+        CAPTextEditor(text: $capteeViewModel.body)
+            .textFieldStyle(.roundedBorder)
+            .onChange(of: capteeViewModel.body) { newValue in
+            }
     }
 }

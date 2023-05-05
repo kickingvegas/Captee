@@ -83,7 +83,8 @@ public class CapteeViewModel: ObservableObject {
         }
     }
         
-    @Published public var showSentToClipboardAlert = false
+    @Published public var isAlertRaised = false
+    @Published public var isNetworkRequestInProgress = false
     @Published public var transmitPickerDisabled: Bool = false
     @Published public var sendButtonDisabled: Bool = true
     @Published public var isURLValid: Bool = true
@@ -205,7 +206,7 @@ public class CapteeViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.alertTitle = "Sent to Clipboard"
                             self.alertMessage = CapteeViewModel.truncate(buf: message, count: 120)
-                            self.showSentToClipboardAlert = true
+                            self.isAlertRaised = true
                         }
 
                         reply(result)
@@ -226,7 +227,7 @@ public class CapteeViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.alertTitle = "Sent to Clipboard"
                         self.alertMessage = CapteeViewModel.truncate(buf: message, count: 120)
-                        self.showSentToClipboardAlert = true
+                        self.isAlertRaised = true
                     }
                     reply(result)
                 }
@@ -291,7 +292,7 @@ public class CapteeViewModel: ObservableObject {
     }
     
     public func extractTitleFromURL(url: URL, closure: @escaping (Result<String, CapteeError>) -> Void) {
-        let validSchemes = ["http", "https"]
+        let validSchemes = ["https"]
         
         guard let urlScheme = url.scheme else {
             closure(.failure(.invalidURLScheme))
