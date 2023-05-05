@@ -22,5 +22,3 @@ indexes:
 	cd $(TARGET_DIR);hiutil -I lsm -Caf Captee.helpindex -vv .
 	cd $(TARGET_DIR);hiutil -I corespotlight -Caf Captee.cshelpindex -vv .
 
-hey:
-	ls $(TARGET_DIR)

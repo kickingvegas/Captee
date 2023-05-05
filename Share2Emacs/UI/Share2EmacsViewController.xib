@@ -27,11 +27,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="850" height="664"/>
+            <rect key="frame" x="0.0" y="0.0" width="850" height="739"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bjg-Uy-4bw">
-                    <rect key="frame" x="817" y="633" width="25" height="25"/>
+                    <rect key="frame" x="817" y="708" width="25" height="25"/>
                     <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Zib-qh-GlO">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -41,10 +41,10 @@
                     </connections>
                 </button>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Iw2-rs-haV">
-                    <rect key="frame" x="10" y="10" width="830" height="644"/>
+                    <rect key="frame" x="10" y="10" width="830" height="719"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PP6-9q-TPf">
-                            <rect key="frame" x="270" y="625" width="290" height="19"/>
+                            <rect key="frame" x="270" y="700" width="290" height="19"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Captee - Share link in Markdown or Org" id="I8z-DV-cmw">
                                 <font key="font" metaFont="system" size="16"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -52,10 +52,10 @@
                             </textFieldCell>
                         </textField>
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="mX0-p7-pDC">
-                            <rect key="frame" x="367" y="614" width="96" height="5"/>
+                            <rect key="frame" x="367" y="689" width="96" height="5"/>
                         </box>
                         <stackView distribution="fillEqually" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2C-cN-pxu">
-                            <rect key="frame" x="163" y="512" width="505" height="96"/>
+                            <rect key="frame" x="163" y="587" width="505" height="96"/>
                             <subviews>
                                 <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lId-i4-tC7" customClass="CXRadioPicker" customModule="Share2Emacs" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="163" height="96"/>
@@ -79,10 +79,10 @@
                             </customSpacing>
                         </stackView>
                         <box verticalHuggingPriority="750" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="HV7-qd-8O2">
-                            <rect key="frame" x="367" y="501" width="96" height="5"/>
+                            <rect key="frame" x="367" y="576" width="96" height="5"/>
                         </box>
-                        <textField verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9b8-Uj-Xah">
-                            <rect key="frame" x="367" y="478" width="96" height="17"/>
+                        <textField verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9b8-Uj-Xah" userLabel="URL">
+                            <rect key="frame" x="367" y="553" width="96" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="URL" id="Uey-FJ-u6c">
                                 <font key="font" metaFont="system" size="14"/>
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -90,21 +90,41 @@
                             </textFieldCell>
                         </textField>
                         <box verticalHuggingPriority="750" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="s1Y-GP-Uzq">
-                            <rect key="frame" x="367" y="467" width="96" height="5"/>
+                            <rect key="frame" x="367" y="542" width="96" height="5"/>
                         </box>
-                        <textField verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IZT-c3-1Q6">
-                            <rect key="frame" x="367" y="445" width="96" height="16"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="Title" id="fmA-Mg-rQO">
-                                <font key="font" usesAppearanceFont="YES"/>
-                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                        </textField>
+                        <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9oZ-KN-poC">
+                            <rect key="frame" x="369" y="402" width="92" height="134"/>
+                            <subviews>
+                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IZT-c3-1Q6" userLabel="Title">
+                                    <rect key="frame" x="-2" y="118" width="96" height="16"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="Title" id="fmA-Mg-rQO">
+                                        <font key="font" usesAppearanceFont="YES"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <progressIndicator hidden="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Hwf-yk-Zcs">
+                                    <rect key="frame" x="0.0" y="122" width="12" height="12"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="12" id="66p-e4-JKC"/>
+                                        <constraint firstAttribute="height" constant="12" id="u3W-Qe-QVH"/>
+                                    </constraints>
+                                </progressIndicator>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
                         <box verticalHuggingPriority="750" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="BXB-g2-uwE">
-                            <rect key="frame" x="367" y="434" width="96" height="5"/>
+                            <rect key="frame" x="367" y="391" width="96" height="5"/>
                         </box>
-                        <textField verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jPp-o7-miE">
-                            <rect key="frame" x="367" y="412" width="96" height="16"/>
+                        <textField verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jPp-o7-miE" userLabel="Template Key">
+                            <rect key="frame" x="367" y="369" width="96" height="16"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="Template Key" id="gFp-Pw-kSl">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -112,15 +132,8 @@
                             </textFieldCell>
                         </textField>
                         <box verticalHuggingPriority="750" ambiguous="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="w3R-w9-Le4">
-                            <rect key="frame" x="367" y="401" width="96" height="5"/>
+                            <rect key="frame" x="367" y="358" width="96" height="5"/>
                         </box>
-                        <progressIndicator hidden="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Hwf-yk-Zcs">
-                            <rect key="frame" x="398" y="360" width="35" height="35"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="35" id="66p-e4-JKC"/>
-                                <constraint firstAttribute="height" constant="35" id="u3W-Qe-QVH"/>
-                            </constraints>
-                        </progressIndicator>
                         <scrollView ambiguous="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lA5-Ua-z3P">
                             <rect key="frame" x="295" y="37" width="240" height="315"/>
                             <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="G9I-2x-5k2">
@@ -200,10 +213,8 @@
                         <integer value="1000"/>
                         <integer value="1000"/>
                         <integer value="1000"/>
-                        <integer value="1000"/>
                     </visibilityPriorities>
                     <customSpacing>
-                        <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
