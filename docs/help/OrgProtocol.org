@@ -23,15 +23,16 @@
 
 Captee can share links and content directly into Emacs via [[https://orgmode.org/manual/Protocols.html][Org Protocol]], a means of letting apps trigger custom actions in Emacs.
 
-If your *Emacs* install has direct Org Protocol support, *Captee* will *use* it.
+If your *Emacs* install has native Org Protocol support, *Captee* will *use* it.
 
 With Org Protocol, customize to your preference how content is captured with user-defined
 [[https://orgmode.org/manual/Capture-templates.html][capture templates]] that use Org Protocol-specific template [[https://orgmode.org/manual/The-capture-protocol.html][placeholders]].
 
-
 ** Native Org Protocol Support
 
-Org Protocol support must be configured into your local build of Emacs. Known builds of Emacs that support Org Protocol are available at the following links:
+At current (2023-05-05) only builds which use the Mitsuharu Yamamoto [[https://bitbucket.org/mituharu/emacs-mac/src/master/][fork of Emacs]] will support Org Protocol natively where support for handling the custom URL scheme ~org-protocol://~ is code-signed into the Emacs app bundle. Org Protocol support in *Captee* requires that your local install of Emacs support Org Protocol natively. Captee does not use ~emacsclient~ as this would violate the sandboxing policies of apps distributed through the App Store.
+
+Known builds of Emacs that support Org Protocol natively are available at the following links:
 
 - [[https://ports.macports.org/port/emacs-mac-app/][MacPorts]]
 - [[https://github.com/railwaycat/homebrew-emacsmacport][Homebrew]]
@@ -40,7 +41,7 @@ Note that if your installed Emacs build does not support Org Protocol, you *must
 
 ** Capture Templates
 
-To capture selected text via ~org-protocol~ you'll need to define a capture template on the *Emacs* side *first* before you use *Captee*. Here's an example capture template using the key "a" that uses the placeholders described in the Org [capture protocol](https://orgmode.org/manual/The-capture-protocol.html). 
+To capture selected text via ~org-protocol~ you'll need to define a capture template on the *Emacs* side *first* before you use *Captee*. Here's an example capture template using the key "a" that uses the placeholders described in the Org [[https://orgmode.org/manual/The-capture-protocol.html][capture protocol]]. 
 
 #+begin_src elisp
   (setq org-capture-templates

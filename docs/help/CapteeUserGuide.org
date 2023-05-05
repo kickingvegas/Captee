@@ -38,7 +38,7 @@ If you use *Emacs* with native *Org Protocol* support, *Captee* can share links 
 [[file:images/s6-captee-share-menu.png]]
 
 
-
+Feedback is always welcome! Please [[https://apps.apple.com/us/app/captee/id6446053750?action=write-review][rate and review]] Captee on the App Store.
 
 
 
