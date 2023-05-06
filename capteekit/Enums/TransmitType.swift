@@ -17,6 +17,6 @@
 import Foundation
 
 public enum TransmitType: String, Equatable, CaseIterable {
-    case orgProtocol = "Org Protocol"
     case clipboard = "Clipboard"
+    case orgProtocol = "Org Protocol"
 }

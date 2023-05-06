@@ -23,12 +23,12 @@ CAPTEE_VERSION_SNAKE_CASE=$(subst .,_,$(MARKETING_VERSION))
 
 CAPTEE_TAG = captee_$(MARKETING_VERSION).$(CURRENT_PROJECT_VERSION)
 
-MARKETING_VERSION_PATCH_BUMP = $(shell python -c "import semver; print(semver.VersionInfo.parse(\"$(MARKETING_VERSION)\").bump_patch())" | xargs)
-MARKETING_VERSION_MINOR_BUMP = $(shell python -c "import semver; print(semver.VersionInfo.parse(\"$(MARKETING_VERSION)\").bump_minor())" | xargs)
-MARKETING_VERSION_MAJOR_BUMP = $(shell python -c "import semver; print(semver.VersionInfo.parse(\"$(MARKETING_VERSION)\").bump_major())" | xargs)
+MARKETING_VERSION_PATCH_BUMP = $(shell python -c "import semver; print(semver.Version.parse(\"$(MARKETING_VERSION)\").bump_patch())" | xargs)
+MARKETING_VERSION_MINOR_BUMP = $(shell python -c "import semver; print(semver.Version.parse(\"$(MARKETING_VERSION)\").bump_minor())" | xargs)
+MARKETING_VERSION_MAJOR_BUMP = $(shell python -c "import semver; print(semver.Version.parse(\"$(MARKETING_VERSION)\").bump_major())" | xargs)
 CURRENT_PROJECT_VERSION_BUMP = $(shell python -c 'print(int("$(CURRENT_PROJECT_VERSION)") + 1)' | xargs)
 
-.PHONY: version last-log mvers vers bump-patch bump-minor bump-major bump sync-main
+.PHONY: version last-log mvers vers bump-patch bump-minor bump-major bump sync-main create-pr
 
 version:
 	echo "$(CAPTEE_VERSION)"
@@ -76,3 +76,5 @@ sync-main:
 tag:
 	git tag $(CAPTEE_TAG)
 
+create-pr:
+	gh pr create -f

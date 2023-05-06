@@ -14,18 +14,25 @@
 // limitations under the License.
 //
 
-import Cocoa
-import UniformTypeIdentifiers
+import SwiftUI
+import CapteeKit
 
-  
-public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
-    public init() {
-        UserDefaults.standard.register(defaults: [
-            "template": "c",
-            "markup_format": MarkupFormat.markdown.rawValue,
-            "payload_type": PayloadType.link.rawValue,
-            "transmit_type": TransmitType.clipboard.rawValue,
-            "show_onboarding_alert": true
-        ])
+struct OrgTitleView: View {
+    @ObservedObject var capteeViewModel: CapteeViewModel
+    
+    var body: some View {
+        HStack {
+            TextField("Title", text: $capteeViewModel.title)
+                .textFieldStyle(.plain)
+                .font(.system(size: 16))
+                .help("Org Capture Link Title")
+            
+            if capteeViewModel.isNetworkRequestInProgress {
+                ProgressView()
+                    .frame(height: 12)
+                    .scaleEffect(x:0.5, y:0.5)
+            }
+        }
+        Divider()
     }
 }

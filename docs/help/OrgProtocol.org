@@ -1,0 +1,69 @@
+# Copyright © 2023 Charles Choi
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#+OPTIONS: toc:nil num:0
+#+HTML_HEAD: <meta name="keywords" content="emacs, org protocol, capturing, org mode, org"/>
+#+HTML_HEAD: <meta name="description" content="Emacs support in Captee."/>
+#+HTML_HEAD: <meta name="robots" content="index, anchors"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style1.css" />
+
+#+HTML: <a name="OrgProtocol"></a>
+* Emacs Support in Captee
+
+Captee can share links and content directly into Emacs via [[https://orgmode.org/manual/Protocols.html][Org Protocol]], a means of letting apps trigger custom actions in Emacs.
+
+If your *Emacs* install has native Org Protocol support, *Captee* will *use* it.
+
+With Org Protocol, customize to your preference how content is captured with user-defined
+[[https://orgmode.org/manual/Capture-templates.html][capture templates]] that use Org Protocol-specific template [[https://orgmode.org/manual/The-capture-protocol.html][placeholders]].
+
+** Native Org Protocol Support
+
+At current (2023-05-05) only builds which use the Mitsuharu Yamamoto [[https://bitbucket.org/mituharu/emacs-mac/src/master/][fork of Emacs]] will support Org Protocol natively where support for handling the custom URL scheme ~org-protocol://~ is code-signed into the Emacs app bundle. Org Protocol support in *Captee* requires that your local install of Emacs support Org Protocol natively. Captee does not use ~emacsclient~ as this would violate the sandboxing policies of apps distributed through the App Store.
+
+Known builds of Emacs that support Org Protocol natively are available at the following links:
+
+- [[https://ports.macports.org/port/emacs-mac-app/][MacPorts]]
+- [[https://github.com/railwaycat/homebrew-emacsmacport][Homebrew]]
+
+Note that if your installed Emacs build does not support Org Protocol, you *must* use the macOS system clipboard to capture shared content. This is enforced by the UI where the /Use: Org Protocol/ option is available only if your Emacs install natively supports Org Protocol.
+
+** Capture Templates
+
+To capture selected text via ~org-protocol~ you'll need to define a capture template on the *Emacs* side *first* before you use *Captee*. Here's an example capture template using the key "a" that uses the placeholders described in the Org [[https://orgmode.org/manual/The-capture-protocol.html][capture protocol]]. 
+
+#+begin_src elisp
+  (setq org-capture-templates
+        '(
+          ("a" "Captee Capture" entry
+           (file+headline "~/org/captee.org" "Captee Captures")
+           "* %:description\n%:annotation\n%i\n%?" :empty-lines 1)
+          ))
+#+end_src
+
+Template placeholders you can use in a capture template are as follows:
+
+| Placeholder     | Description                              |
+|-----------------+------------------------------------------|
+| ~%:link~        | The URL                                  |
+| ~%:description~ | The webpage title                        |
+| ~%:annotation~  | Equivalent to ~[​[%:link][%:annotation]]~ |
+| ~%i~            | The selected text                        |
+
+Learn more about [[https://orgmode.org/manual/Capture-templates.html][capture templates]].
+
+#+BEGIN_CENTER
+[[file:CapteeUserGuide.org][Home]]
+#+END_CENTER
+

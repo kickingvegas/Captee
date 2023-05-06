@@ -11,8 +11,15 @@
 		D9057B3A29CCD1360001B4FC /* CXURLFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3929CCD1360001B4FC /* CXURLFieldValidator.swift */; };
 		D9057B3C29CCD1C80001B4FC /* CXTitleFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3B29CCD1C80001B4FC /* CXTitleFieldValidator.swift */; };
 		D9057B3E29CCD20D0001B4FC /* CXTemplateFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3D29CCD20D0001B4FC /* CXTemplateFieldValidator.swift */; };
+		D926B19029F88EA200A11CA3 /* Captee.help in Resources */ = {isa = PBXBuildFile; fileRef = D9DA578E29F88A6600FB7333 /* Captee.help */; };
 		D92774AC29B94AA500A15CC9 /* Share2EmacsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */; };
+		D92E0FAC2A04665400F13B86 /* OrgTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FAB2A04665400F13B86 /* OrgTemplateView.swift */; };
+		D92E0FAE2A0469E300F13B86 /* OrgTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FAD2A0469E300F13B86 /* OrgTitleView.swift */; };
+		D92E0FB02A046A7100F13B86 /* OrgURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FAF2A046A7100F13B86 /* OrgURLView.swift */; };
+		D92E0FB22A046AD700F13B86 /* OrgBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FB12A046AD700F13B86 /* OrgBodyView.swift */; };
+		D92E0FB42A046B3C00F13B86 /* OrgProtocolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FB32A046B3C00F13B86 /* OrgProtocolPickerView.swift */; };
 		D931DF2B29CD087200421EC8 /* CXTextViewValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */; };
+		D94688762A0191F600C6A5FA /* Captee.help in Resources */ = {isa = PBXBuildFile; fileRef = D9DA578E29F88A6600FB7333 /* Captee.help */; };
 		D96459A229D35885002CC78E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D96459A429D35885002CC78E /* Localizable.strings */; };
 		D96459A629D35F31002CC78E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A529D35F31002CC78E /* Constants.swift */; };
 		D96459A829D382C9002CC78E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A729D382C9002CC78E /* AppDelegate.swift */; };
@@ -186,6 +193,11 @@
 		D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share2EmacsUtils.swift; sourceTree = "<group>"; };
 		D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeUtils.swift; sourceTree = "<group>"; };
 		D92774B029B95CEA00A15CC9 /* CapteeXPCService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CapteeXPCService.entitlements; sourceTree = "<group>"; };
+		D92E0FAB2A04665400F13B86 /* OrgTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgTemplateView.swift; sourceTree = "<group>"; };
+		D92E0FAD2A0469E300F13B86 /* OrgTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgTitleView.swift; sourceTree = "<group>"; };
+		D92E0FAF2A046A7100F13B86 /* OrgURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgURLView.swift; sourceTree = "<group>"; };
+		D92E0FB12A046AD700F13B86 /* OrgBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgBodyView.swift; sourceTree = "<group>"; };
+		D92E0FB32A046B3C00F13B86 /* OrgProtocolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgProtocolPickerView.swift; sourceTree = "<group>"; };
 		D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXTextViewValidator.swift; sourceTree = "<group>"; };
 		D96459A329D35885002CC78E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D96459A529D35F31002CC78E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = capteekit/Utils/Constants.swift; sourceTree = SOURCE_ROOT; };
@@ -227,6 +239,7 @@
 		D9D6BC1629B7F79400B9416C /* CapteeManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapteeManagerProtocol.swift; path = CapteeKit/Protocols/CapteeManagerProtocol.swift; sourceTree = SOURCE_ROOT; };
 		D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeManagerProtocol.swift"; path = "CapteeKit/Managers/CapteeManager+CapteeManagerProtocol.swift"; sourceTree = SOURCE_ROOT; };
 		D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeePersistenceProtocol.swift"; path = "CapteeKit/Managers/CapteeManager+CapteeePersistenceProtocol.swift"; sourceTree = SOURCE_ROOT; };
+		D9DA578E29F88A6600FB7333 /* Captee.help */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Captee.help; sourceTree = "<group>"; };
 		D9DDD1ED29B6A18E00F04224 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = CapteeKit/Managers/ConnectionManager.swift; sourceTree = SOURCE_ROOT; };
 		D9E9311C29B0156600348A7B /* CapteeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeViewModel.swift; sourceTree = "<group>"; };
 		D9F36E1729A5464E00C17E5A /* CapteeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CapteeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,6 +340,7 @@
 		D978B8E0299BFCB800C00D0B = {
 			isa = PBXGroup;
 			children = (
+				D9DA578E29F88A6600FB7333 /* Captee.help */,
 				D984438C29E36A1000696633 /* config */,
 				D978B8EB299BFCB800C00D0B /* Captee */,
 				D978B8FD299BFCB900C00D0B /* CapteeTests */,
@@ -484,6 +498,11 @@
 			children = (
 				D978B8EE299BFCB800C00D0B /* ContentView.swift */,
 				D971A71529A819C00029F6F6 /* CAPTextEditor.swift */,
+				D92E0FB32A046B3C00F13B86 /* OrgProtocolPickerView.swift */,
+				D92E0FAF2A046A7100F13B86 /* OrgURLView.swift */,
+				D92E0FAD2A0469E300F13B86 /* OrgTitleView.swift */,
+				D92E0FAB2A04665400F13B86 /* OrgTemplateView.swift */,
+				D92E0FB12A046AD700F13B86 /* OrgBodyView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -687,7 +706,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					D978B8E8299BFCB800C00D0B = {
 						CreatedOnToolsVersion = 14.2;
@@ -744,6 +763,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D926B19029F88EA200A11CA3 /* Captee.help in Resources */,
 				D978B8F4299BFCB900C00D0B /* Preview Assets.xcassets in Resources */,
 				D978B8F1299BFCB900C00D0B /* Assets.xcassets in Resources */,
 			);
@@ -767,6 +787,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D94688762A0191F600C6A5FA /* Captee.help in Resources */,
 				D978B92E299C096800C00D0B /* ExtensionClass.js in Resources */,
 				D978B91E299BFD1000C00D0B /* icon.icns in Resources */,
 				D9BFE93F29CADF57005F0970 /* CXRadioPicker.xib in Resources */,
@@ -807,6 +828,11 @@
 				D971A71629A819C00029F6F6 /* CAPTextEditor.swift in Sources */,
 				D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */,
 				D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */,
+				D92E0FB42A046B3C00F13B86 /* OrgProtocolPickerView.swift in Sources */,
+				D92E0FAE2A0469E300F13B86 /* OrgTitleView.swift in Sources */,
+				D92E0FB22A046AD700F13B86 /* OrgBodyView.swift in Sources */,
+				D92E0FB02A046A7100F13B86 /* OrgURLView.swift in Sources */,
+				D92E0FAC2A04665400F13B86 /* OrgTemplateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,6 +1006,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1043,6 +1070,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1075,6 +1103,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Captee/Preview Content\"";
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1108,6 +1137,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Captee/Preview Content\"";
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1137,6 +1167,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -1156,6 +1187,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -1174,6 +1206,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
@@ -1191,6 +1224,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
@@ -1210,6 +1244,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1239,6 +1274,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1264,14 +1300,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = 2023;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1281,6 +1320,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yummymelon.CapteeKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1295,14 +1336,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = 2023;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1312,6 +1356,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yummymelon.CapteeKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1328,6 +1374,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
@@ -1345,6 +1392,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = "$(MARKETING_VERSION)";
@@ -1363,6 +1411,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1385,6 +1434,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = UD5428GZB3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;

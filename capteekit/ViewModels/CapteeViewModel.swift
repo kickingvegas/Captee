@@ -30,11 +30,19 @@ public class CapteeViewModel: ObservableObject {
     @Published public var urlString: String = "" {
         didSet {
             isURLValid = CapteeUtils.validateURL(string: urlString)
-            sendButtonDisabled = evalEnableSendButton()
+            sendButtonDisabled = !isSendButtonEnabled()
         }
     }
-    @Published public var title: String = ""
-    @Published public var body: AttributedString = AttributedString("")
+    @Published public var title: String = "" {
+        didSet {
+            sendButtonDisabled = !isSendButtonEnabled()
+        }
+    }
+    @Published public var body: AttributedString = AttributedString("") {
+        didSet {
+            sendButtonDisabled = !isSendButtonEnabled()
+        }
+    }
     
     @Published public var template: String {
         didSet {
@@ -57,8 +65,8 @@ public class CapteeViewModel: ObservableObject {
             case .capture:
                 orgProtocol = .capture
             }
+            sendButtonDisabled = !isSendButtonEnabled()
         }
-
     }
     
     @Published public var orgProtocol: OrgProtocolType
@@ -68,8 +76,15 @@ public class CapteeViewModel: ObservableObject {
             capteeManager.persistedTransmitType = transmitType
         }
     }
+    
+    @Published public var showOnboardingAlert: Bool {
+        didSet {
+            capteeManager.persistedShowOnboardingAlert = showOnboardingAlert
+        }
+    }
         
-    @Published public var showSentToClipboardAlert = false
+    @Published public var isAlertRaised = false
+    @Published public var isNetworkRequestInProgress = false
     @Published public var transmitPickerDisabled: Bool = false
     @Published public var sendButtonDisabled: Bool = true
     @Published public var isURLValid: Bool = true
@@ -83,9 +98,14 @@ public class CapteeViewModel: ObservableObject {
     public init() {
         orgProtocol = .storeLink
         template = capteeManager.persistedTemplateKey ?? "c"
-        markupFormat = capteeManager.persistedMarkupFormat ?? .orgMode
-        payloadType = capteeManager.persistedPayloadType ?? .capture
-        transmitType = capteeManager.persistedTransmitType ?? .orgProtocol
+        markupFormat = capteeManager.persistedMarkupFormat ?? .markdown
+        payloadType = capteeManager.persistedPayloadType ?? .link
+        transmitType = capteeManager.persistedTransmitType ?? .clipboard
+        
+        showOnboardingAlert = capteeManager.persistedShowOnboardingAlert ?? true
+        if markupFormat == .markdown {
+            transmitPickerDisabled = true
+        }
 
         if let url = URL(string: "org-protocol://capture/"),
            let _ = NSWorkspace.shared.urlForApplication(toOpen: url) {
@@ -186,7 +206,7 @@ public class CapteeViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.alertTitle = "Sent to Clipboard"
                             self.alertMessage = CapteeViewModel.truncate(buf: message, count: 120)
-                            self.showSentToClipboardAlert = true
+                            self.isAlertRaised = true
                         }
 
                         reply(result)
@@ -207,7 +227,7 @@ public class CapteeViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.alertTitle = "Sent to Clipboard"
                         self.alertMessage = CapteeViewModel.truncate(buf: message, count: 120)
-                        self.showSentToClipboardAlert = true
+                        self.isAlertRaised = true
                     }
                     reply(result)
                 }
@@ -216,12 +236,26 @@ public class CapteeViewModel: ObservableObject {
         }
     }
     
-    func evalEnableSendButton() -> Bool {
+    func isSendButtonEnabled() -> Bool {
         var result: Bool = false
-        if urlString == "" {
-            result = true
-        } else {
-            result = !isURLValid
+        
+        switch payloadType {
+        case .link:
+            result = (urlString == "") ? true : isURLValid
+        case .capture:
+            let bodyString = String(body.characters[...])
+
+            if urlString == "" {
+                // test if bodyString or title are populated
+                result = (bodyString != "") || (title != "")
+            } else {
+                let urlIsValid = (urlString == "") ? true : CapteeUtils.validateURL(string: urlString)
+                if urlIsValid {
+                    result = (bodyString != "") || (title != "") || urlIsValid
+                } else {
+                    result = false
+                }
+            }
         }
         return result
     }
@@ -258,7 +292,7 @@ public class CapteeViewModel: ObservableObject {
     }
     
     public func extractTitleFromURL(url: URL, closure: @escaping (Result<String, CapteeError>) -> Void) {
-        let validSchemes = ["http", "https"]
+        let validSchemes = ["https"]
         
         guard let urlScheme = url.scheme else {
             closure(.failure(.invalidURLScheme))

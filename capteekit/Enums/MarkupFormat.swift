@@ -17,7 +17,7 @@
 import Foundation
 
 public enum MarkupFormat: String, Equatable, CaseIterable {
-    case orgMode = "Org Mode"
     case markdown = "Markdown"
+    case orgMode = "Org Mode"
 }
 

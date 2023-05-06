@@ -1,0 +1,99 @@
+/**
+ Copyright 2023 Yummy Melon Software LLC
+ Author: Charles Y. Choi
+ */
+
+body {
+    margin: 0pt;
+    padding: 0.5in 0.5in 0.5in 0.5in;
+    font-family: Helvetica, Arial, Verdana;
+    /* font-family: Palatino, Times */
+    font-size: 12pt;
+    line-height: 145%;
+}
+
+code {
+    font-family: Monaco, Andale Mono, Liberation Mono, Courier Regular;
+    font-size: -2pt;
+}
+
+var {
+    font-family: Monaco, Andale Mono, Liberation Mono, Courier Regular;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 16pt;
+}
+
+h2 {
+    font-size: 14pt;
+}
+
+h3 {
+    font-size: 14pt;
+}
+
+
+h4 {
+    font-size: 14pt;
+}
+
+
+h5 {
+    font-size: 14pt;
+}
+
+
+h6 {
+    font-size: 14pt;
+    font-style: oblique;
+}
+
+
+table {
+   border-style: solid;
+   border-width: 1px;
+   border-color: grey;
+   width: 95%;
+   page-break-inside: auto;
+}
+
+tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+}
+
+td {
+   border-bottom: 1px solid grey;
+   border-right: 1px solid grey;
+   font-size: 10pt;
+}
+
+th {
+   border-bottom: 3px solid black;
+   border-right: 1px solid grey;
+   font-size: 10pt;
+}
+
+thead {
+    display: table-header-group;
+}
+
+tfoot {
+    display: table-footer-group;
+}
+
+
+pre {
+     background-color: #ECECEC
+}
+
+.break {
+     page-break-before: always;
+}
+
+.seqdia {
+    width: 5in;
+    height: 5in;
+}

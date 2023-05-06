@@ -6,5 +6,9 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>CFBundleHelpBookFolder</key>
+	<string>Captee.help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>com.yummymelon.CapteeHelp</string>
 </dict>
 </plist>

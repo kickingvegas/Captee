@@ -14,18 +14,21 @@
 // limitations under the License.
 //
 
-import Cocoa
-import UniformTypeIdentifiers
+import SwiftUI
+import CapteeKit
 
-  
-public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
-    public init() {
-        UserDefaults.standard.register(defaults: [
-            "template": "c",
-            "markup_format": MarkupFormat.markdown.rawValue,
-            "payload_type": PayloadType.link.rawValue,
-            "transmit_type": TransmitType.clipboard.rawValue,
-            "show_onboarding_alert": true
-        ])
+struct OrgBodyView: View {
+    @ObservedObject var capteeViewModel: CapteeViewModel
+
+    var body: some View {
+        Text("Body Text")
+            .font(.system(size: 16))
+            .help("Enter body text")
+            .foregroundColor(.gray)
+        
+        CAPTextEditor(text: $capteeViewModel.body)
+            .textFieldStyle(.roundedBorder)
+            .onChange(of: capteeViewModel.body) { newValue in
+            }
     }
 }
