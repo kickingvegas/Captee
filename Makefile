@@ -28,7 +28,16 @@ MARKETING_VERSION_MINOR_BUMP = $(shell python -c "import semver; print(semver.Ve
 MARKETING_VERSION_MAJOR_BUMP = $(shell python -c "import semver; print(semver.Version.parse(\"$(MARKETING_VERSION)\").bump_major())" | xargs)
 CURRENT_PROJECT_VERSION_BUMP = $(shell python -c 'print(int("$(CURRENT_PROJECT_VERSION)") + 1)' | xargs)
 
-.PHONY: version last-log mvers vers bump-patch bump-minor bump-major bump sync-main create-pr
+.PHONY: version \
+last-log \
+mvers vers \
+bump-patch \
+bump-minor \
+bump-major \
+bump \
+sync-main \
+create-pr \
+clean-helpbook
 
 version:
 	echo "$(CAPTEE_VERSION)"
@@ -68,9 +77,7 @@ sync-main:
 	git merge main development
 	$(MAKE) bump
 	git commit -m 'Bumped build.' config/base.xcconfig
-	git tag $(CAPTEE_TAG)
 	git push origin merge-development-to-main
-	git push origin $(CAPTEE_TAG)
 	gh pr create -t 'Merge development to main' -b 'Merge development to main' -B main
 
 tag:
@@ -78,3 +85,7 @@ tag:
 
 create-pr:
 	gh pr create -f
+
+clean-helpbook:
+	rm -rf Captee.help/Contents/Resources/en.lproj/*
+
