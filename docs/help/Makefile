@@ -16,9 +16,22 @@
 
 TARGET_DIR=../../Captee.help/Contents/Resources/en.lproj
 
-.PHONY: indexes
+.PHONY: indexes \
+build-helpbook \
+create-helpbook \
+open-helpbook
+
+create-helpbook: clean-helpbook build-helpbook indexes
 
 indexes:
 	cd $(TARGET_DIR);hiutil -I lsm -Caf Captee.helpindex -vv .
 	cd $(TARGET_DIR);hiutil -I corespotlight -Caf Captee.cshelpindex -vv .
 
+build-helpbook:
+	/opt/local/bin/emacs -batch -l publish-doc.el --eval '(org-publish "captee-help-book" t)'
+
+open-helpbook:
+	open $(TARGET_DIR)/CapteeUserGuide.html
+
+clean-helpbook:
+	/bin/rm -rf $(TARGET_DIR)/*

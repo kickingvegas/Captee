@@ -1,0 +1,7 @@
+$(SRCROOT)/Contents/Resources/en.lproj/CapteeUserGuide.html
+$(SRCROOT)/Contents/Resources/en.lproj/OrgProtocol.html
+$(SRCROOT)/Contents/Resources/en.lproj/ShareMenuPermission.html
+$(SRCROOT)/Contents/Resources/en.lproj/SharingCapture.html
+$(SRCROOT)/Contents/Resources/en.lproj/SharingLink.html
+$(SRCROOT)/Contents/Resources/en.lproj/UserInterface.html
+

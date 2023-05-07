@@ -569,6 +569,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D978B90E299BFCB900C00D0B /* Build configuration list for PBXNativeTarget "Captee" */;
 			buildPhases = (
+				D9E8A4242A07208C007516BD /* ShellScript */,
 				D978B8E5299BFCB800C00D0B /* Sources */,
 				D978B8E6299BFCB800C00D0B /* Frameworks */,
 				D978B8E7299BFCB800C00D0B /* Resources */,
@@ -818,6 +819,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D9E8A4242A07208C007516BD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(SRCROOT)/docs/help/inputs.xcfilelist",
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+				"$(SRCROOT)/docs/help/outputs.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "make -C docs/help create-helpbook\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D978B8E5299BFCB800C00D0B /* Sources */ = {
