@@ -19,7 +19,6 @@
 		D92E0FB22A046AD700F13B86 /* OrgBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FB12A046AD700F13B86 /* OrgBodyView.swift */; };
 		D92E0FB42A046B3C00F13B86 /* OrgProtocolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FB32A046B3C00F13B86 /* OrgProtocolPickerView.swift */; };
 		D931DF2B29CD087200421EC8 /* CXTextViewValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */; };
-		D94688762A0191F600C6A5FA /* Captee.help in Resources */ = {isa = PBXBuildFile; fileRef = D9DA578E29F88A6600FB7333 /* Captee.help */; };
 		D96459A229D35885002CC78E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D96459A429D35885002CC78E /* Localizable.strings */; };
 		D96459A629D35F31002CC78E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A529D35F31002CC78E /* Constants.swift */; };
 		D96459A829D382C9002CC78E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A729D382C9002CC78E /* AppDelegate.swift */; };
@@ -788,7 +787,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D94688762A0191F600C6A5FA /* Captee.help in Resources */,
 				D978B92E299C096800C00D0B /* ExtensionClass.js in Resources */,
 				D978B91E299BFD1000C00D0B /* icon.icns in Resources */,
 				D9BFE93F29CADF57005F0970 /* CXRadioPicker.xib in Resources */,
