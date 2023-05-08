@@ -45,6 +45,12 @@ class Share2EmacsViewController: NSViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear() {
+        if let window = view.window {
+            window.makeFirstResponder(titleField)
+        }
+    }
+    
     override var nibName: NSNib.Name? {
         return NSNib.Name("Share2EmacsViewController")
     }
