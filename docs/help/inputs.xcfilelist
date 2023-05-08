@@ -1,0 +1,7 @@
+$(SRCROOT)/docs/help/CapteeUserGuide.org
+$(SRCROOT)/docs/help/OrgProtocol.org
+$(SRCROOT)/docs/help/ShareMenuPermission.org
+$(SRCROOT)/docs/help/SharingCapture.org
+$(SRCROOT)/docs/help/SharingLink.org
+$(SRCROOT)/docs/help/UserInterface.org
+

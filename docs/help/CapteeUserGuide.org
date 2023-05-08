@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-#+OPTIONS: toc:nil num:0
+#+OPTIONS: toc:nil num:0 html-postamble:nil html-preamble:nil
 #+HTML_HEAD: <meta name="keywords" content="captee, home, index"/>
 #+HTML_HEAD: <meta name="description" content="Captee User Guide"/>
 #+HTML_HEAD: <meta name="robots" content="index, anchors"/>
