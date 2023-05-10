@@ -56,10 +56,9 @@ extension CapteeManager {
             }
 
             if let body = body {
-                // TODO: convert to target format
-                let bodyString = String(body.characters[...])
-                if bodyString != "" {
-                    queryItems.append(URLQueryItem(name: "body", value: bodyString))
+                if String(body.characters[...]) != "" {
+                    let markupConverter = AttributedStringToMarkup(body)
+                    queryItems.append(URLQueryItem(name: "body", value: markupConverter.toMarkup(format: .orgMode)))
                 }
             }
         }
@@ -90,10 +89,9 @@ extension CapteeManager {
             }
             
             if let body = body {
-                // TODO: convert attributed string to org markup
-                let bodyString = String(body.characters[...])
-                if bodyString != "" {
-                    bufList.append(bodyString)
+                if String(body.characters[...]) != "" {
+                    let markupConverter = AttributedStringToMarkup(body)
+                    bufList.append(markupConverter.toMarkup(format: .orgMode))
                 }
             }
             
@@ -123,10 +121,9 @@ extension CapteeManager {
             }
             
             if let body = body {
-                // TODO: convert attributed string to org markup
-                let bodyString = String(body.characters[...])
-                if bodyString != "" {
-                    bufList.append(bodyString)
+                if String(body.characters[...]) != "" {
+                    let markupConverter = AttributedStringToMarkup(body)
+                    bufList.append(markupConverter.toMarkup(format: .markdown))
                 }
             }
             
