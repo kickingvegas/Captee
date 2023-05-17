@@ -14,9 +14,14 @@
 // limitations under the License.
 //
 
+import Foundation
 
-// Configuration settings file format documentation can be found at:
-// https://help.apple.com/xcode/#/dev745c5c974
+protocol AttributedStringToMarkupProtocol {
+    var attributedString: AttributedString { get }
+    
+    func toMarkup(format: MarkupFormat) -> String
+}
 
-MARKETING_VERSION = 1.1.0
-CURRENT_PROJECT_VERSION = 36
+protocol TranslateToMarkupProtocol {
+    func translate(attributedString: AttributedString, markup: MarkupProtocol) -> String
+}

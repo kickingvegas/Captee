@@ -14,9 +14,19 @@
 // limitations under the License.
 //
 
+import Foundation
 
-// Configuration settings file format documentation can be found at:
-// https://help.apple.com/xcode/#/dev745c5c974
-
-MARKETING_VERSION = 1.1.0
-CURRENT_PROJECT_VERSION = 36
+protocol MarkupProtocol {
+    // Header method
+    func header(_ buf: String, level: Int) -> String
+    
+    // Style methods
+    func emphasis(_ buf: String) -> String
+    func strong(_ buf: String) -> String
+    func code(_ buf: String) -> String
+    func underline(_ buf: String) -> String
+    func strikethrough(_ buf: String) -> String
+    
+    // Link method
+    func link(_ url: URL, description: String?) -> String
+}

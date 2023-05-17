@@ -11,6 +11,7 @@
 		D9057B3A29CCD1360001B4FC /* CXURLFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3929CCD1360001B4FC /* CXURLFieldValidator.swift */; };
 		D9057B3C29CCD1C80001B4FC /* CXTitleFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3B29CCD1C80001B4FC /* CXTitleFieldValidator.swift */; };
 		D9057B3E29CCD20D0001B4FC /* CXTemplateFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9057B3D29CCD20D0001B4FC /* CXTemplateFieldValidator.swift */; };
+		D90972602A133BBF0061F711 /* AttributedStringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D909725F2A133BBF0061F711 /* AttributedStringUtils.swift */; };
 		D926B19029F88EA200A11CA3 /* Captee.help in Resources */ = {isa = PBXBuildFile; fileRef = D9DA578E29F88A6600FB7333 /* Captee.help */; };
 		D92774AC29B94AA500A15CC9 /* Share2EmacsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */; };
 		D92E0FAC2A04665400F13B86 /* OrgTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FAB2A04665400F13B86 /* OrgTemplateView.swift */; };
@@ -19,6 +20,12 @@
 		D92E0FB22A046AD700F13B86 /* OrgBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FB12A046AD700F13B86 /* OrgBodyView.swift */; };
 		D92E0FB42A046B3C00F13B86 /* OrgProtocolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E0FB32A046B3C00F13B86 /* OrgProtocolPickerView.swift */; };
 		D931DF2B29CD087200421EC8 /* CXTextViewValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */; };
+		D9620DE32A0C8DA100C971A8 /* MarkupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9620DE22A0C8DA100C971A8 /* MarkupProtocol.swift */; };
+		D9620DE52A0C8DF800C971A8 /* MarkdownDialect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9620DE42A0C8DF800C971A8 /* MarkdownDialect.swift */; };
+		D9620DE72A0C8E2500C971A8 /* OrgDialect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9620DE62A0C8E2500C971A8 /* OrgDialect.swift */; };
+		D9620DE92A0C8E7800C971A8 /* AttributedStringToMarkupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9620DE82A0C8E7800C971A8 /* AttributedStringToMarkupProtocol.swift */; };
+		D9620DEB2A0C905800C971A8 /* TranslateAttributedStringToMarkup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9620DEA2A0C905800C971A8 /* TranslateAttributedStringToMarkup.swift */; };
+		D9620DED2A0C911000C971A8 /* TranslateNSAttributedStringToMarkup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9620DEC2A0C911000C971A8 /* TranslateNSAttributedStringToMarkup.swift */; };
 		D96459A229D35885002CC78E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D96459A429D35885002CC78E /* Localizable.strings */; };
 		D96459A629D35F31002CC78E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A529D35F31002CC78E /* Constants.swift */; };
 		D96459A829D382C9002CC78E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96459A729D382C9002CC78E /* AppDelegate.swift */; };
@@ -29,6 +36,8 @@
 		D973BB8629D205D800B29126 /* TransmitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB8529D205D800B29126 /* TransmitType.swift */; };
 		D973BB8929D206A400B29126 /* CapteePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB8829D206A400B29126 /* CapteePayload.swift */; };
 		D973BB8B29D206D900B29126 /* CapteePersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D973BB8A29D206D900B29126 /* CapteePersistenceProtocol.swift */; };
+		D9768B5A2A0AC0E7000BAE04 /* AttributedStringToMarkup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9768B592A0AC0E7000BAE04 /* AttributedStringToMarkup.swift */; };
+		D9768B5C2A0AC354000BAE04 /* AttributedStringToMarkupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9768B5B2A0AC354000BAE04 /* AttributedStringToMarkupTests.swift */; };
 		D978B8ED299BFCB800C00D0B /* CapteeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B8EC299BFCB800C00D0B /* CapteeApp.swift */; };
 		D978B8EF299BFCB800C00D0B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D978B8EE299BFCB800C00D0B /* ContentView.swift */; };
 		D978B8F1299BFCB900C00D0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D978B8F0299BFCB900C00D0B /* Assets.xcassets */; };
@@ -53,6 +62,7 @@
 		D9BFE94C29CC070B005F0970 /* CapteeXPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFE94B29CC070A005F0970 /* CapteeXPCServiceProtocol.swift */; };
 		D9BFE95229CC16A1005F0970 /* CapteeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9311C29B0156600348A7B /* CapteeViewModel.swift */; };
 		D9BFE95329CC16DC005F0970 /* CapteeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */; };
+		D9D120C02A130E3E0085237B /* MarkupDialectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D120BF2A130E3E0085237B /* MarkupDialectTests.swift */; };
 		D9D6BC1729B7F79400B9416C /* CapteeManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1629B7F79400B9416C /* CapteeManagerProtocol.swift */; };
 		D9D6BC1929B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */; };
 		D9D6BC1B29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */; };
@@ -189,6 +199,7 @@
 		D9057B3929CCD1360001B4FC /* CXURLFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXURLFieldValidator.swift; sourceTree = "<group>"; };
 		D9057B3B29CCD1C80001B4FC /* CXTitleFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXTitleFieldValidator.swift; sourceTree = "<group>"; };
 		D9057B3D29CCD20D0001B4FC /* CXTemplateFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXTemplateFieldValidator.swift; sourceTree = "<group>"; };
+		D909725F2A133BBF0061F711 /* AttributedStringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AttributedStringUtils.swift; path = capteekitTests/AttributedStringUtils.swift; sourceTree = SOURCE_ROOT; };
 		D92774AB29B94AA500A15CC9 /* Share2EmacsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share2EmacsUtils.swift; sourceTree = "<group>"; };
 		D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeUtils.swift; sourceTree = "<group>"; };
 		D92774B029B95CEA00A15CC9 /* CapteeXPCService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CapteeXPCService.entitlements; sourceTree = "<group>"; };
@@ -198,6 +209,12 @@
 		D92E0FB12A046AD700F13B86 /* OrgBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgBodyView.swift; sourceTree = "<group>"; };
 		D92E0FB32A046B3C00F13B86 /* OrgProtocolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgProtocolPickerView.swift; sourceTree = "<group>"; };
 		D931DF2A29CD087200421EC8 /* CXTextViewValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXTextViewValidator.swift; sourceTree = "<group>"; };
+		D9620DE22A0C8DA100C971A8 /* MarkupProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarkupProtocol.swift; path = capteekit/Protocols/MarkupProtocol.swift; sourceTree = SOURCE_ROOT; };
+		D9620DE42A0C8DF800C971A8 /* MarkdownDialect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MarkdownDialect.swift; path = capteekit/Utils/MarkdownDialect.swift; sourceTree = SOURCE_ROOT; };
+		D9620DE62A0C8E2500C971A8 /* OrgDialect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrgDialect.swift; path = capteekit/Utils/OrgDialect.swift; sourceTree = SOURCE_ROOT; };
+		D9620DE82A0C8E7800C971A8 /* AttributedStringToMarkupProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AttributedStringToMarkupProtocol.swift; path = capteekit/Protocols/AttributedStringToMarkupProtocol.swift; sourceTree = SOURCE_ROOT; };
+		D9620DEA2A0C905800C971A8 /* TranslateAttributedStringToMarkup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TranslateAttributedStringToMarkup.swift; path = capteekit/Utils/TranslateAttributedStringToMarkup.swift; sourceTree = SOURCE_ROOT; };
+		D9620DEC2A0C911000C971A8 /* TranslateNSAttributedStringToMarkup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TranslateNSAttributedStringToMarkup.swift; path = capteekit/Utils/TranslateNSAttributedStringToMarkup.swift; sourceTree = SOURCE_ROOT; };
 		D96459A329D35885002CC78E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D96459A529D35F31002CC78E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = capteekit/Utils/Constants.swift; sourceTree = SOURCE_ROOT; };
 		D96459A729D382C9002CC78E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -208,6 +225,8 @@
 		D973BB8529D205D800B29126 /* TransmitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransmitType.swift; path = capteekit/Enums/TransmitType.swift; sourceTree = SOURCE_ROOT; };
 		D973BB8829D206A400B29126 /* CapteePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CapteePayload.swift; path = capteekit/Constructs/CapteePayload.swift; sourceTree = SOURCE_ROOT; };
 		D973BB8A29D206D900B29126 /* CapteePersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CapteePersistenceProtocol.swift; path = capteekit/Protocols/CapteePersistenceProtocol.swift; sourceTree = SOURCE_ROOT; };
+		D9768B592A0AC0E7000BAE04 /* AttributedStringToMarkup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AttributedStringToMarkup.swift; path = capteekit/Utils/AttributedStringToMarkup.swift; sourceTree = SOURCE_ROOT; };
+		D9768B5B2A0AC354000BAE04 /* AttributedStringToMarkupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AttributedStringToMarkupTests.swift; path = capteekitTests/AttributedStringToMarkupTests.swift; sourceTree = SOURCE_ROOT; };
 		D978B8E9299BFCB800C00D0B /* Captee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Captee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D978B8EC299BFCB800C00D0B /* CapteeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeApp.swift; sourceTree = "<group>"; };
 		D978B8EE299BFCB800C00D0B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -235,6 +254,7 @@
 		D9BFE94329CB8985005F0970 /* ShareCXCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCXCoordinator.swift; sourceTree = "<group>"; };
 		D9BFE94529CBA515005F0970 /* CXRadioPickerMaps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXRadioPickerMaps.swift; sourceTree = "<group>"; };
 		D9BFE94B29CC070A005F0970 /* CapteeXPCServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapteeXPCServiceProtocol.swift; sourceTree = "<group>"; };
+		D9D120BF2A130E3E0085237B /* MarkupDialectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkupDialectTests.swift; sourceTree = SOURCE_ROOT; };
 		D9D6BC1629B7F79400B9416C /* CapteeManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CapteeManagerProtocol.swift; path = CapteeKit/Protocols/CapteeManagerProtocol.swift; sourceTree = SOURCE_ROOT; };
 		D9D6BC1829B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeManagerProtocol.swift"; path = "CapteeKit/Managers/CapteeManager+CapteeManagerProtocol.swift"; sourceTree = SOURCE_ROOT; };
 		D9D6BC1A29B7F8BD00B9416C /* CapteeManager+CapteeePersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CapteeManager+CapteeePersistenceProtocol.swift"; path = "CapteeKit/Managers/CapteeManager+CapteeePersistenceProtocol.swift"; sourceTree = SOURCE_ROOT; };
@@ -479,6 +499,8 @@
 				D9D6BC1629B7F79400B9416C /* CapteeManagerProtocol.swift */,
 				D973BB8A29D206D900B29126 /* CapteePersistenceProtocol.swift */,
 				D9BFE94B29CC070A005F0970 /* CapteeXPCServiceProtocol.swift */,
+				D9620DE22A0C8DA100C971A8 /* MarkupProtocol.swift */,
+				D9620DE82A0C8E7800C971A8 /* AttributedStringToMarkupProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -488,6 +510,11 @@
 			children = (
 				D92774AD29B94BF400A15CC9 /* CapteeUtils.swift */,
 				D96459A529D35F31002CC78E /* Constants.swift */,
+				D9768B592A0AC0E7000BAE04 /* AttributedStringToMarkup.swift */,
+				D9620DE42A0C8DF800C971A8 /* MarkdownDialect.swift */,
+				D9620DE62A0C8E2500C971A8 /* OrgDialect.swift */,
+				D9620DEA2A0C905800C971A8 /* TranslateAttributedStringToMarkup.swift */,
+				D9620DEC2A0C911000C971A8 /* TranslateNSAttributedStringToMarkup.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -525,8 +552,11 @@
 		D9F36E2629A5464F00C17E5A /* CapteeKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				D909725F2A133BBF0061F711 /* AttributedStringUtils.swift */,
 				D9F36E2729A5464F00C17E5A /* CapteeKitTests.swift */,
 				D90387CF29F195400074F135 /* CapteeViewModelTests.swift */,
+				D9768B5B2A0AC354000BAE04 /* AttributedStringToMarkupTests.swift */,
+				D9D120BF2A130E3E0085237B /* MarkupDialectTests.swift */,
 			);
 			path = CapteeKitTests;
 			sourceTree = "<group>";
@@ -897,11 +927,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D973BB7F29D2054500B29126 /* OrgProtocolType.swift in Sources */,
+				D9620DE92A0C8E7800C971A8 /* AttributedStringToMarkupProtocol.swift in Sources */,
 				D9F36E1B29A5464E00C17E5A /* CapteeKit.docc in Sources */,
 				D9BFE94A29CC06E0005F0970 /* ConnectionManager.swift in Sources */,
+				D9620DE32A0C8DA100C971A8 /* MarkupProtocol.swift in Sources */,
 				D9BFE95329CC16DC005F0970 /* CapteeUtils.swift in Sources */,
+				D9768B5A2A0AC0E7000BAE04 /* AttributedStringToMarkup.swift in Sources */,
 				D9BFE95229CC16A1005F0970 /* CapteeViewModel.swift in Sources */,
+				D9620DE52A0C8DF800C971A8 /* MarkdownDialect.swift in Sources */,
 				D9D6BC1729B7F79400B9416C /* CapteeManagerProtocol.swift in Sources */,
+				D9620DED2A0C911000C971A8 /* TranslateNSAttributedStringToMarkup.swift in Sources */,
+				D9620DE72A0C8E2500C971A8 /* OrgDialect.swift in Sources */,
 				D9BFE94C29CC070B005F0970 /* CapteeXPCServiceProtocol.swift in Sources */,
 				D96459A629D35F31002CC78E /* Constants.swift in Sources */,
 				D9F36E3829A5472F00C17E5A /* CapteeManager.swift in Sources */,
@@ -912,6 +948,7 @@
 				D973BB8629D205D800B29126 /* TransmitType.swift in Sources */,
 				D973BB8129D2056000B29126 /* MarkupFormat.swift in Sources */,
 				D9D6BC1929B7F87800B9416C /* CapteeManager+CapteeManagerProtocol.swift in Sources */,
+				D9620DEB2A0C905800C971A8 /* TranslateAttributedStringToMarkup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,7 +956,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9D120C02A130E3E0085237B /* MarkupDialectTests.swift in Sources */,
 				D90387D029F195400074F135 /* CapteeViewModelTests.swift in Sources */,
+				D9768B5C2A0AC354000BAE04 /* AttributedStringToMarkupTests.swift in Sources */,
+				D90972602A133BBF0061F711 /* AttributedStringUtils.swift in Sources */,
 				D9F36E2829A5464F00C17E5A /* CapteeKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
