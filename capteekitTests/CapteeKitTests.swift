@@ -35,10 +35,11 @@ func randomSentence(words: Int) -> String {
 }
 
 func randomURL(scheme: String = "https",
-               host: String = randomString(length: 10),
+               host: String = randomString(length: 10) + "." + randomString(length: 3),
                path: String = "/" + randomString(length: 30)) -> URL? {
     var urlComponents = URLComponents()
     urlComponents.scheme = scheme
+    urlComponents.host = host
     urlComponents.path = path
     
     var queryItems = [URLQueryItem]()
@@ -412,4 +413,44 @@ extension CapteeKitTests {
         }
     }
 
+    func test_replaceOrderedListMarkers() throws {
+        var bufList: [String] = []
+        var controlList: [String] = []
+        let index: Int = 1
+        let limit: Int = 10
+        let depth: Int = 2
+        
+        for i in index...limit {
+            let sentence = randomSentence(words: 5)
+            bufList.append("\t\(i).\t\(sentence)\n")
+            controlList.append("\(String(repeating: "  ", count: (depth - 1)))\(i). \(sentence)\n")
+        
+        }
+        
+        let input = bufList.joined()
+        let experiment = CapteeUtils.replaceOrderedListMarkers(input, depth: depth)
+        let control = controlList.joined()
+        XCTAssertEqual(control, experiment)
+    }
+    
+    func test_replaceUnorderedListMarkers() throws {
+        var bufList: [String] = []
+        var controlList: [String] = []
+        let index: Int = 1
+        let limit: Int = 10
+        let depth: Int = 2
+        let marker = "-"
+        
+        for _ in index...limit {
+            let sentence = randomSentence(words: 5)
+            bufList.append("\t\(marker)\t\(sentence)\n")
+            controlList.append("\(String(repeating: "  ", count: (depth - 1)))\(marker) \(sentence)\n")
+        
+        }
+        
+        let input = bufList.joined()
+        let experiment = CapteeUtils.replaceUnorderedListMarkers(input, depth: depth)
+        let control = controlList.joined()
+        XCTAssertEqual(control, experiment)
+    }
 }
