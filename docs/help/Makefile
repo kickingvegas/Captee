@@ -14,24 +14,28 @@
 # limitations under the License.
 #
 
+EMACS_ELPA_DIR=$(HOME)/.config/emacs/elpa
+EMACS=$(EMACS_APP_EXEC)
+PACKAGE_PATHS=-L $(EMACS_ELPA_DIR)/htmlize-current
+
 TARGET_DIR=../../Captee.help/Contents/Resources/en.lproj
 
-.PHONY: indexes \
-build-helpbook \
-create-helpbook \
-open-helpbook
-
+.PHONY: create-helpbook
 create-helpbook: clean-helpbook build-helpbook indexes
 
+.PHONY: indexes
 indexes:
 	cd $(TARGET_DIR);hiutil -I lsm -Caf Captee.helpindex -vv .
 	cd $(TARGET_DIR);hiutil -I corespotlight -Caf Captee.cshelpindex -vv .
 
+.PHONY: build-helpbook
 build-helpbook:
-	/opt/local/bin/emacs -batch -l publish-doc.el --eval '(org-publish "captee-help-book" t)'
+	$(EMACS) -batch $(PACKAGE_PATHS) -l publish-doc.el --eval '(org-publish "captee-help-book" t)'
 
+.PHONY: open-helpbook
 open-helpbook:
 	open $(TARGET_DIR)/CapteeUserGuide.html
 
+.PHONY: clean-helpbook
 clean-helpbook:
 	/bin/rm -rf $(TARGET_DIR)/*
