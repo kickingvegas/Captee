@@ -1,4 +1,4 @@
-# Copyright © 2023 Charles Choi
+# Copyright © 2023-2025 Charles Choi
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,51 +19,98 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style1.css" />
 
 #+HTML: <a name="OrgProtocol"></a>
-* Emacs Support in Captee
+* Emacs Org Protocol Support in Captee
 
-Captee can share links and content directly into Emacs via [[https://orgmode.org/manual/Protocols.html][Org Protocol]], a means of letting apps trigger custom actions in Emacs.
+*Captee* can share links and content directly into Emacs via [[https://orgmode.org/manual/Protocols.html][Org Protocol]]. Org Protocol is a custom URL scheme devised by the developers of [[https://orgmode.org/][Org]] to let 3^{rd} party apps share their content to an Org file. 
 
-If your *Emacs* install has native Org Protocol support, *Captee* will *use* it.
+Org Protocol support for macOS is available via the [[http://yummymelon.com/scrim/][Scrim app]] (purchased separately). Alternately, if you use the Mitsuharu Yamamoto [[https://bitbucket.org/mituharu/emacs-mac/src/master/][fork of Emacs]], it offers native Org Protocol support.
 
-With Org Protocol, customize to your preference how content is captured with user-defined
-[[https://orgmode.org/manual/Capture-templates.html][capture templates]] that use Org Protocol-specific template [[https://orgmode.org/manual/The-capture-protocol.html][placeholders]].
+The following event sequence shows how *Captee* and *Scrim* work together to get macOS content into Emacs.
 
-** Native Org Protocol Support
+ macOS App → Share Menu → *Captee* → Org Protocol → *Scrim* → Emacs
 
-At current (2023-05-05) only builds which use the Mitsuharu Yamamoto [[https://bitbucket.org/mituharu/emacs-mac/src/master/][fork of Emacs]] will support Org Protocol natively where support for handling the custom URL scheme ~org-protocol://~ is code-signed into the Emacs app bundle. Org Protocol support in *Captee* requires that your local install of Emacs support Org Protocol natively. Captee does not use ~emacsclient~ as this would violate the sandboxing policies of apps distributed through the App Store.
+** Using Org Protocol Capture
 
-Known builds of Emacs that support Org Protocol natively are available at the following links:
+The Org [[https://orgmode.org/manual/Capture.html][Capture]] feature provides a way to quickly store notes into an Org file. Many different kinds of notes can be defined by the user, where each different kind is defined as a /template/. All capture templates are defined in the customizable variable ~org-capture-templates~. Typically, an Org Capture note is created while inside Emacs.
 
-- [[https://ports.macports.org/port/emacs-mac-app/][MacPorts]]
-- [[https://github.com/railwaycat/homebrew-emacsmacport][Homebrew]]
+The Org Protocol ~capture~ sub-protocol extends Org Capture by allowing /external/ programs to access it. In other words, with Org Protocol, programs outside of Emacs can also create a capture note.
 
-Note that if your installed Emacs build does not support Org Protocol, you *must* use the macOS system clipboard to capture shared content. This is enforced by the UI where the /Use: Org Protocol/ option is available only if your Emacs install natively supports Org Protocol.
+In order to use Org Capture, you must have Emacs setup for it. This tutorial provides enough guidance to get you started with it but also notes that Org Capture is embarrassingly customizable. Readers are [[https://orgmode.org/manual/Capture-templates.html][encouraged to get a deeper understanding of it]] to make their own bespoke workflows.
 
-** Capture Templates
+*** Setup Org Capture
 
-To capture selected text via ~org-protocol~ you'll need to define a capture template on the *Emacs* side *first* before you use *Captee*. Here's an example capture template using the key "a" that uses the placeholders described in the Org [[https://orgmode.org/manual/The-capture-protocol.html][capture protocol]]. 
+The following setup makes the following presumptions:
+- The user keeps their Org files in a file system directory named ~org~ in their home directory.
+- The user desires to keep all captured notes in a single file ~~/org/notes.org~.
 
-#+begin_src elisp
-  (setq org-capture-templates
-        '(
-          ("a" "Captee Capture" entry
-           (file+headline "~/org/captee.org" "Captee Captures")
-           "* %:description\n%:annotation\n%i\n%?" :empty-lines 1)
-          ))
+The following Elisp code configures Emacs accordingly.  Put this in your ~init.el~ file.
+
+#+begin_src elisp :lexical no
+  (setopt org-directory "~/org")
+  (setopt org-default-notes-file (concat org-directory "/notes.org"))
 #+end_src
 
-Template placeholders you can use in a capture template are as follows:
+*** Setup Org Protocol Capture
 
-| Placeholder     | Description                              |
-|-----------------+------------------------------------------|
-| ~%:link~        | The URL                                  |
-| ~%:description~ | The webpage title                        |
-| ~%:annotation~  | Equivalent to ~[​[%:link][%:annotation]]~ |
-| ~%i~            | The selected text                        |
+The following Elisp configuration puts a single template definition with key name "capture" into ~org-capture-templates~. This template differs from a regular [[https://orgmode.org/manual/Template-expansion.html][Org Capture template]] in that it has [[https://orgmode.org/manual/The-capture-protocol.html][different placeholder elements]] (~%:link~, ~%:description~, ~%:annotation~, ~%i~) that are passed in via an Org Protocol URL request.
 
-Learn more about [[https://orgmode.org/manual/Capture-templates.html][capture templates]].
+#+begin_src elisp :lexical no
+  (setopt org-capture-templates
+          '(("capture"
+             "Org Protocol Capture"
+             entry
+             (file "") ; an empty string defaults to org-default-notes-file
+             (function (lambda ()
+                         (string-join
+                          '("* %:description"
+                            "%:annotation"
+                            "%i"
+                            "%?")
+                          "\n")))
+             :empty-lines 1)))
+#+end_src
 
-#+BEGIN_CENTER
-[[file:CapteeUserGuide.org][Home]]
-#+END_CENTER
+Note that in normal use, many different templates can be defined to create different kinds of notes. Only one template is shown here for brevity.
 
+If the Org Protocol URL request does not have a ~template~ query parameter, then a fallback template can be specified in the customizable variable ~org-protocol-default-template-key~. For this example, we will set it to ~"capture"~.
+
+*** Send Org Protocol ~capture~ request to Emacs
+
+With the above configuration Elisp in place let's now exercise it by making an Org Protocol ~capture~ URL request from *Captee*. As an example, we will capture the Org Mode home page (https://orgmode.org) from Safari.
+
+Do the following:
+
+1. Load https://orgmode.org in Safari.
+2. From the Share Menu, launch *Captee*
+   - Both the Link and Title fields should populated.
+3. Make sure the following configuration is used:
+   - Format: ~Org Mode~
+   - Payload: ~Capture~
+   - Use: ~Org Protocol~
+   - Template: ~capture~ (this is optional if ~org-protocol-default-template-key~ is set to ~capture~.)
+
+In the Body text field, type in the sentence "This is the Org Mode Website."
+
+Your *Captee* window should appear like the screenshot below. Press the blue "Capture" button at the top right hand side of the *Captee* window to make the Org Protocol request. At this point typically *Scrim* will accept the request and relay it to Emacs server. Note how *Captee* does the work of constructing the Org Protocol URL here, leaving you to focus on what's really important: the content you want to send over to Emacs.
+
+[[file:images/captee-org-protocol-capture-example.png]]
+
+
+A resulting capture window should appear in Emacs that resembles this:
+
+[[file:images/org-protocol-capture-example.png]]
+
+Observe how the Org Protocol-specific template placeholder elements have been populated accordingly in the capture window. 
+
+* References
+- [[https://orgmode.org/manual/Capture-templates.html][Capture templates (The Org Manual)]]
+  - [[https://orgmode.org/manual/Template-elements.html][Template elements (The Org Manual)]]
+  - [[https://orgmode.org/manual/Template-expansion.html][Template expansion (The Org Manual)]]
+- [[https://orgmode.org/manual/The-capture-protocol.html][The capture protocol (The Org Manual)]]
+
+-----
+#+HTML: <footer class="footer">
+#+HTML: <span class="footer-section left">⟨ <a href='SharingCapture.html'>Sharing Content</a></span>
+#+HTML: <span class="footer-section center"><a href='CapteeUserGuide.html'>Home</a></span>
+#+HTML: <span class="footer-section right">&nbsp;</span>
+#+HTML: </footer>

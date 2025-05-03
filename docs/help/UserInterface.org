@@ -1,4 +1,4 @@
-# Copyright © 2023 Charles Choi
+# Copyright © 2023-2025 Charles Choi
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ Options:
 
 Which desired means to use to capture the output. Typically this will be the macOS system clipboard.
 
-For Emacs Org Mode users, if their Emacs install has native support for Org Protocol, then that option will be enabled.
+For Emacs Org Mode users, if either *Scrim* ([[http://yummymelon.com/scrim][purchased separately]]) is installed and configured or has an Emacs fork with native support for Org Protocol, then that option will be enabled.
 
 Options:
 - ~Clipboard~
@@ -68,6 +68,9 @@ This is an Org Protocol specific key and only shown when the format is set to ~O
 
 When all of the above form elements are configured as desired, capture the shared link or content by clicking on this button.
 
-#+BEGIN_CENTER
-[[file:CapteeUserGuide.org][Home]]
-#+END_CENTER
+-----
+#+HTML: <footer class="footer">
+#+HTML: <span class="footer-section left">⟨ <a href='ShareMenuPermission.html'>Enable <b>Captee</b> in the Share Menu</a></span>
+#+HTML: <span class="footer-section center"><a href='CapteeUserGuide.html'>Home</a></span>
+#+HTML: <span class="footer-section right"><a href='SharingLink.html'>Sharing a Link</a> ⟩</span>
+#+HTML: </footer>

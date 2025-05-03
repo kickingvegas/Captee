@@ -866,7 +866,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "make -C docs/help create-helpbook\n";
+			shellScript = "make -C docs/help create-helpbook EMACS_APP_EXEC=/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
