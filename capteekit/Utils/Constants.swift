@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ public struct Constants {
                                             bundle: Bundle(identifier: "com.yummymelon.CapteeKit") ?? Bundle.main,
                                             comment: "Tool tip for Markdown format selection")
     ]
-    
+
     public static let payloadPickerDB: [String: String] = [
         "label.title": NSLocalizedString("Payload",
                                          bundle: Bundle(identifier: "com.yummymelon.CapteeKit") ?? Bundle.main,
@@ -58,7 +58,7 @@ public struct Constants {
                                             bundle: Bundle(identifier: "com.yummymelon.CapteeKit") ?? Bundle.main,
                                             comment: "Tool tip for capture type selection")
     ]
-    
+
     public static let transmitPickerDB: [String: String] = [
         "label.title": NSLocalizedString("Use",
                                          bundle: Bundle(identifier: "com.yummymelon.CapteeKit") ?? Bundle.main,

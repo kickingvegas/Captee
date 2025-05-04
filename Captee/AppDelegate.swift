@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
     }
-    
+
     func application(_ application: NSApplication, open urls: [URL]) {
         // TODO: TBD
         print("hey")

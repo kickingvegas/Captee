@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,20 +21,20 @@ extension CapteeManager {
     public func orgProtcolURL(pType: OrgProtocolType, url: URL?, title: String?, body: AttributedString?, template: String?) -> URL? {
         // preconditions:
         // strings must be trimmed of whitespaces and newlines
-                
+
         var orgProtocolComponents = URLComponents()
         orgProtocolComponents.scheme = "org-protocol"
         orgProtocolComponents.host = pType.rawValue
         var queryItems = [URLQueryItem]()
-        
+
         switch pType {
         case .storeLink:
             guard let url = url else {
                 return nil
             }
-                  
+
             queryItems.append(URLQueryItem(name: "url", value: url.absoluteString))
-        
+
             if let title = title,
                title != "" {
                 queryItems.append(URLQueryItem(name: "title", value: title))
@@ -44,7 +44,7 @@ extension CapteeManager {
             if let url = url {
                 queryItems.append(URLQueryItem(name: "url", value: url.absoluteString))
             }
-            
+
             if let title = title,
                title != "" {
                 queryItems.append(URLQueryItem(name: "title", value: title))
@@ -67,19 +67,19 @@ extension CapteeManager {
 
         return orgProtocolComponents.url
     }
-        
-    
+
+
     public func orgMessage(payloadType: PayloadType, url: URL?, title: String?, body: AttributedString?, template: String?) -> String? {
         var result: String?
         let linkMarkup = orgLinkMarkup(url: url, title: title)
-        
+
         switch payloadType {
         case .link:
             result = linkMarkup
-            
+
         case .capture:
             var bufList = [String]()
-            
+
             if let title = title {
                 bufList.append("* " + title)
             }
@@ -87,31 +87,31 @@ extension CapteeManager {
             if let linkMarkup = linkMarkup {
                 bufList.append(linkMarkup)
             }
-            
+
             if let body = body {
                 if String(body.characters[...]) != "" {
                     let markupConverter = AttributedStringToMarkup(body)
                     bufList.append(markupConverter.toMarkup(format: .orgMode))
                 }
             }
-            
+
             result = bufList.joined(separator: "\n")
         }
-        
+
         return result
     }
-    
+
     public func markdownMessage(payloadType: PayloadType, url: URL?, title: String?, body: AttributedString?) -> String? {
         var result: String?
         let linkMarkup = markdownLinkMarkup(url: url, title: title)
-        
+
         switch payloadType {
         case .link:
             result = linkMarkup
-            
+
         case .capture:
             var bufList = [String]()
-            
+
             if let title = title {
                 bufList.append("# " + title)
             }
@@ -119,21 +119,21 @@ extension CapteeManager {
             if let linkMarkup = linkMarkup {
                 bufList.append(linkMarkup)
             }
-            
+
             if let body = body {
                 if String(body.characters[...]) != "" {
                     let markupConverter = AttributedStringToMarkup(body)
                     bufList.append(markupConverter.toMarkup(format: .markdown))
                 }
             }
-            
+
             result = bufList.joined(separator: "\n")
         }
-        
+
         return result
     }
 
-    
+
     func orgLinkMarkup(url: URL?, title: String?) -> String? {
         var result: String?
         if let url = url,
@@ -147,7 +147,7 @@ extension CapteeManager {
         }
         return result
     }
-    
+
     func markdownLinkMarkup(url: URL?, title: String?) -> String? {
         var result: String?
         if let url = url,

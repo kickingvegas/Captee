@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,27 +34,27 @@ struct OrgDialect: MarkupProtocol {
         guard buf != "\n" else { return buf }
         return String(repeating: "*", count: level) + " " + buf
     }
-    
+
     func emphasis(_ buf: String) -> String {
         CapteeUtils.delimitString(buf: buf, delimiter: OrgStyleDelimiter.emphasis.rawValue)
     }
-    
+
     func strong(_ buf: String) -> String {
         CapteeUtils.delimitString(buf: buf, delimiter: OrgStyleDelimiter.strong.rawValue)
     }
-    
+
     func code(_ buf: String) -> String {
         CapteeUtils.delimitString(buf: buf, delimiter: OrgStyleDelimiter.code.rawValue)
     }
-    
+
     func underline(_ buf: String) -> String {
         CapteeUtils.delimitString(buf: buf, delimiter: OrgStyleDelimiter.underline.rawValue)
     }
-    
+
     func strikethrough(_ buf: String) -> String {
         CapteeUtils.delimitString(buf: buf, delimiter: OrgStyleDelimiter.strikethrough.rawValue)
     }
-    
+
     func style(_ buf: String, delimiter: OrgStyleDelimiter) -> String {
         switch delimiter {
         case .emphasis:
@@ -69,7 +69,7 @@ struct OrgDialect: MarkupProtocol {
             return strikethrough(buf)
         }
     }
-    
+
     func link(_ url: URL, description: String? = nil) -> String {
         if let description = description {
             return "[[\(url.absoluteString)][\(description)]]"
@@ -78,4 +78,3 @@ struct OrgDialect: MarkupProtocol {
         }
     }
 }
-

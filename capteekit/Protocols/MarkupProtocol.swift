@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,14 +19,14 @@ import Foundation
 protocol MarkupProtocol {
     // Header method
     func header(_ buf: String, level: Int) -> String
-    
+
     // Style methods
     func emphasis(_ buf: String) -> String
     func strong(_ buf: String) -> String
     func code(_ buf: String) -> String
     func underline(_ buf: String) -> String
     func strikethrough(_ buf: String) -> String
-    
+
     // Link method
     func link(_ url: URL, description: String?) -> String
 }

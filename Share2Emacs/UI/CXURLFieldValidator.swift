@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,11 +20,11 @@ import CapteeKit
 
 class CXURLFieldValidator: NSObject, NSTextFieldDelegate {
     let viewModel: CapteeViewModel
-    
+
     init(_ viewModel: CapteeViewModel) {
         self.viewModel = viewModel
     }
-    
+
 //    func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
 //        print("should end url editing \(fieldEditor.string)")
 //        return true
@@ -34,19 +34,19 @@ class CXURLFieldValidator: NSObject, NSTextFieldDelegate {
 //        print("should begin url editing \(fieldEditor.string)")
 //        return true
 //    }
-    
+
     func controlTextDidBeginEditing(_ obj: Notification) {
         guard obj.object is NSTextField else {
             return
         }
-        
+
 //        if let targetObject = obj.object {
 //            let textField = targetObject as! NSTextField
 //            //print("did begin url editing: \(textField.stringValue)")
 //        }
 
     }
-    
+
     func controlTextDidChange(_ obj: Notification) {
         guard obj.object is NSTextField else {
             return
@@ -58,12 +58,12 @@ class CXURLFieldValidator: NSObject, NSTextFieldDelegate {
         }
 
     }
-    
+
     func controlTextDidEndEditing(_ obj: Notification) {
         guard obj.object is NSTextField else {
             return
         }
-        
+
         if let targetObject = obj.object {
             let textField = targetObject as! NSTextField
 
