@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import CapteeKit
 
 struct OrgURLView: View {
     @ObservedObject var capteeViewModel: CapteeViewModel
-    
+
     @State var foregroundColor: Color = .black
 
     var body: some View {
@@ -35,7 +35,7 @@ struct OrgURLView: View {
                 }
             }
             .foregroundColor(foregroundColor)
-        
+
         Divider()
     }
 }

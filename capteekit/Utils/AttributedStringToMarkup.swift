@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,14 +30,14 @@ class AttributedStringToMarkup: AttributedStringToMarkupProtocol {
     var kindHasChanged: Bool = false
     var idHasChanged: Bool = false
 
-    
+
     init(_ attributedString: AttributedString) {
         self.attributedString = attributedString
     }
-    
+
     func testSwiftOrNSAttributedString(attributedString: AttributedString) -> AttributedStringFlavor {
         var result: AttributedStringFlavor = .ns
-        
+
         for run in attributedString.runs {
             let container = run.attributes
             if container.presentationIntent != nil {
@@ -49,12 +49,12 @@ class AttributedStringToMarkup: AttributedStringToMarkupProtocol {
         }
         return result
     }
-    
+
     func toMarkup(format: MarkupFormat) -> String {
-        
+
         var markup: MarkupProtocol
         var translator: TranslateToMarkupProtocol
-        
+
         switch format {
         case .markdown:
             markup = MarkdownDialect()
@@ -62,9 +62,9 @@ class AttributedStringToMarkup: AttributedStringToMarkupProtocol {
         case .orgMode:
             markup = OrgDialect()
         }
-        
+
         //!!! Test to see if Swift or NS AttributedString
-        
+
         let attributedStringFlavor = testSwiftOrNSAttributedString(attributedString: attributedString)
         switch attributedStringFlavor {
         case .swift:
@@ -77,7 +77,7 @@ class AttributedStringToMarkup: AttributedStringToMarkupProtocol {
             let bodyString = String(attributedString.characters[...])
             return bodyString
         }
-        
+
         return translator.translate(attributedString: attributedString, markup: markup)
     }
 

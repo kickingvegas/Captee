@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@ struct CAPTextEditor: NSViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-    
+
     var theTextView = NSTextView.scrollableTextView()
-    
+
     @Binding var text: AttributedString
-    
+
     func makeNSView(context: Context) -> NSScrollView {
         let textView = (theTextView.documentView as! NSTextView)
         textView.isRichText = true
@@ -39,48 +39,48 @@ struct CAPTextEditor: NSViewRepresentable {
         textView.usesRuler = true
         textView.usesInspectorBar = true
         textView.usesFontPanel = true
-        
+
         textView.delegate = context.coordinator
-        
+
         if let textStorage = textView.textStorage {
             textStorage.append(NSAttributedString(text))
         }
-        
+
         return theTextView
     }
-    
+
     func updateNSView(_ nsView: NSScrollView, context: Context) {
     }
 }
 
 extension CAPTextEditor {
     class Coordinator: NSObject, NSTextViewDelegate{
-        
+
         var parent: CAPTextEditor
         var affectedCharRange: NSRange?
-        
+
         init(_ parent: CAPTextEditor) {
             self.parent = parent
         }
-        
+
         func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else {
                 return
             }
-            
+
             //Update text
             if let textStorage = textView.textStorage {
                 let newContentText = NSMutableAttributedString(attributedString: textStorage)
                 newContentText.addAttribute(.foregroundColor,
                                             value: NSColor.textColor,
                                             range: NSMakeRange(0, textStorage.string.count))
-                
+
                 newContentText.addAttribute(.backgroundColor,
                                             value: NSColor.textBackgroundColor,
                                             range: NSMakeRange(0, textStorage.string.count))
-                
+
                 textView.layoutManager?.replaceTextStorage(NSTextStorage(attributedString: newContentText))
-                
+
                 do {
                     let a = try AttributedString(textStorage, including: \.appKit)
                     self.parent.text = a
@@ -89,10 +89,10 @@ extension CAPTextEditor {
                 }
             }
         }
-        
+
         func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
             return true
         }
-        
+
     }
 }

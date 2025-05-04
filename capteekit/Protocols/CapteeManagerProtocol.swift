@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,16 +30,15 @@ public protocol CapteeManagerProtocol {
                        title: String?,
                        body: AttributedString?,
                        template: String?) -> URL?
-        
+
     func orgMessage(payloadType: PayloadType,
                     url: URL?,
                     title: String?,
                     body: AttributedString?,
                     template: String?) -> String?
-        
+
     func markdownMessage(payloadType: PayloadType,
                          url: URL?,
                          title: String?,
                          body: AttributedString?) -> String?
 }
-

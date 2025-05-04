@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,12 +45,12 @@ public enum CXRadioPickerSelected: String, Equatable, CaseIterable {
 }
 
 class CXRadioPicker: NSControl, LoadableNib, ObservableObject {
-    
+
     @IBOutlet var contentView: NSView!
     @IBOutlet weak var radio1: NSButton!
     @IBOutlet weak var radio2: NSButton!
     @IBOutlet weak var label: NSTextField!
-    
+
     @Published var selection: CXRadioPickerSelected? {
         didSet {
             switch selection {
@@ -64,7 +64,7 @@ class CXRadioPicker: NSControl, LoadableNib, ObservableObject {
             }
         }
     }
-    
+
     override var isEnabled: Bool {
         didSet {
             for obj in [radio1, radio2, label] {
@@ -72,7 +72,7 @@ class CXRadioPicker: NSControl, LoadableNib, ObservableObject {
             }
         }
     }
-    
+
     var title: String {
         get {
             label.stringValue
@@ -81,17 +81,17 @@ class CXRadioPicker: NSControl, LoadableNib, ObservableObject {
             label.stringValue = newValue
         }
     }
-    
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
     }
-    
+
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
         loadViewFromNib()
     }
 
-    
+
     @IBAction func buttonAction(_ sender: Any) {
         let radio = sender as! NSButton
         if radio == radio1 {
@@ -100,6 +100,6 @@ class CXRadioPicker: NSControl, LoadableNib, ObservableObject {
             selection = .radio2
         }
     }
-    
-   
+
+
 }

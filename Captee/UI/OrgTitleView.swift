@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,14 +19,14 @@ import CapteeKit
 
 struct OrgTitleView: View {
     @ObservedObject var capteeViewModel: CapteeViewModel
-    
+
     var body: some View {
         HStack {
             TextField("Title", text: $capteeViewModel.title)
                 .textFieldStyle(.plain)
                 .font(.system(size: 16))
                 .help("Org Capture Link Title")
-            
+
             if capteeViewModel.isNetworkRequestInProgress {
                 ProgressView()
                     .frame(height: 12)

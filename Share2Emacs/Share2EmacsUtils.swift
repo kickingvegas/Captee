@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import Cocoa
 import CapteeKit
 
 public struct Share2EmacsUtils {
-    
+
     public static func extractPayloadContentFromAppKit(urlField: NSTextField,
                                                        titleField: NSTextField,
                                                        templateField: NSTextField,
@@ -27,19 +27,19 @@ public struct Share2EmacsUtils {
         let urlString: String? = urlField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         var titleString: String? = titleField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         var templateString:String? = templateField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
-        
+
         if let urlString2 = urlString {
             url = URL(string: urlString2)
         }
-        
+
         if titleString == "" {
             titleString = nil
         }
-        
+
         if templateString == "" {
             templateString = nil
         }
-        
+
         var body: AttributedString?
         do {
             if let textStorage = textView.textStorage {
@@ -48,7 +48,7 @@ public struct Share2EmacsUtils {
         } catch {
             // do nothing
         }
-        
+
         return CapteePayload(url: url, title: titleString, template: templateString, body: body)
     }
 }

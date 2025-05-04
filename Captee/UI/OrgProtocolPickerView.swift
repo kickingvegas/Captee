@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ struct OrgProtocolPickerView: View {
                 .pickerStyle(.radioGroup)
                 .onChange(of: capteeViewModel.payloadType) { newValue in
                 }
-                
+
                 Picker("Use", selection: $capteeViewModel.transmitType) {
                     ForEach(TransmitType.allCases, id: \.self) { value in
                         Text(value.rawValue)
@@ -69,7 +69,7 @@ struct OrgProtocolPickerView: View {
                 .padding(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
                 .pickerStyle(.radioGroup)
                 .disabled(capteeViewModel.transmitPickerDisabled || !capteeViewModel.isOrgProtocolSupported)
-                
+
                 Spacer()
                 VStack {
                     Text("Drag URL here")
@@ -81,7 +81,7 @@ struct OrgProtocolPickerView: View {
                     if let url = items.first {
                         print("\(url.absoluteString)")
                         capteeViewModel.urlString = url.absoluteString
-                        
+
                         capteeViewModel.isNetworkRequestInProgress = true
                         capteeViewModel.extractTitleFromURL(url: url) { result in
                             switch result {
@@ -90,7 +90,7 @@ struct OrgProtocolPickerView: View {
                                     capteeViewModel.isNetworkRequestInProgress = false
                                     capteeViewModel.title = extractedTitle
                                 }
-                                
+
                             case .failure(let error):
                                 DispatchQueue.main.async {
                                     capteeViewModel.isNetworkRequestInProgress = false
