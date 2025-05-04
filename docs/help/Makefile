@@ -1,5 +1,5 @@
 ##
-# Copyright © 2023 Charles Choi
+# Copyright © 2023-2025 Charles Choi
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,3 +39,15 @@ open-helpbook:
 .PHONY: clean-helpbook
 clean-helpbook:
 	/bin/rm -rf $(TARGET_DIR)/*
+
+.PHONY: entr
+entr:
+	find . -name '*.org' | entr $(MAKE) create-helpbook
+
+.PHONY: devserver
+devserver:
+	cd $(TARGET_DIR); python -m http.server
+
+.PHONY: user-guide
+dev-user-guide:
+	open "http://localhost:8000/CapteeUserGuide.html"

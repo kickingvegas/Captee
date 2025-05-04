@@ -1,4 +1,4 @@
-# Copyright © 2023 Charles Choi
+# Copyright © 2023-2025 Charles Choi
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
 
 *Captee* is a macOS app that wraps a link from the *Share menu* into either Markdown or Org syntax. Results are stored in the system clipboard for pasting into your favorite editor.
 
-If you use *Emacs* with native *Org Protocol* support, *Captee* can share links and content directly into *Emacs*.
+If you use *Emacs* with *Org Protocol* support, *Captee* can share links and content directly into *Emacs*.
 
 - [[file:ShareMenuPermission.org][Enable *Captee* in the *Share Menu*]]
 - [[file:UserInterface.org][User Interface]]
@@ -40,5 +40,8 @@ If you use *Emacs* with native *Org Protocol* support, *Captee* can share links 
 
 Feedback is always welcome! Please [[https://apps.apple.com/us/app/captee/id6446053750?action=write-review][rate and review]] Captee on the App Store.
 
-
+-----
+#+HTML: <footer class="footer">
+#+HTML: <span class="footer-section right"><a href='ShareMenuPermission.html'>Enable <b>Captee</b> in the Share Menu</a> ⟩</span>
+#+HTML: </footer>
 

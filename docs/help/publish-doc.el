@@ -1,4 +1,4 @@
-;; Copyright © 2023 Charles Choi
+;; Copyright © 2023-2025 Charles Choi
 ;;
 ;; Licensed under the Apache License, Version 2.0 (the "License");
 ;; you may not use this file except in compliance with the License.
@@ -35,6 +35,6 @@
          :recursive t
          :publishing-directory "../../Captee.help/Contents/Resources/en.lproj"
          :publishing-function org-publish-attachment)
-        
+
         ("captee-help-book"
          :components ("pages" "static"))))
