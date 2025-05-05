@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import AppKit
 
 public struct CXUtils {
-    
+
     public static func newLabel(string: String = "",
                                 font: NSFont = NSFont.systemFont(ofSize: 12),
                                 alignment: NSTextAlignment = .left) -> NSTextField {
@@ -33,7 +33,7 @@ public struct CXUtils {
 
         return label
     }
-    
+
     public static func newTextField(string: String = "",
                                     placeholder: String = "",
                                     font: NSFont = NSFont.systemFont(ofSize: 12),
@@ -50,22 +50,22 @@ public struct CXUtils {
         textField.font = font
         return textField
     }
-    
+
     public static func separator() -> NSBox {
         let result = NSBox()
         result.boxType = .separator
         return result
     }
-    
-    
+
+
     public static func newHStack(spacing: CGFloat = 5) -> NSStackView {
         newStackView(orientation: .horizontal, spacing: spacing)
     }
-    
+
     public static func newVStack(spacing: CGFloat = 5) -> NSStackView {
         newStackView(orientation: .vertical, spacing: spacing)
     }
-    
+
     public static func newStackView(orientation: NSUserInterfaceLayoutOrientation,
                                     spacing: CGFloat = 5) -> NSStackView {
         let result = NSStackView()
@@ -74,8 +74,8 @@ public struct CXUtils {
         result.spacing = spacing
         return result
     }
-    
-    
+
+
     public static func newButton(title: String = "Some Button",
                                  bezelStyle: NSButton.BezelStyle = .rounded,
                                  buttonType: NSButton.ButtonType = .momentaryPushIn,
@@ -92,5 +92,5 @@ public struct CXUtils {
     }
 
 
-    
+
 }

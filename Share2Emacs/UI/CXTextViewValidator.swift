@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,28 +19,28 @@ import CapteeKit
 
 class CXTextViewValidator: NSObject, NSTextViewDelegate {
     let viewModel: CapteeViewModel
-    
+
     init(_ viewModel: CapteeViewModel) {
         self.viewModel = viewModel
     }
-    
-    
+
+
     func textDidChange(_ notification: Notification) {
         guard notification.object is NSTextView else {
             return
         }
-        
+
         if let targetObject = notification.object {
             let textView = targetObject as! NSTextView
-            
+
             if let textStorage = textView.textStorage {
-                
+
                 do {
                     let body = try AttributedString(textStorage, including: \.appKit)
                     //let bodyString = String(body.characters[...])
                     //print("#### hey textView changed <<<< \(bodyString)")
                     viewModel.body = body
-                    
+
                 } catch {
                     // TODO: need to handle properly
                     print("ERROR: nothing in textStorage")

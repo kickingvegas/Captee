@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,46 +18,46 @@ import Foundation
 
 class TranslateNSAttributedStringToMarkup: TranslateToMarkupProtocol {
     let empahasisPat = /oblique|italic/
-            
+
     func translate(attributedString: AttributedString, markup: MarkupProtocol) -> String {
         var bufList: [String] = []
-        
+
         for run in attributedString.runs {
             let container = run.attributes
             let runString = String(attributedString.characters[run.range])
-            
+
             bufList.append(
                 contentsOf: processNSAttributeContainer(container: container, runString: runString, markup: markup)
             )
         }
-        
+
         let firstPass = bufList.joined()
-        
+
         let secondPassList = firstPass.split(separator: "\n")
-        
+
         var resultList: [String] = []
         secondPassList.forEach { e in
             resultList.append(String(e))
         }
-        
+
         return resultList.joined(separator: "\n\n")
     }
-    
+
     func processNSAttributeContainer(container: AttributeContainer,
                                      runString: String,
                                      markup: MarkupProtocol) -> [String] {
-        
+
         var bufList: [String] = []
         var buf: String?
 
         if let link = container.link {
             buf = markup.link(link, description: buf ?? runString)
         }
-        
+
         if let paragraphStyle = container.appKit.paragraphStyle {
             let textLists = paragraphStyle.textLists
             let depth = textLists.count
-            
+
             if runString != "\n",
                let textList = textLists.last {
                 if textList.isOrdered {
@@ -70,7 +70,7 @@ class TranslateNSAttributedStringToMarkup: TranslateToMarkupProtocol {
 
         if let font = container.appKit.font {
             let fontName = font.fontName.lowercased()
-            
+
             if fontName.contains("bold") {
                 buf = markup.strong(buf ?? runString)
             } else if fontName.firstMatch(of: empahasisPat) != nil {

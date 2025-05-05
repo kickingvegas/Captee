@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 import Foundation
 
 extension CapteeManager {
-    
+
     private static let templateKey = "template"
     private static let markupFormatKey = "markup_format"
     private static let payloadTypeKey = "payload_type"
     private static let transmitTypeKey = "transmit_type"
     private static let showOnboardingAlertKey = "show_onboarding_alert"
-    
+
     public var persistedShowOnboardingAlert: Bool? {
         get {
             var result: Bool?
@@ -31,7 +31,7 @@ extension CapteeManager {
             result = defaults.value(forKey: Self.showOnboardingAlertKey) as? Bool
             return result
         }
-        
+
         set(newValue) {
             let defaults = UserDefaults.standard
             if let newValue = newValue {
@@ -41,7 +41,7 @@ extension CapteeManager {
             }
         }
     }
-    
+
     public var persistedTemplateKey: String? {
         get {
             var result: String?
@@ -49,7 +49,7 @@ extension CapteeManager {
             result = defaults.value(forKey: Self.templateKey) as? String
             return result
         }
-        
+
         set(newValue) {
             let defaults = UserDefaults.standard
             if let newValue = newValue {
@@ -59,8 +59,8 @@ extension CapteeManager {
             }
         }
     }
-    
-    
+
+
     public var persistedMarkupFormat: MarkupFormat? {
         get {
             var result: MarkupFormat?
@@ -70,7 +70,7 @@ extension CapteeManager {
             }
             return result
         }
-        
+
         set(newValue) {
             let defaults = UserDefaults.standard
 
@@ -80,7 +80,7 @@ extension CapteeManager {
                 defaults.removeObject(forKey: Self.markupFormatKey)
             }
         }
-        
+
     }
 
     public var persistedPayloadType: PayloadType? {
@@ -92,7 +92,7 @@ extension CapteeManager {
             }
             return result
         }
-        
+
         set(newValue) {
             let defaults = UserDefaults.standard
 
@@ -114,7 +114,7 @@ extension CapteeManager {
             }
             return result
         }
-        
+
         set(newValue) {
             let defaults = UserDefaults.standard
 
@@ -126,4 +126,3 @@ extension CapteeManager {
         }
     }
 }
-

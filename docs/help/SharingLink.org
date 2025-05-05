@@ -1,4 +1,4 @@
-# Copyright © 2023 Charles Choi
+# Copyright © 2023-2025 Charles Choi
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,27 @@ The payload type /Link/ must be selected as illustrated below.
 
 [[file:images/link-selected.png]]
 
-  
-#+BEGIN_CENTER
-[[file:CapteeUserGuide.org][Home]]
-#+END_CENTER
+
+** Org Protocol
+
+If the link is sent via [[file:OrgProtocol.org][Org Protocol]], then a message similar to what is shown below should be seen in the Emacs mini-buffer:
+
+#+HTML: <img src="images/insert-org-link-minibuffer.png" width="80%" style="border: solid thin;"/>
+
+This message lets you know that the Org link has been stored by Emacs. Org links are stored in a LIFO ("Last In, First Out") queue. They can be pasted into an Org buffer using the following commands:
+
+- ~org-insert-last-stored-link~ (binding: ~C-c M-l~)
+- ~org-insert-link~ (binding: ~C-c C-l~)
+
+In Emacs, open an Org buffer and use the binding  ~C-c M-l~ to paste the link.
+
+As the mini-buffer message states, if you only want the URL, you can paste the link using ~C-y~.
+
+-----
+#+HTML: <footer class="footer">
+#+HTML: <span class="footer-section left">⟨ <a href='UserInterface.html'>User Interface</a></span>
+#+HTML: <span class="footer-section center"><a href='CapteeUserGuide.html'>Home</a></span>
+#+HTML: <span class="footer-section right"><a href='SharingCapture.html'>Sharing Content</a> ⟩</span>
+#+HTML: </footer>
+
+

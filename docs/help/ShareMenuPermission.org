@@ -1,4 +1,4 @@
-# Copyright © 2023 Charles Choi
+# Copyright © 2023-2025 Charles Choi
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,41 +25,42 @@ When *Captee* is first installed, you'll need to enable the permission to let it
 
 ** 1. Select *Edit Extensions…* from the macOS Share menu.
 
-This will launch macOS *Settings* and raise a pop-up window.
+Launch Safari. In the top of the window look for the Share toolbar icon as shown below.
+
+[[file:images/share-icon_resize_x64.png]]
+
+Tap on the toolbar icon and look for the menu item "Edit Extensions…" as shown below. 
 
 [[file:images/s1-share-menu.png]]
 
 
-** 2. Press the *Done* button at the bottom of the pop-up window to dismiss it.
-
-There are no actions to be done in the pop-up. 
-
-[[file:images/s2-preferences-shared-extensions.png]]
-
-** 3. Select Added Extensions
-
-Press on the *Added extensions* menu item. This will raise a pop-up window showing 3rd-party extensions that can be enabled for sharing.
-
-[[file:images/s3-added-extensions.png]]
-
-** 4. Enable Sharing for Captee 
-
-Enable the checkbox next to *Captee* so that it can appear in the macOS *Share menu*.
-
-[[file:images/s4-captee-unselected.png]]
+Tap on "Edit Extensions…" to launch the macOS *Settings* app and raise a pop-up window titled *Sharing* shown in the next section.
 
 
-** 5. Select Done to dismiss the pop-up window
+** 2. Enable Captee in the Share Extension Preferences
 
-[[file:images/s5-captee-selected.png]]
+This menu lists the possible extensions to add to the Share Menu.
 
-** 6. Success!
+[[file:images/share-extension-preferences.png]]
+
+Scroll down this window to find "Captee - Share Markup Link" and enable it as shown below.
+
+[[file:images/captee-shared-extension-enabled.png]]
+
+
+** 3. Exit Settings
+
+Press the *Done* button at the bottom of the pop-up window to dismiss it, then quit the *Settings* app.
+
+** 4. Success!
 
 *Captee* is now enabled in the macOS *Share menu*.
 
 [[file:images/s6-captee-share-menu.png]]
 
-
-#+BEGIN_CENTER
-[[file:CapteeUserGuide.org][Home]]
-#+END_CENTER
+-----
+#+HTML: <footer class="footer">
+#+HTML: <span class="footer-section left">&nbsp;</a></span>
+#+HTML: <span class="footer-section center"><a href='CapteeUserGuide.html'>Home</a></span>
+#+HTML: <span class="footer-section right"><a href='UserInterface.html'>User Interface</a> ⟩</span>
+#+HTML: </footer>

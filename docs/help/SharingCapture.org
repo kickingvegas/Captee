@@ -1,4 +1,4 @@
-# Copyright © 2023 Charles Choi
+# Copyright © 2023-2025 Charles Choi
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,15 +36,24 @@ Note that having the /URL/ field populated is optional when the payload type is 
 
 ** Sharing Selected Text to Captee
 
-You can share selected text from a macOS app by right-mouse button clicking on it and using the *Share menu* to share to *Captee* as illustrated below.
+Many macOS apps support sharing selected text as a clipping. Captee supports this particularly for Emacs though Org Protocol. Shown below is an example of sharing selected text from Safari. Other macOS apps that support sharing text will have a similar workflow.
 
-The /Body/ text field will be populated with your selected text. This text is also editable.
+1. Select text in a web page. Use the right mouse button to raise a context menu.
 
-#+BEGIN_CENTER
-[[file:CapteeUserGuide.org][Home]]
-#+END_CENTER
+   [[file:images/capture-selected-text-1.png]]
+   
+2. Select the menu item *Captee - Share Markup Link*.
 
+   [[file:images/capture-selected-text-2.png]]
 
-
-
+3. The *Captee* window will be raised with the body section populated with the selected text. The body section can be edited before sending it to Emacs via Org Protocol.
+   
+   [[file:images/capture-selected-text-3.png]]
+   
+-----
+#+HTML: <footer class="footer">
+#+HTML: <span class="footer-section left">⟨ <a href='SharingLink.html'>Sharing a Link</a></span>
+#+HTML: <span class="footer-section center"><a href='CapteeUserGuide.html'>Home</a></span>
+#+HTML: <span class="footer-section right"><a href='OrgProtocol.html'>Emacs Org Protocol</a> ⟩</span>
+#+HTML: </footer>
 

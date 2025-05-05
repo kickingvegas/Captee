@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,18 +25,18 @@ class TranslateAttributedStringToMarkup: TranslateToMarkupProtocol {
 
     func translate(attributedString: AttributedString, markup: MarkupProtocol) -> String {
         var bufList: [String] = []
-        
+
         for run in attributedString.runs {
             //print ("😏 \(run)")
             let container = run.attributes
             let runString = String(attributedString.characters[run.range])
             print("😏  '\(runString)'")
-            
+
             bufList.append(
                 contentsOf: processSwiftAttributeContainer(container: container, runString: runString, markup: markup)
             )
         }
-        
+
         // Do I need to do this?
         var index: Int = 0
 
@@ -53,25 +53,25 @@ class TranslateAttributedStringToMarkup: TranslateToMarkupProtocol {
             return bufList.joined()
         }
     }
-    
+
     func processSwiftAttributeContainer(container: AttributeContainer,
                                         runString: String,
                                         markup: MarkupProtocol) -> [String] {
         var bufList: [String] = []
         var buf: String?
         // contain id value for intentType.kind
-        
+
         if let presentationIntent = container.presentationIntent,
            let intentType = presentationIntent.components.first {
             let kind = intentType.kind
-  
+
             // initialize entry in kindIndexes if necessary
             if kindIndexes.index(forKey: kind) == nil {
                 kindIndexes[kind] = intentType.identity
             }
-            
+
             kindHasChanged = (previousIntentKind != kind)
-                        
+
             if kindHasChanged {
                 // !!!: different kind of instance, add 2 newlines
                 bufList.append("\n\n")
@@ -84,41 +84,41 @@ class TranslateAttributedStringToMarkup: TranslateToMarkupProtocol {
                     bufList.append("\n\n")
                 }
             }
-            
-            
+
+
             switch kind {
             case .listItem(let ordinal):
                 print("PresentationIntent.Kind: \(kind.debugDescription) \(ordinal)")
-                
+
             case .header(let level):
                 print("PresentationIntent.Kind: \(kind.debugDescription) \(level)")
-      
+
                 if kindHasChanged {
                     buf = markup.header(runString, level: level)
                 }
-                
+
             case .paragraph:
                 buf = runString
 
                 print("PresentationIntent.Kind: \(kind.debugDescription)")
-                
+
             case .thematicBreak:
                 print("PresentationIntent.Kind: \(kind.debugDescription)")
-                
+
             case .unorderedList:
                 print("PresentationIntent.Kind: \(kind.debugDescription)")
-                
+
             default:
                 print("PresentationIntent.Kind: \(kind.debugDescription)")
             }
-            
+
             previousIntentKind = kind
         }
-        
+
         if let link = container.link {
             buf = markup.link(link, description: buf ?? runString)
         }
-            
+
         if let inlineIntent = container.inlinePresentationIntent {
             switch inlineIntent {
             case .code:
@@ -133,11 +133,11 @@ class TranslateAttributedStringToMarkup: TranslateToMarkupProtocol {
                 buf = buf ?? runString
             }
         }
-        
+
         if let buf = buf {
             bufList.append(buf)
         }
         return bufList
     }
-    
+
 }

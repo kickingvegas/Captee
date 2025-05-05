@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Charles Choi
+// Copyright © 2023-2025 Charles Choi
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,16 +19,16 @@ import CapteeKit
 
 class CXTemplateFieldValidator: NSObject, NSTextFieldDelegate {
     let viewModel: CapteeViewModel
-    
+
     init(_ viewModel: CapteeViewModel) {
         self.viewModel = viewModel
     }
-    
+
     func controlTextDidBeginEditing(_ obj: Notification) {
         guard obj.object is NSTextField else {
             return
         }
-        
+
         if let targetObject = obj.object {
             let textField = targetObject as! NSTextField
             // TODO: comment out
@@ -36,7 +36,7 @@ class CXTemplateFieldValidator: NSObject, NSTextFieldDelegate {
         }
 
     }
-    
+
     func controlTextDidChange(_ obj: Notification) {
         guard obj.object is NSTextField else {
             return
@@ -49,12 +49,12 @@ class CXTemplateFieldValidator: NSObject, NSTextFieldDelegate {
         }
 
     }
-    
+
     func controlTextDidEndEditing(_ obj: Notification) {
         guard obj.object is NSTextField else {
             return
         }
-        
+
         if let targetObject = obj.object {
             let textField = targetObject as! NSTextField
             // TODO: comment out
@@ -62,5 +62,5 @@ class CXTemplateFieldValidator: NSObject, NSTextFieldDelegate {
             viewModel.template = textField.stringValue
         }
     }
-    
+
 }
