@@ -28,7 +28,7 @@ BUMP_LEVEL=patch
 SEMVER_BUMP := $(shell python -m semver bump $(BUMP_LEVEL) $(SEMVER))
 NEXT_BUILD = $(shell echo "$(BUILD_NUMBER) + 1" | bc)
 VERSION = "$(SEMVER) ($(BUILD_NUMBER))"
-GIT_TAG = "$(EXEC_LOWER_NAME)_$(SEMVER).$(BUILD_NUMBER)"
+RELEASE_TAG = "$(EXEC_LOWER_NAME)_$(SEMVER).$(BUILD_NUMBER)"
 
 .PHONY: version
 version:
@@ -90,19 +90,17 @@ create-release-pr: create-merge-development-branch
 --fill-verbose
 
 .PHONY: create-release-tag
-create-release-tag: checkout-main bump-semver
-	git tag $(SEMVER_BUMP)
-	git push origin $(SEMVER_BUMP)
+create-release-tag: checkout-main
+	git tag $(RELEASE_TAG)
+	git push origin $(RELEASE_TAG)
 
 .PHONY: create-gh-release
-create-gh-release: SEMVER_BUMP:=$(shell python -m semver nextver $(SEMVER) $(BUMP_LEVEL))
 create-gh-release: create-release-tag
-	gh release create --draft --title v$(SEMVER_BUMP) --generate-notes $(SEMVER_BUMP)
+	gh release create --draft --title v$(VERSION) --generate-notes $(RELEASE_TAG)
 
 .PHONY: test
 test:
 	xcodebuild test -scheme $(EXEC_NAME)
-
 
 .PHONY: create-helpbook
 create-helpbook:
@@ -115,7 +113,3 @@ clean-helpbook:
 .PHONY: status
 status:
 	git status
-
-.PHONY: tag
-tag:
-	git tag $(GIT_TAG)
