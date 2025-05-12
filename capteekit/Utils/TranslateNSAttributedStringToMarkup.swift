@@ -33,14 +33,14 @@ class TranslateNSAttributedStringToMarkup: TranslateToMarkupProtocol {
 
         let firstPass = bufList.joined()
 
-        let secondPassList = firstPass.split(separator: "\n")
+        let secondPassList = firstPass.split(separator: "\n", omittingEmptySubsequences: false)
 
         var resultList: [String] = []
         secondPassList.forEach { e in
             resultList.append(String(e))
         }
 
-        return resultList.joined(separator: "\n\n")
+        return resultList.joined(separator: "\n")
     }
 
     func processNSAttributeContainer(container: AttributeContainer,
@@ -53,7 +53,7 @@ class TranslateNSAttributedStringToMarkup: TranslateToMarkupProtocol {
         if let link = container.link {
             buf = markup.link(link, description: buf ?? runString)
         }
-
+        
         if let paragraphStyle = container.appKit.paragraphStyle {
             let textLists = paragraphStyle.textLists
             let depth = textLists.count
