@@ -62,6 +62,33 @@ final class AttributedStringToMarkupTests: XCTestCase {
         }
     }
     
+    func test_DoubleLineSpace() throws {
+        let control = "mary\n\njane"
+        let buf = AttributedString(control)
+        let markupConvertor = AttributedStringToMarkup(buf)
+        let output = markupConvertor.toMarkup(format: .orgMode)
+        // print("\(output)")
+        XCTAssertEqual(control, output)
+        
+        let output2 = markupConvertor.toMarkup(format: .markdown)
+        // print("\(output2)")
+        XCTAssertEqual(control, output2)
+    }
+    
+    func test_SingleLineSpace() throws {
+        let control = "mary\njane"
+        let buf = AttributedString(control)
+        let markupConvertor = AttributedStringToMarkup(buf)
+        let output = markupConvertor.toMarkup(format: .orgMode)
+        // print("\(output)")
+        XCTAssertEqual(control, output)
+        
+        let output2 = markupConvertor.toMarkup(format: .markdown)
+        // print("\(output2)")
+        XCTAssertEqual(control, output2)
+    }
+    
+        
     func internalMarkdown() -> String {
         // OBSOLETE
         let control = "# Hey they *clittiak*.\nI `wanted` to **let** you know ~about~ this.\n\nAlso this is a *[Google](https://www.google.com)* link.\n## Frink this thing"

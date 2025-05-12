@@ -16,7 +16,7 @@
 
 import Foundation
 
-
+// TODO: revisit this design decision.
 enum AttributedStringFlavor {
     case swift
     case ns
@@ -43,7 +43,7 @@ class AttributedStringToMarkup: AttributedStringToMarkupProtocol {
             if container.presentationIntent != nil {
                 result = .swift
                 break
-            } else if container.paragraphStyle != nil {
+            } else {
                 result = .ns
             }
         }
