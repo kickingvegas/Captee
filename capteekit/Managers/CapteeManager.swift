@@ -25,7 +25,8 @@ public struct CapteeManager: CapteeManagerProtocol, CapteePersistenceProtocol {
             "markup_format": MarkupFormat.markdown.rawValue,
             "payload_type": PayloadType.link.rawValue,
             "transmit_type": TransmitType.clipboard.rawValue,
-            "show_onboarding_alert": true
+            "show_onboarding_alert": true,
+            "strip_formatting": false
         ])
     }
 }

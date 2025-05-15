@@ -82,6 +82,12 @@ public class CapteeViewModel: ObservableObject {
             capteeManager.persistedShowOnboardingAlert = showOnboardingAlert
         }
     }
+    
+    @Published public var stripFormatting: Bool {
+        didSet {
+            capteeManager.persistedStripFormatting = stripFormatting
+        }
+    }
 
     @Published public var isAlertRaised = false
     @Published public var isNetworkRequestInProgress = false
@@ -101,6 +107,7 @@ public class CapteeViewModel: ObservableObject {
         markupFormat = capteeManager.persistedMarkupFormat ?? .markdown
         payloadType = capteeManager.persistedPayloadType ?? .link
         transmitType = capteeManager.persistedTransmitType ?? .clipboard
+        stripFormatting = capteeManager.persistedStripFormatting ?? false
 
         showOnboardingAlert = capteeManager.persistedShowOnboardingAlert ?? true
         if markupFormat == .markdown {
@@ -176,6 +183,15 @@ public class CapteeViewModel: ObservableObject {
         }
 
         let payload = extractPayload()
+        var body: AttributedString?
+        
+        if stripFormatting,
+           let payloadBody = payload.body,
+           payloadBody.characters.isEmpty == false {
+            body = CapteeUtils.stripFormatting(buf: payloadBody)
+        } else {
+            body = payload.body
+        }
 
         switch markupFormat {
         case .orgMode:
@@ -184,7 +200,7 @@ public class CapteeViewModel: ObservableObject {
                 if let url = capteeManager.orgProtcolURL(pType: orgProtocolType,
                                                          url: payload.url,
                                                          title: payload.title,
-                                                         body: payload.body,
+                                                         body: body,
                                                          template: payload.template) {
                     if let appURL = NSWorkspace.shared.urlForApplication(toOpen: url) {
                         print("\(appURL.absoluteString)")
@@ -193,11 +209,12 @@ public class CapteeViewModel: ObservableObject {
                         reply(false)
                     }
                 }
+                
             case .clipboard:
                 if let message = capteeManager.orgMessage(payloadType: payloadType,
                                                           url: payload.url,
                                                           title: payload.title,
-                                                          body: payload.body,
+                                                          body: body,
                                                           template: payload.template) {
 
                     connectionManager.xpcService().sendToClipboard(payload: message) { [weak self] result in
@@ -208,11 +225,8 @@ public class CapteeViewModel: ObservableObject {
                             self.alertMessage = CapteeViewModel.truncate(buf: message, count: 120)
                             self.isAlertRaised = true
                         }
-
                         reply(result)
                     }
-
-
                 }
             }
 
@@ -220,7 +234,7 @@ public class CapteeViewModel: ObservableObject {
             if let message = capteeManager.markdownMessage(payloadType: payloadType,
                                                            url: payload.url,
                                                            title: payload.title,
-                                                           body: payload.body) {
+                                                           body: body) {
                 connectionManager.xpcService().sendToClipboard(payload: message) { [weak self] result in
                     guard let self else { return }
 
