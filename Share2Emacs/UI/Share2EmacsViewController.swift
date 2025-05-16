@@ -16,8 +16,11 @@
 
 import Cocoa
 import CapteeKit
+import OSLog
+
 
 class Share2EmacsViewController: NSViewController {
+    fileprivate let logger = Logger(subsystem: "com.yummymelon.Captee", category: "Share2Emacs")
     @IBOutlet weak var cancelButton: NSButton!
     @IBOutlet weak var sendButton: NSButton!
     @IBOutlet weak var payloadPicker: CXRadioPicker!
@@ -31,11 +34,11 @@ class Share2EmacsViewController: NSViewController {
     @IBOutlet weak var templateLine: NSBox!
     @IBOutlet var textView: NSTextView!
     @IBOutlet weak var scrollableTextView: NSScrollView!
-    @IBOutlet weak var textViewLine: NSBox!
-
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
+    @IBOutlet weak var stripFormattingButton: NSButton!
     var shareCXCoordinator: ShareCXCoordinator?
-
+    
+    
     override func loadView() {
         super.loadView()
         initUI()
@@ -72,8 +75,8 @@ class Share2EmacsViewController: NSViewController {
                                                templateLine: templateLine,
                                                textView: textView,
                                                scrollableTextView: scrollableTextView,
-                                               textViewLine: textViewLine,
                                                sendButton: sendButton,
+                                               stripFormattingButton: stripFormattingButton,
                                                progressIndicator: progressIndicator)
 
         // populate
@@ -92,7 +95,7 @@ class Share2EmacsViewController: NSViewController {
     }
 
     @IBAction func sendAction(_ sender: Any) {
-        print("send")
+        logger.debug("Send")
         let outputItem = NSExtensionItem()
 
         if let shareCXCoordinator = self.shareCXCoordinator {
@@ -103,8 +106,14 @@ class Share2EmacsViewController: NSViewController {
         self.extensionContext!.completeRequest(returningItems: outputItems, completionHandler: nil)
     }
 
+    @IBAction func stripFormattingAction(_ sender: Any) {
+        logger.debug("strip me")
+        shareCXCoordinator?.syncStripFormatting()
+    }
+    
+    
     @IBAction func cancelAction(_ sender: Any) {
-        print("cancel")
+        logger.debug("Cancel")
         let cancelError = NSError(domain: NSCocoaErrorDomain, code: NSUserCancelledError, userInfo: nil)
         self.extensionContext!.cancelRequest(withError: cancelError)
     }

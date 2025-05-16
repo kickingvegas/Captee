@@ -132,4 +132,10 @@ public struct CapteeUtils {
 
         return result
     }
+    
+    public static func stripFormatting(buf: AttributedString) -> AttributedString {
+        let strippedBody = NSAttributedString(buf).string
+        return AttributedString(strippedBody)
+    }
+    
 }

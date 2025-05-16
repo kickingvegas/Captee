@@ -34,9 +34,9 @@ class ShareCXCoordinator {
     var templateLine: NSBox
     var textView: NSTextView
     var scrollableTextView: NSScrollView
-    var textViewLine: NSBox
     var sendButton: NSButton
     var progressIndicator: NSProgressIndicator
+    var stripFormattingButton: NSButton
 
     private var formatPickerCancellable: AnyCancellable?
     private var payloadPickerCancellable: AnyCancellable?
@@ -60,8 +60,8 @@ class ShareCXCoordinator {
          templateLine: NSBox,
          textView: NSTextView,
          scrollableTextView: NSScrollView,
-         textViewLine: NSBox,
          sendButton: NSButton,
+         stripFormattingButton: NSButton,
          progressIndicator: NSProgressIndicator) {
 
         self.viewModel = viewModel
@@ -74,14 +74,17 @@ class ShareCXCoordinator {
         self.templateLine = templateLine
         self.textView = textView
         self.scrollableTextView = scrollableTextView
-        self.textViewLine = textViewLine
         self.sendButton = sendButton
+        self.stripFormattingButton = stripFormattingButton
         self.progressIndicator = progressIndicator
 
         self.urlFieldValidator = CXURLFieldValidator(viewModel)
         self.titleFieldValidator = CXTitleFieldValidator(viewModel)
         self.templateFieldValidator = CXTemplateFieldValidator(viewModel)
         self.textViewValidator = CXTextViewValidator(viewModel)
+        
+        self.stripFormattingButton.state = viewModel.stripFormatting ? .on : .off
+        
 
         urlField.delegate = urlFieldValidator
         titleField.delegate = titleFieldValidator
@@ -142,6 +145,7 @@ class ShareCXCoordinator {
                 self.templateLine.isHidden = self.viewModel.isTemplateHidden()
                 self.templateField.isHidden = self.viewModel.isTemplateHidden()
                 self.scrollableTextView.isHidden = self.viewModel.isBodyHidden()
+                self.stripFormattingButton.isHidden = self.viewModel.isBodyHidden()
             }
         }
 
@@ -188,8 +192,11 @@ class ShareCXCoordinator {
 
         viewModel.synchronizePayload(payload)
     }
-
-
+    
+    func syncStripFormatting() {
+        viewModel.stripFormatting = stripFormattingButton.state == .on
+    }
+            
     func configureTextStorage(extensionContext: NSExtensionContext) {
         if let item = extensionContext.inputItems.first as? NSExtensionItem,
            let contentText = item.attributedContentText {
@@ -326,7 +333,16 @@ class ShareCXCoordinator {
         let payloadType = viewModel.payloadType
         let capteeManager = viewModel.capteeManager
         let connectionManager = viewModel.connectionManager
-
+        
+        var body: AttributedString?
+        if viewModel.stripFormatting,
+           let payloadBody = payload.body,
+           payloadBody.characters.isEmpty == false {
+            body = CapteeUtils.stripFormatting(buf: payloadBody)
+        } else {
+            body = payload.body
+        }
+        
         switch markupFormat {
         case .orgMode:
             switch transmitType {
@@ -334,7 +350,7 @@ class ShareCXCoordinator {
                 if let url = capteeManager.orgProtcolURL(pType: orgProtocolType,
                                                          url: payload.url,
                                                          title: payload.title,
-                                                         body: payload.body,
+                                                         body: body,
                                                          template: payload.template) {
                     connectionManager.xpcService().openURL(url: url as NSURL) { result in
                         print("\(result)")
@@ -344,7 +360,7 @@ class ShareCXCoordinator {
                 if let message = capteeManager.orgMessage(payloadType: payloadType,
                                                           url: payload.url,
                                                           title: payload.title,
-                                                          body: payload.body,
+                                                          body: body,
                                                           template: payload.template) {
                     connectionManager.xpcService().sendToClipboard(payload: message) { result in
                         print("\(result)")
@@ -356,7 +372,7 @@ class ShareCXCoordinator {
             if let message = capteeManager.markdownMessage(payloadType: payloadType,
                                                            url: payload.url,
                                                            title: payload.title,
-                                                           body: payload.body) {
+                                                           body: body) {
                 connectionManager.xpcService().sendToClipboard(payload: message) { result in
                     print("\(result)")
                 }

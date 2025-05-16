@@ -23,6 +23,7 @@ extension CapteeManager {
     private static let payloadTypeKey = "payload_type"
     private static let transmitTypeKey = "transmit_type"
     private static let showOnboardingAlertKey = "show_onboarding_alert"
+    private static let stripFormattingKey = "strip_formatting"
 
     public var persistedShowOnboardingAlert: Bool? {
         get {
@@ -38,6 +39,24 @@ extension CapteeManager {
                 defaults.setValue(newValue, forKey: Self.showOnboardingAlertKey)
             } else {
                 defaults.removeObject(forKey: Self.showOnboardingAlertKey)
+            }
+        }
+    }
+    
+    public var persistedStripFormatting: Bool? {
+        get {
+            var result: Bool?
+            let defaults = UserDefaults.standard
+            result = defaults.value(forKey: Self.stripFormattingKey) as? Bool
+            return result
+        }
+
+        set(newValue) {
+            let defaults = UserDefaults.standard
+            if let newValue = newValue {
+                defaults.setValue(newValue, forKey: Self.stripFormattingKey)
+            } else {
+                defaults.removeObject(forKey: Self.stripFormattingKey)
             }
         }
     }
@@ -80,7 +99,6 @@ extension CapteeManager {
                 defaults.removeObject(forKey: Self.markupFormatKey)
             }
         }
-
     }
 
     public var persistedPayloadType: PayloadType? {
