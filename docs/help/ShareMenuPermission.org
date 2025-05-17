@@ -27,12 +27,11 @@ When *Captee* is first installed, you'll need to enable the permission to let it
 
 Launch Safari. In the top of the window look for the Share toolbar icon as shown below.
 
-[[file:images/share-icon_resize_x64.png]]
+#+HTML: <p align="center"><img src="images/share-icon_resize_x64.png" width="24px"/></p>
 
-Tap on the toolbar icon and look for the menu item "Edit Extensions…" as shown below. 
+Tap on the toolbar icon and look for the menu item "Edit Extensions…" as shown below.
 
-[[file:images/s1-share-menu.png]]
-
+#+HTML: <p align="center"><img src="images/s1-share-menu.png" style="border: solid thin;"/></p>
 
 Tap on "Edit Extensions…" to launch the macOS *Settings* app and raise a pop-up window titled *Sharing* shown in the next section.
 
@@ -56,7 +55,7 @@ Press the *Done* button at the bottom of the pop-up window to dismiss it, then q
 
 *Captee* is now enabled in the macOS *Share menu*.
 
-[[file:images/s6-captee-share-menu.png]]
+#+HTML: <p align="center"><img src="images/s6-captee-share-menu.png" style="border: solid thin;"/></p>
 
 -----
 #+HTML: <footer class="footer">

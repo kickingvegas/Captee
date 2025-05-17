@@ -19,7 +19,7 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="c22-O7-iKe">
             <rect key="frame" x="0.0" y="0.0" width="186" height="58"/>
             <subviews>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ryN-Gc-p4K">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ryN-Gc-p4K">
                     <rect key="frame" x="8" y="33" width="37" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="NpT-pG-z9f">
                         <font key="font" usesAppearanceFont="YES"/>

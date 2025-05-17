@@ -20,7 +20,7 @@
 #+HTML: <a name="UserInterface"></a>
 * Captee User Interface
 
-[[file:images/captee-user-interface.png]]
+[[file:images/captee-shared-extension-user-interface.png]]
 
 ** Format
 
@@ -58,7 +58,11 @@ The title (or description) associated with the URL.
 
 ** Body
 
-If the payload type is set to ~Capture~, then this field is enabled to support adding additional text to be captured.
+If the payload type is set to ~Capture~, then this field is enabled to support adding additional text to be captured. Formatted text (for example, bold, italic, code, bulleted, etc.) is supported.
+
+** Strip Formatting
+
+If turned on, this checkbox will strip all formatting in the *Body* text field. This is idea for clipping source code.
 
 ** Template Key
 
