@@ -87,14 +87,13 @@ Do the following:
    - Format: ~Org Mode~
    - Payload: ~Capture~
    - Use: ~Org Protocol~
-   - Template: ~capture~ (this is optional if ~org-protocol-default-template-key~ is set to ~capture~.)
+   - Template: ~capture~ (this is optional if the Emacs variable ~org-protocol-default-template-key~ is set to ~capture~.)
 
 In the Body text field, type in the sentence "This is the Org Mode Website."
 
 Your *Captee* window should appear like the screenshot below. Press the blue "Capture" button at the top right hand side of the *Captee* window to make the Org Protocol request. At this point typically *Scrim* will accept the request and relay it to Emacs server. Note how *Captee* does the work of constructing the Org Protocol URL here, leaving you to focus on what's really important: the content you want to send over to Emacs.
 
 [[file:images/captee-org-protocol-capture-example.png]]
-
 
 A resulting capture window should appear in Emacs that resembles this:
 

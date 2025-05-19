@@ -16,8 +16,10 @@
 
 import SwiftUI
 import CapteeKit
+import OSLog
 
 struct ContentView: View {
+    fileprivate let logger = Logger(subsystem: "com.yummymelon.Captee", category: "UI")
     @StateObject var capteeViewModel = CapteeViewModel()
 
     var body: some View {
@@ -65,13 +67,11 @@ struct ContentView: View {
 
     func captureAction() {
         capteeViewModel.captureAction { result in
-            print("\(result)")
+            logger.debug("\(result)")
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView().frame(width: 800, height: 600)
 }

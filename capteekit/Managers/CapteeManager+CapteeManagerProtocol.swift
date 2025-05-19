@@ -55,16 +55,14 @@ extension CapteeManager {
                 queryItems.append(URLQueryItem(name: "template", value: template))
             }
 
-            if let body = body {
-                if String(body.characters[...]) != "" {
-                    let markupConverter = AttributedStringToMarkup(body)
-                    queryItems.append(URLQueryItem(name: "body", value: markupConverter.toMarkup(format: .orgMode)))
-                }
+            if let body = body,
+               body.characters.isEmpty == false {
+                let markupConverter = AttributedStringToMarkup(body)
+                queryItems.append(URLQueryItem(name: "body", value: markupConverter.toMarkup(format: .orgMode)))
             }
         }
 
         orgProtocolComponents.queryItems = queryItems
-
         return orgProtocolComponents.url
     }
 
@@ -88,16 +86,13 @@ extension CapteeManager {
                 bufList.append(linkMarkup)
             }
 
-            if let body = body {
-                if String(body.characters[...]) != "" {
-                    let markupConverter = AttributedStringToMarkup(body)
-                    bufList.append(markupConverter.toMarkup(format: .orgMode))
-                }
+            if let body = body,
+               body.characters.isEmpty == false {
+                let markupConverter = AttributedStringToMarkup(body)
+                bufList.append(markupConverter.toMarkup(format: .orgMode))
             }
-
             result = bufList.joined(separator: "\n")
         }
-
         return result
     }
 
@@ -120,16 +115,13 @@ extension CapteeManager {
                 bufList.append(linkMarkup)
             }
 
-            if let body = body {
-                if String(body.characters[...]) != "" {
-                    let markupConverter = AttributedStringToMarkup(body)
-                    bufList.append(markupConverter.toMarkup(format: .markdown))
-                }
+            if let body = body,
+               body.characters.isEmpty == false {
+                let markupConverter = AttributedStringToMarkup(body)
+                bufList.append(markupConverter.toMarkup(format: .markdown))
             }
-
             result = bufList.joined(separator: "\n")
         }
-
         return result
     }
 

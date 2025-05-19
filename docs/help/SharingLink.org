@@ -26,8 +26,7 @@ Sharing a link requires that the /URL/ field and optionally the /Title/ field be
 
 The payload type /Link/ must be selected as illustrated below.
 
-[[file:images/link-selected.png]]
-
+#+HTML: <p align="center"><img src="images/link-selected.png" width="200px" style="border: solid thin;"/></p>
 
 ** Org Protocol
 

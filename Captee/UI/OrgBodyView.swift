@@ -19,16 +19,30 @@ import CapteeKit
 
 struct OrgBodyView: View {
     @ObservedObject var capteeViewModel: CapteeViewModel
-
     var body: some View {
-        Text("Body Text")
-            .font(.system(size: 16))
-            .help("Enter body text")
-            .foregroundColor(.gray)
-
-        CAPTextEditor(text: $capteeViewModel.body)
-            .textFieldStyle(.roundedBorder)
-            .onChange(of: capteeViewModel.body) { newValue in
+        VStack {
+            HStack {
+                Text("Body Text")
+                    .font(.system(size: 16))
+                    .help("Enter body text")
+                    .foregroundColor(.gray)
+                Spacer()
+                
+                Toggle(isOn: $capteeViewModel.stripFormatting) {
+                    Text("Strip Formatting")
+                }
+                .toggleStyle(.checkbox)
+                .help("Do not include formatting in captured text.")
             }
+            
+            CAPTextEditor(text: $capteeViewModel.body)
+                .textFieldStyle(.roundedBorder)
+                .onChange(of: capteeViewModel.body) { newValue in
+                }
+        }
     }
+}
+
+#Preview {
+    OrgBodyView(capteeViewModel: CapteeViewModel())
 }

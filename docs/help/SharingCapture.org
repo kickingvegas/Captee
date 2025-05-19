@@ -26,7 +26,7 @@ In addition to sharing a link, Captee can share text content to go along with it
 
 To share content, the payload type /Capture/ should be selected as illustrated below.
 
-[[file:images/capture-selected.png]]
+#+HTML: <p align="center"><img src="images/capture-selected.png" width="200px" style="border: solid thin;"/></p>
 
 When the payload type /Capture/ is selected, the /Body/ text area is made visible. From there you can edit the text to be captured.
 
@@ -40,15 +40,25 @@ Many macOS apps support sharing selected text as a clipping. Captee supports thi
 
 1. Select text in a web page. Use the right mouse button to raise a context menu.
 
-   [[file:images/capture-selected-text-1.png]]
+   #+HTML: <img src="images/capture-selected-text-1.png" width="60%"/>
    
 2. Select the menu item *Captee - Share Markup Link*.
 
-   [[file:images/capture-selected-text-2.png]]
+   #+HTML: <img src="images/capture-selected-text-2.png" width="60%"/>
 
 3. The *Captee* window will be raised with the body section populated with the selected text. The body section can be edited before sending it to Emacs via Org Protocol.
-   
-   [[file:images/capture-selected-text-3.png]]
+
+   #+HTML: <img src="images/capture-selected-text-3.png" width="60%"/>
+
+*** Sharing URL, Title, and Text
+   Note that the /URL/ and /Title/ fields are not populated when sharing selected text. A work-around is to copy the selected text before sharing to Captee as described in the following steps:
+
+   1. Select desired text in web page.
+   2. Copy selected text. 
+   3. Deselect text.
+   4. Click on top-level Share Menu and open "Captee - Share Markup Link".
+   5. Paste copied text into the *Body* text field.
+   6. Click on the *Capture* button.
    
 -----
 #+HTML: <footer class="footer">
